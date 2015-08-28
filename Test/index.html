@@ -5,11 +5,14 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="angular/angular.js"></script>
   </head>
-  <body ng-app='angularApp'>
-    <h1>Hello World!</h1>
-    We are using io.js <script>document.write(process.version)</script>
-    and Electron <script>document.write(process.versions['electron'])</script>.
-    <p>Angular Expression: {{1+2}}</p>
-    <p ng-controller="angularAppCtrl">Count: {{count}}</p>
+  <body ng-app="angularApp">
+    <div ng-controller="angularAppCtrl">
+        <h1>Hello World!</h1>
+        We are using io.js <script>document.write(process.version)</script>
+        and Electron <script>document.write(process.versions['electron'])</script>.
+        <p>Angular Expression: {{1+2}}</p>
+        <p>Count: {{count}}</p>
+        <p><button ng-click="go()">Button</button></p>
+    </div>
   </body>
 </html>
