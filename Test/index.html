@@ -2,17 +2,18 @@
 <html>
   <head>
     <title>Hello World!</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <script src="bower_components/angular/angular.js"></script>
     <script src="angular/angular.js"></script>
   </head>
   <body ng-app="angularApp">
     <div ng-controller="angularAppCtrl">
-        <h1>Hello World!</h1>
-        We are using io.js <script>document.write(process.version)</script>
-        and Electron <script>document.write(process.versions['electron'])</script>.
-        <p>Angular Expression: {{1+2}}</p>
-        <p>Count: {{count}}</p>
-        <p><button ng-click="go()">Button</button></p>
+        <h1>NodeJS Test Application</h1>
+        <p><button ng-click="go()">Activate</button></p>
+        <div class="footer">
+            io.js: <script>document.write(process.version)</script>
+            Electron: <script>document.write(process.versions['electron'])</script>.
+        </div>
     </div>
   </body>
 </html>
