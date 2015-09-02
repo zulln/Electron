@@ -11,6 +11,6 @@ angularApp.controller('angularAppCtrl', function($scope){
 
 <!-- NodeJS -->
 
-var addon = require('./node_modules/hello-mac/build/Release/addonMac');
+var addon = require('./node_modules/hello-mac/build/Release/nodeAddon');
 
 //var nodeTest = console.log(addon.hello());

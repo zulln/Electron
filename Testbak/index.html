@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World!</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="angular.js"></script>
+  </head>
+  <body ng-app="angularApp">
+    <div ng-controller="angularAppCtrl">
+        <h1>NodeJS Test Application</h1>
+        <p><button ng-click="go()">Activate</button></p>
+        <div class="footer">
+            io.js: <script>document.write(process.version)</script>
+            Electron: <script>document.write(process.versions['electron'])</script>.
+        </div>
+    </div>
+  </body>
+</html>
