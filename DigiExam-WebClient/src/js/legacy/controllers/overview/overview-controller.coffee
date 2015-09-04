@@ -14,12 +14,6 @@ angular.module("digiexamclient").controller "OverviewController", ($rootScope, $
 
 	$scope.truncateDescription = true
 
-	$scope.$watch "openExamCode", (n, o)->
-		if n is o
-			return
-		$scope.openExamError = ""
-		$scope.openExamCode = n.trim().toLowerCase().replace new RegExp(/\s+/), ""
-
 	$scope.resetErrorMessages = ->
 		$scope.openExamError = ""
 		$scope.openOfflineFileError = ""
@@ -40,7 +34,7 @@ angular.module("digiexamclient").controller "OverviewController", ($rootScope, $
 			$scope.truncateDescription = true
 
 	$scope.isValidOpenExamCode = (code)->
-		return new RegExp(/^[^\D]+$/).test code
+		return typeof code is "number" and code > 0
 
 	$scope.getOpenExam = ->
 		if !$scope.isValidOpenExamCode $scope.openExamCode

@@ -7,7 +7,10 @@ angular.module("digiexamclient").factory("DXClient", function($window, $route, $
 
 	// Shorthand for closing the application
 	DXClient.close = function(modalInstance) {
-		if (DX_PLATFORM === "CHROME_APP") {
+		if (DX_PLATFORM === "ELECTRON_APP") {
+			$window.close();
+		}
+		else if (DX_PLATFORM === "CHROME_APP") {
 			$window.chrome.app.window.current().close();
 		}
 		else if (DX_PLATFORM === "BROWSER") {

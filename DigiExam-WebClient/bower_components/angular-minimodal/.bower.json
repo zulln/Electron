@@ -1,0 +1,19 @@
+{
+  "name": "angular-minimodal",
+  "private": true,
+  "devDependencies": {
+    "angular": "~1.2.6",
+    "angular-mocks": "~1.2.16",
+    "jasmine-underscore": "EvilOatmeal/jasmine-underscore",
+    "dialog-polyfill": "~0.3.0"
+  },
+  "homepage": "https://github.com/DigiExam/angular-minimodal",
+  "_release": "f0cfed7",
+  "_resolution": {
+    "type": "commit",
+    "commit": "f0cfed7"
+  },
+  "_source": "git://github.com/DigiExam/angular-minimodal.git",
+  "_target": "f0cfed7",
+  "_originalSource": "git://github.com/DigiExam/angular-minimodal.git"
+}

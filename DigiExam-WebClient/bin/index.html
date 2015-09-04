@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="digiexamclient" ng-csp="">
+<head>
+	<title>DigiExam</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<script type="text/javascript">
+		//alert(__dirname);
+        window.$ = window.jQuery = require('./jquery.js');
+    </script>
+	<!-- rev-hash -->
+<link rel="stylesheet" type="text/css" href="css/libs.min.css?v=f0b825404db0c8330033cfb7ed89871a" />
+<link rel="stylesheet" type="text/css" href="css/main.min.css?v=03f251b83b2f6f28d149578557dd5b42" />
+<script src="js/libs.min.js?v=576278f1ff5de4ad5834ffe6d7ba4fe9" type="text/javascript"></script>
+<!-- end -->
+</head>
+<body layout="column" dx-set-platform-class>
+
+	<div class="toast-area" ng-controller="ToastController">
+		<div class="toast" ng-repeat="t in toasts" ng-click="dismissToast(t.id)">
+			<p>{{t.message}}</p>
+		</div>
+	</div>
+
+	<div class="statusbar" ng-controller="StatusbarController">
+		<div class="statusbar-block statusbar-buttons" ng-show="!hasActiveExam">
+			<a ng-if="DX_PLATFORM !== 'IOS_WEBVIEW'" class="statusbar-close" href="" ng-disabled="hasActiveExam" ng-click="confirmClose()" tabindex="2">x</a>
+		</div>
+
+		<div ng-if="DX_PLATFORM !== 'IOS_WEBVIEW'" class="statusbar-block statusbar-clock">
+			<img src="./images/clock.png" alt="Clock" /> {{time | date:'HH:mm'}}
+		</div>
+
+		<a ng-href="#{{Urls.get('userEdit')}}" class="statusbar-block statusbar-user" ng-show="hasUser()" ng-disabled="hasActiveExam" no-navigate-on-disabled tabindex="1">
+			<span class="statusbar-user-name">{{user.name()}} - {{user.code}}</span>
+			<span class="statusbar-user-email">{{user.email}}</span>
+		</a>
+
+		<div class="statusbar-version">
+			<span>v{{version}}</span>
+		</div>
+	</div>
+
+	<div flex layout-relative>
+		<div
+				ng-view
+				layout-cover-relative
+				dx-scroll="y">
+		</div>
+	</div>
+
+	<div class="debug-area" ng-controller="DebugController">
+		<button class="debug-area-trigger" ng-dblclick="toggleDebugMessages()" tabindex="-1"></button>
+
+		<div class="debug-messages-area" ng-show="showMessages">
+			<div class="clearfix">
+				<div ng-repeat="f in dxrFiles" class="debug-message mb-300">
+					{{f.name}}
+					<button class="btn btn-small btn-raised" ng-click="saveDXR(f)">Save</button>
+				</div>
+
+				<button class="btn btn-raised" ng-click="readDXRFiles()">Load DXR file list</button>
+			</div>
+
+			<div ng-if="messages.length" class="clearfix">
+				<hr class="mv"/>
+
+				<div ng-repeat="m in messages">
+					<span class="debug-message" ng-class="{'debug-message-type-critical': m.type == 0}">{{m.message}}</span>
+				</div>
+
+				<button class="btn btn-raised" ng-click="clear()">Clear messages</button>
+			</div>
+
+			<button class="btn btn-raised debug-close" ng-click="toggleDebugMessages()">Close</button>
+		</div>
+	</div>
+
+	<!-- rev-hash -->
+<script src="js/config.js?v=c30162117e5e0c9c7887fe918e380509" type="text/javascript"></script>
+<script src="js/main.min.js?v=555c52704d4222e0befc2c73ac2871ca" type="text/javascript"></script>
+<!-- end -->
+</body>
+</html>

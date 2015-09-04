@@ -1,0 +1,16 @@
+<dialog class="confirm-turn-in">
+	<header>
+		<h1>Do you want to hand in your exam?</h1>
+	</header>
+
+	<div class="modal-body mv">
+		<p class="mb-300">You are trying to hand in your exam. Do you want to do this?</p>
+		<p class="mb-300">Type I UNDERSTAND in the box below to confirm your choice</p>
+		<input type="text" ng-model="confirmValue" placeholder="I UNDERSTAND" />
+	</div>
+
+	<footer class="text-right">
+		<button class="btn mr" ng-click="no()" autofocus>No, continue exam</button>
+		<button class="btn btn-positive" ng-disabled="confirmValue.toLowerCase() != 'i understand'" ng-click="yes()">Yes, hand in</button>
+	</footer>
+</dialog>
