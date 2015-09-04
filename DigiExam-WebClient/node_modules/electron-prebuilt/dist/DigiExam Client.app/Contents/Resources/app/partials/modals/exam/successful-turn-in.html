@@ -1,0 +1,20 @@
+<dialog class="modal-successful-turn-in">
+	<header>
+		<h1>Exam handed in successfully!</h1>
+	</header>
+
+	<div class="modal-body mv">
+		<div class="success-check">
+			<img src="images/check.png" alt="Successful" />
+		</div>
+		<p class="mb-300">Congratulations!</p>
+		<p>Your exam has been handed in successfully and is soon available for teachers to grade!</p>
+	</div>
+
+	<footer class="text-right">
+		<button class="btn btn-positive" ng-click="close()">
+			<span ng-if="DX_PLATFORM !== 'IOS_WEBVIEW'">Close DigiExam</span>
+			<span ng-if="DX_PLATFORM === 'IOS_WEBVIEW'">OK</span>
+		</button>
+	</footer>
+</dialog>

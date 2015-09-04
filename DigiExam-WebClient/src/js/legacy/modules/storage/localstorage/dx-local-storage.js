@@ -3,6 +3,7 @@ angular.module("digiexamclient.storage.localstorage")
 	"use strict";
 
 	var PLATFORM_LOCAL_STORAGES = {
+		"ELECTRON_APP": BrowserLocalStorage,
 		"BROWSER": BrowserLocalStorage,
 		"CHROME_APP": ChromeAppLocalStorage,
 		"IOS_WEBVIEW": IOSLocalStorage

@@ -3,6 +3,7 @@ angular.module("digiexamclient.storage.filesystem")
 	"use strict";
 
 	var PLATFORM_FILE_SYSTEMS = {
+		"ELECTRON_APP": BrowserFileSystem,
 		"BROWSER": BrowserFileSystem,
 		"CHROME_APP": ChromeAppFileSystem,
 		"IOS_WEBVIEW": IOSFileSystem
