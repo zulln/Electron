@@ -1,0 +1,55 @@
+// Base components
+
+.autoGrow_container {
+	position: relative;
+}
+
+.autoGrow_source {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	box-sizing: border-box;
+	overflow: hidden;
+	resize: none;  // Maybe not that UX friendly, but resizing does not work as intended on autogrow
+}
+
+.autoGrow_mirror {
+	visibility: hidden;
+	white-space: pre-wrap;
+	border: 1px solid #CCC;
+	min-height: 200px;
+}
+
+.autoGrow_source,
+.autoGrow_mirror {
+	padding: 10px;
+	margin: 0;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+// Mod hasBar
+
+ .autoGrow_hasBar .autoGrow_mirror {
+ 	min-height: 106px;
+ }
+
+ .autoGrow_hasBar .autoGrow_source,
+ .autoGrow_hasBar .autoGrow_mirror {
+ 	padding-bottom: 44px;
+ }
+
+.autoGrow_bar {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+// Mod small
+
+.autoGrow_small .autoGrow_mirror {
+	min-height: 80px;
+}

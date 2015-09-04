@@ -1,0 +1,40 @@
+@import "../../node_modules/web-ui/src/css/variables";
+
+@import "variables";
+@import "colors";
+
+@import "mixins/box-sizing";
+@import "mixins/clearfix";
+@import "mixins/transition";
+
+@import "keyframes/rotate";
+@import "keyframes/toast-leave";
+
+@import "helpers/bold";
+@import "helpers/display";
+@import "helpers/italic";
+@import "helpers/overflow";
+@import "helpers/text-align";
+@import "helpers/underline";
+@import "helpers/white-space";
+
+@import "global";
+@import "ipad";
+
+@import "partials/login";
+@import "partials/statusbar";
+@import "partials/exam";
+@import "partials/overview";
+@import "partials/debug";
+@import "partials/modal-successful-turn-in";
+
+@import "components/alerts";
+@import "components/buttons";
+@import "components/demo-exam-watermark";
+@import "components/inputs";
+@import "components/dialogs";
+@import "components/examlist";
+@import "components/loader";
+@import "components/sheet";
+@import "components/autogrow";
+@import "components/toast";

@@ -1,0 +1,14 @@
+<dialog class="confirm-start-exam">
+	<header>
+		<h1>You are about to start <span class="bold">{{exam.title}}</span>.</h1>
+	</header>
+
+	<div class="modal-body mv">
+		<p>You are about to start <span class="bold">{{exam.title}}</span>. Do you want to do this?</p>
+	</div>
+
+	<footer class="text-right">
+		<button class="btn mr" ng-click="no()">No, don't start</button>
+		<button class="btn btn-positive" ng-click="yes()">Yes, start exam</button>
+	</footer>
+</dialog>

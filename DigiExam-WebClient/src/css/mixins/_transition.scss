@@ -1,0 +1,8 @@
+@mixin transition($data)
+{
+	-webkit-transition: $data;
+	-moz-transition: $data;
+	-ms-transition: $data;
+	-o-transition: $data;
+	transition: $data;
+}

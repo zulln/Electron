@@ -1,0 +1,68 @@
+// Default text color
+$color-text: #000;
+$color-text-faded: #aaa;
+$color-text-disabled: #ccc;
+
+// The clear green color used as background color on buttons etc
+$color-clear-green: #59b200;
+$color-clear-green-highlight: #72d312;
+
+$color-clear-red: #ce4e41;
+
+$color-link: #4c91c9;
+
+// Warning text color - Used for text that should express some warning.
+$color-text-warning: #ff9000;
+.color-text-warning {
+	color: $color-text-warning;
+}
+
+// Success text color - Used for text that should express success
+$color-text-success: #59af02;
+.color-text-success {
+	color: $color-text-success;
+}
+
+// Error text colors
+$color-text-error: #ff0000;
+.color-text-error {
+	color: $color-text-error;
+}
+
+// Text color used when the text should appear faded out
+$color-text-faded: #999999;
+.color-text-faded {
+	color: $color-text-faded;
+}
+
+/*
+	Buttons
+*/
+$color-btn-flat: transparent;
+$color-btn-flat-hover: #eee;
+$color-btn-flat-active: darken($color-btn-flat-hover, 4%);
+$color-btn-flat-positive: $color-link;
+
+$color-btn-raised: $color-btn-flat-hover;
+$color-btn-raised-hover: darken($color-btn-raised, 4%);
+$color-btn-raised-active: darken($color-btn-raised, 7%);
+
+/*
+	Inputs
+*/
+$input-border-color-normal: lighten($color-text, 70%);
+$input-border-color-success: darken($color-text-success, 30%);
+$input-border-color-warning: $color-text-warning;
+$input-border-color-error: $color-text-error;
+
+$input-background-color: #fff;
+
+$input-box-shadow-color-focus-normal: #66afe9;
+$input-box-shadow-color-focus-success: lighten($input-border-color-success, 40%);
+$input-box-shadow-color-focus-warning: lighten($input-border-color-warning, 20%);
+$input-box-shadow-color-focus-error: lighten($input-border-color-error, 20%);
+
+$input-border-color-focus-normal: darken($input-box-shadow-color-focus-normal, 20%);
+$input-border-color-focus-success: darken($input-box-shadow-color-focus-success, 20%);
+$input-border-color-focus-warning: darken($input-box-shadow-color-focus-warning, 20%);
+$input-border-color-focus-error: darken($input-box-shadow-color-focus-error, 20%);

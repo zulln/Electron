@@ -1,0 +1,91 @@
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], textarea
+{
+	border-radius: $input-border-radius;
+	border: 1px solid $input-border-color-normal;
+	background: $input-background-color;
+	outline: none;
+	line-height: normal;
+	@include transition(0.1s ease-out all);
+
+	&:focus
+	{
+		box-shadow: 0 0 6px $input-box-shadow-color-focus-normal;
+		border-color: $input-border-color-focus-normal;
+	}
+
+	&.success
+	{
+		border-color: $input-border-color-success;
+		color: $color-text-success;
+
+		&:focus
+		{
+			box-shadow: 0 0 6px $input-box-shadow-color-focus-success;
+			border-color: $input-border-color-focus-success;
+		}
+	}
+
+	&.warning
+	{
+		border-color: $input-border-color-warning;
+		color: $color-text-warning;
+
+		&:focus
+		{
+			box-shadow: 0 0 6px $input-box-shadow-color-focus-warning;
+			border-color: $input-border-color-focus-warning;
+		}
+	}
+
+	&.error
+	{
+		border-color: $input-border-color-error;
+		color: $color-text-error;
+
+		&:focus
+		{
+			box-shadow: 0 0 6px $input-box-shadow-color-focus-error;
+			border-color: $input-border-color-focus-error;
+		}
+	}
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="number"]
+{
+	width: 100%;
+	height: $input-height;
+	font-size: 12px;
+	display: block;
+	padding: $input-padding;
+}
+
+textarea
+{
+	width: 100%;
+	min-height: 200px;
+	padding: $textarea-padding;
+	resize: none;
+	word-wrap: break-word;
+}
+
+.input-error-wrapper
+{
+	position: relative;
+	line-height: 0;
+
+	.input-error
+	{
+		width: 100%;
+		height: $input-height;
+		line-height: $input-height;
+		padding: 0 10px;
+		color: $color-text-error;
+		position: absolute;
+		left: 100%;
+		top: 0;
+		bottom: 0;
+		margin-left: 20px;
+		display: block;
+		vertical-align: middle;
+	}
+}

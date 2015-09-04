@@ -1,0 +1,52 @@
+.debug-area
+{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+
+	.debug-area-trigger
+	{
+		width: 10px;
+		height: 10px;
+		display: block;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		border: 0;
+		cursor: pointer;
+		outline: none;
+		z-index: 99999999999999;
+		background: #fff;
+	}
+
+	.debug-messages-area
+	{
+		width: 600px;
+		max-height: 500px;
+		overflow-y: auto;
+		padding: 10px;
+		position: absolute;
+		bottom: 15px;
+		right: 15px;
+		box-shadow: 0 0 25px hsla(0,0%,0%,0.25);
+		background: #fff;
+		border: 1px solid #ccc;
+		z-index: 99999999999999;
+
+		.debug-message
+		{
+			color: #000;
+
+			&.debug-message-type-critical
+			{
+				color: #f00;
+			}
+		}
+	}
+}
+
+.debug-close {
+	position: absolute;
+	bottom: $space-300;
+	right: $space-300;
+}

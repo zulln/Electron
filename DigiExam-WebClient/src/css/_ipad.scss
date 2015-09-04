@@ -1,0 +1,98 @@
+.dx-ios-webview
+{
+	[dx-container="narrow"],
+	[dx-container="medium"]
+	{
+		max-width: none;
+		margin: 0 30px;
+	}
+
+	#login
+	{
+
+		ul
+		{
+			li
+			{
+				margin-bottom: 24px !important
+			}
+		}
+	}
+
+	input[type="text"],
+	input[type="email"],
+	input[type="password"]
+	input[type="number"]
+	{
+		height: $ipad-input-height !important;
+		font-size: 14px !important;
+		padding-left: $ipad-input-padding-left !important;
+		padding-right: $ipad-input-padding-right !important;
+		border-radius: 0 !important;
+		-webkit-appearance: caret !important;
+	}
+
+	label
+	{
+		margin-bottom: 10px !important;
+	}
+
+	.btn
+	{
+		height: $ipad-input-height !important;
+		padding-left: $ipad-input-padding-left !important;
+		padding-right: $ipad-input-padding-right !important;
+	}
+
+	.examlist
+	{
+		li
+		{
+			line-height: $ipad-input-height !important;
+		}
+	}
+
+	.blockEditor_toolbar
+	{
+		button
+		{
+			padding: 5px 8px;
+		}
+	}
+
+	/*
+		WKWebView does not support custom fonts in iOS 8.4, therefore we use png icons as override for the iPad
+
+		Long term fix ticket: https://jira.digiexam.se/browse/CHROME-139
+	*/
+
+	[dx-icon]
+	{
+		font-size: 20px/1;
+	}
+
+	[dx-icon]:before {
+		content: "";
+		width: 20px;
+		height: 18px;
+		background-size: 20px 18px;
+		display: inline-block;
+	}
+
+	[dx-icon="h1"]:before { content: "H1" }
+	[dx-icon="h2"]:before { content: "H2" }
+	[dx-icon="h3"]:before { content: "H3" }
+	[dx-icon="h4"]:before { content: "H4" }
+	[dx-icon="h5"]:before { content: "H5" }
+	[dx-icon="h6"]:before { content: "H6" }
+
+	[dx-icon="undo"]:before { background-image: url("../images/icomoon/0102-undo.png"); }
+	[dx-icon="redo"]:before { background-image: url("../images/icomoon/0103-redo.png"); }
+	[dx-icon="list-number"]:before { background-image: url("../images/icomoon/0186-list-numbered.png"); }
+	[dx-icon="list-disc"]:before { background-image: url("../images/icomoon/0188-list2.png"); }
+	[dx-icon="bold"]:before { background-image: url("../images/icomoon/0355-bold.png"); }
+	[dx-icon="italic"]:before { background-image: url("../images/icomoon/0357-italic.png"); }
+	[dx-icon="underline"]:before { background-image: url("../images/icomoon/0356-underline.png"); }
+	[dx-icon="strike-through"]:before { background-image: url("../images/icomoon/0358-strikethrough.png"); }
+	[dx-icon="remove-formatting"]:before { background-image: url("../images/icomoon/0368-clear-formatting.png"); }
+}

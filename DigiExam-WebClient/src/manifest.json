@@ -1,0 +1,23 @@
+{
+	"name": "DigiExam",
+	"description": "DigiExam - Digital examinations has never been easier!",
+	"version": "{{version}}",
+	"manifest_version": 2,
+	"icons": {
+		"128": "128.png"
+	},
+	"app": {
+		"background": {
+			"scripts": ["background.js"]
+		}
+	},
+	"permissions": [
+		"{{apiBaseUrl}}",
+		"storage",
+		"unlimitedStorage",
+		{ "fileSystem": ["write"] },
+		"https://www.gravatar.com/avatar/*"
+	],
+	"kiosk_enabled": true,
+	"kiosk_only": true
+}

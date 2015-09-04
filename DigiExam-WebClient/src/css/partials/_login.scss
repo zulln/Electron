@@ -1,0 +1,96 @@
+#login
+{
+	.logo
+	{
+		text-align: center;
+		position: relative;
+		margin-bottom: 20px;
+		opacity: 1;
+
+		&.ng-hide-add, &.ng-hide-remove
+		{
+			@include transition(1s ease-out all);
+			display: block !important;
+		}
+
+		&.ng-hide-add.ng-hide-add-active, &.ng-hide-remove { opacity: 0; top: -10px; }
+		&.ng-hide-add, &.ng-hide-remove.ng-hide-remove-active { opacity: 1; top: 0; }
+
+		h1 { font-size: 64px; margin: 0; }
+
+		img
+		{
+			width: 400px;
+		}
+	}
+
+	.auth
+	{
+		position: relative;
+
+		&.ng-hide-add, &.ng-hide-remove
+		{
+			@include transition(0.5s ease-out 0.3s all);
+			display: block !important;
+		}
+
+		&.ng-hide-add.ng-hide-add-active, &.ng-hide-remove { opacity: 0; left: -10px; }
+		&.ng-hide-add, &.ng-hide-remove.ng-hide-remove-active { opacity: 1; left: 0; }
+
+		label { display: block; }
+		input { margin-bottom: 10px; }
+
+		.open-exam
+		{
+			position: relative;
+
+			&.ng-hide-add, &.ng-hide-remove
+			{
+				@include transition(0.5s ease-out all);
+				display: block !important;
+			}
+
+			&.ng-hide-add.ng-hide-add-active, &.ng-hide-remove { opacity: 0; left: -10px; }
+			&.ng-hide-add, &.ng-hide-remove.ng-hide-remove-active { opacity: 1; left: 0; }
+		}
+
+		.choose-open-or-register { height: 30px; }
+
+		.btn
+		{
+			float: right;
+			position: relative;
+			@include transition(0.5s ease-out all);
+
+			&.ng-hide-add, &.ng-hide-remove { display: block !important; }
+
+			&.ng-hide
+			{
+				display: block;
+				opacity: 0;
+			}
+		}
+
+		.btn.isntOpen
+		{
+			top: 0;
+			&.ng-hide { top: 8px; }
+		}
+
+		.btn.isOpen
+		{
+			top: 0;
+			&.ng-hide { top: -8px; }
+		}
+
+		.alert
+		{
+			margin-top: 15px;
+
+			&.is-open
+			{
+				margin-top: 55px;
+			}
+		}
+	}
+}

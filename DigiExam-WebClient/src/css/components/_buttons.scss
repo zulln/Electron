@@ -1,0 +1,111 @@
+.btn
+{
+	height: 30px;
+	border: 0;
+	text-decoration: none;
+	line-height: 30px;
+	font-size: 12px;
+	cursor: pointer;
+	padding: 0 10px;
+	background: $color-btn-flat;
+	outline-width: thin;
+	font-weight: bold;
+	@include transition(0.1s ease-out all);
+
+	&:hover
+	{
+		background: $color-btn-flat-hover;
+	}
+
+	&:focus
+	{
+
+	}
+
+	&:active
+	{
+		background: $color-btn-flat-active;
+	}
+
+	&-small {
+		height: 20px;
+		padding: 0 5px;
+		line-height: 20px;
+	}
+
+	&.btn-positive
+	{
+		color: $color-btn-flat-positive;
+	}
+
+	&.btn-raised
+	{
+		background: $color-btn-raised;
+		box-shadow: 0 1px 1px #888;
+
+		&:hover
+		{
+			background: $color-btn-raised-hover;
+		}
+
+		&:focus
+		{
+
+		}
+
+		&:active
+		{
+			background: $color-btn-raised-active;
+		}
+	}
+
+	&.btn-green
+	{
+		color: #fff;
+		background: $color-clear-green;
+
+		&:hover
+		{
+			background: darken($color-clear-green, 4%);
+		}
+
+		&:focus
+		{
+
+		}
+
+		&:active
+		{
+			background: darken($color-clear-green, 7%);
+		}
+	}
+
+	&.btn-red
+	{
+		color: #fff;
+		background: $color-clear-red;
+
+		&:hover
+		{
+			background: darken($color-clear-red, 4%);
+		}
+
+		&:focus
+		{
+
+		}
+
+		&:active
+		{
+			background: darken($color-clear-red, 7%);
+		}
+	}
+
+	&[disabled]
+	{
+		opacity: 0.5;
+		cursor: default;
+		color: #888;
+		background: #ccc !important;
+	}
+}

@@ -1,0 +1,87 @@
+.statusbar
+{
+	height: 60px;
+	line-height: 30px;
+	background: #fff;
+	z-index: $zindex-statusbar;
+	box-shadow: 0 2px 4px RGBA(0,0,0,0.1);
+
+	.statusbar-block
+	{
+		margin-left: 20px;
+		display: inline-block;
+		vertical-align: top;
+		padding: 15px;
+	}
+
+	.statusbar-close
+	{
+		width: 50px;
+		height: 30px;
+		text-align: center;
+		display: block;
+		color: #000;
+		font-size: 18px;
+		-webkit-transform-origin: 25px 16px;
+
+		&:focus
+		{
+			background: #000;
+			color: #fff;
+		}
+	}
+
+	.statusbar-buttons
+	{
+		float: right;
+	}
+
+	.statusbar-user
+	{
+		cursor: pointer;
+		line-height: 1.1;
+
+		&[disabled]
+		{
+			cursor: default;
+
+			&:hover { background: transparent; }
+			.statusbar-user-name, .statusbar-user-email { color: $color-text-disabled; }
+		}
+
+		&:hover { background: #f8f8f8; }
+
+		.statusbar-user-name
+		{
+			display: block;
+			font-weight: bold;
+			color: $color-text;
+		}
+
+		.statusbar-user-email
+		{
+			color: $color-text-faded;
+		}
+	}
+
+	.statusbar-clock
+	{
+		font-size: 14px;
+		margin-left: 0;
+
+		img
+		{
+			width: 20px;
+			height: 20px;
+		}
+	}
+
+	.statusbar-version
+	{
+		position: absolute;
+		top: -5px;
+		right: 2px;
+		font-size: 10px;
+		color: #aaa;
+	}
+}

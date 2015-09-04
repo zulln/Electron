@@ -1,0 +1,35 @@
+/*
+	Line heights
+*/
+$input-height: 30px;
+
+/*
+	Border radius
+*/
+$input-border-radius: 5px;
+
+/*
+	Input and textareas padding
+*/
+$input-padding: 0 $input-border-radius;
+$textarea-padding: $input-border-radius;
+
+/*
+	Exam
+*/
+$exam-question-wrapper-margin: 40px 0 0 0;
+$exam-question-margin: 0 0 40px 0;
+
+/*
+	z-index
+*/
+$zindex-statusbar: 100;
+$zindex-toast-area: 110;
+
+/*
+  ipad
+*/
+$ipad-break: 1024px;
+$ipad-input-height: 44px;
+$ipad-input-padding-left: 14px;
+$ipad-input-padding-right: 14px;

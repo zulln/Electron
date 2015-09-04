@@ -1,0 +1,16 @@
+{
+	"envs": ["browser"],
+	"globals": {
+		"window": true,
+		"document": true,
+		"Element": true,
+		"Node": true,
+		"NodeFilter": true,
+		"angular": true,
+		"WebViewJavascriptBridge": true
+	},
+	"rules": {
+		"indent": [2, "tab"],
+		"no-use-before-define": [2, "nofunc"]
+	}
+}

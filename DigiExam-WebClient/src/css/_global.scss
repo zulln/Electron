@@ -1,0 +1,24 @@
+html,
+body {
+	height: 100%;
+	min-height: 100%;
+}
+
+body {
+	user-select: unset;
+	overflow: auto;
+	background-color: #F9F9F9;
+}
+
+a {
+	color: $color-link;
+	text-decoration: none;
+	display: inline;
+	outline-width: thin;
+}
+
+// TODO(kenneth): These should be placed on a dialog class instead
+dialog {
+	margin: auto;
+	padding: 1em;
+}

@@ -1,0 +1,8 @@
+{
+	"apiBaseUrl": {
+		"live": "https://digiexam-live.appspot.com/",
+		"release": "https://digiexam-release.appspot.com/",
+		"manual": "https://digiexam-manual.appspot.com/",
+		"localhost": "https://digiexam-manual.appspot.com/"
+	}
+}

@@ -26,6 +26,10 @@ app.on('ready', function() {
   // and load the index.html of the app.
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
+  mainWindow.webContents.on('did-finish-load', function(){
+     mainWindow.webContents.send('ping', 'I am electron'); 
+  });
+
   // Open the devtools.
   mainWindow.openDevTools();
 

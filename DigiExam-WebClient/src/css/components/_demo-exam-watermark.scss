@@ -1,0 +1,14 @@
+.demoExamWatermark {
+	$scrollbarWidth: 16px;
+
+	position: fixed;
+	right: $space + $scrollbarWidth;
+	bottom: $space;
+	background: red;
+	color: white;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: $fontSize-large;
+	padding: $space-300;
+	line-height: 1;
+}

@@ -1,0 +1,42 @@
+.toast-area
+{
+	width: 240px;
+	position: absolute;
+	right: 10px;
+	top: 80px;
+	z-index: $zindex-toast-area;
+}
+
+.toast
+{
+	width: 220px;
+	padding: 10px;
+	background: #282828;
+	margin-bottom: 20px;
+	cursor: pointer;
+	border-radius: 2px;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+	position: relative;
+	transform-origin: top right;
+	position: relative;
+
+	p { margin: 0; color: #fff; }
+
+	&.ng-enter, &.ng-move
+	{
+		@include transition(all ease-out 0.3s);
+		opacity: 0;
+		top: -20px;
+	}
+
+	&.ng-enter.ng-enter-active, &.ng-move.ng-move-active
+	{
+		opacity: 1;
+		top: 0;
+	}
+
+	&.ng-leave
+	{
+		animation: 0.3s toast-leave;
+	}
+}
