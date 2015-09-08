@@ -1,4 +1,4 @@
-angular.module("digiexamclient").controller "OverviewController", ($rootScope, $scope, $modal, $location, $interval, Urls, SessionService, Answer, ExamInfo, ExamInfoRepository, DXFileSystem, DXLocalStorage, DX_PLATFORM)->
+angular.module("digiexamclient").controller "OverviewController", ($rootScope, $scope, $window, $modal, $location, $interval, $log, Urls, SessionService, Answer, ExamInfo, ExamInfoRepository, DXFileSystem, DXLocalStorage, DX_PLATFORM)->
 
 	$scope.loadingExams = true
 
@@ -121,6 +121,7 @@ angular.module("digiexamclient").controller "OverviewController", ($rootScope, $
 
 	$scope.openOfflineFile = ->
 		$scope.openOfflineFileError = ""
+		$log.log(DXFileSystem)
 		promise = DXFileSystem.openFile [ { extensions: ["dxe"] } ]
 		promise.then $scope.handleOpenOfflineFileSuccess
 

@@ -18,6 +18,7 @@ angular.module("digiexamclient").directive "userDetails", ->
 			# Normal angular routing does not work here on iPad for some reason
 			# This is a work around that uses the app startup cycle to get to the overview
 			# todo(andersson): optimize, fml
-			setTimeout ->
-				location.href = "/"
-			, 250
+			##setTimeout ->
+			##	location.href = "/"
+			##, 250
+			location.reload()

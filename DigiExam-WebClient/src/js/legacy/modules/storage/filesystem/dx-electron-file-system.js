@@ -1,5 +1,5 @@
 angular.module("digiexamclient.storage.filesystem")
-.factory("ElectronFileSystem", function($q, $timeout) {
+.factory("ElectronFileSystem", function($q, $timeout, $window) {
 	"use strict";
 
 	var mockedPromise = function(resolveData) {
@@ -64,6 +64,7 @@ angular.module("digiexamclient.storage.filesystem")
 		 *         DirectoryEntry to the directory to be looked up.
 		 * `name`: Name of file to be appended to path
 		 */
+		$window.alert("open angularJS");
 		return mockedPromise();
 	};
 

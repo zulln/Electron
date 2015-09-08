@@ -1,0 +1,17 @@
+<dialog>
+	<header>
+		<h1>Exam was not handed in</h1>
+	</header>
+
+	<div class="modal-body mv">
+		<p class="mb-300">Failed to upload the exam to the server due to no internet connection.</p>
+		<p>Try to restart the exam and hand it in again when you have a connection to the internet.</p>
+	</div>
+
+	<footer class="text-right">
+		<button class="btn btn-positive" ng-click="close()">
+			<span ng-if="DX_PLATFORM !== 'IOS_WEBVIEW'">Close DigiExam</span>
+			<span ng-if="DX_PLATFORM === 'IOS_WEBVIEW'">OK</span>
+		</button>
+	</footer>
+</dialog>

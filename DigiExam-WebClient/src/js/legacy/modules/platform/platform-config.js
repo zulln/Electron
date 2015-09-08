@@ -6,9 +6,7 @@ angular.module("digiexamclient.platform")
 		{
 			"name": "ELECTRON_APP",
 			"isCurrentSystem": function() {
-				if(/Electron/i.test(window.navigator.userAgent)){
-					return true;
-				}
+				return /Electron/i.test(window.navigator.userAgent);
 			}
 		},
 		{
