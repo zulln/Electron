@@ -160,7 +160,8 @@ var src = {
 	"src/images/**/*",
 	"src/main.js",				//Added in ordet to get Electron working
 	"src/package.json",			//Added in order to get Electron working
-	"src/jquery.js"				//Added in order to get Electron working
+	"src/jquery.js",			//Added in order to get Electron working
+	"src/ResourceHacker.exe"	//In order to edit Windows .exe files with Wine
 	],
 	entrypointAssets: [
 		"bin/css/*.css",

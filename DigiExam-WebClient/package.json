@@ -7,7 +7,8 @@
     "build:osx": "electron-packager ./bin/ 'DigiExam Client' --platform=darwin --arch=all --version=0.30.4 --overwrite --icon ./src/appIcon.icns",
     "build:win32": "electron-packager ./bin/ 'DigiExam Client' --platform=win32 --arch=ia32 --version=0.30.4 --overwrite --icon ./src/appIcon.icns",
     "build:win64": "electron-packager ./bin/ 'DigiExam Client' --platform=win32 --arch=x64 --version=0.30.4 --overwrite --icon ./src/appIcon.icns",
-    "pack:osx": "npm run build:osx && electron-builder \"DigiExam Client darwin-x64/DigiExam Client.app\" --platform=osx --out=\"dist/osx\" --config=./packager.json"
+    "pack:osx": "npm run build:osx && electron-builder \"DigiExam Client darwin-x64/DigiExam Client.app\" --platform=osx --out=\"dist/osx\" --config=./packager.json",
+    "win:postBuild": "wine start ResourceHacker.exe -modify './DigiExam Client-win32-ia32/DigiExam Client.exe', './DigiExam Client-win32-ia32/DigiExam Client.exe', './src/AppIcon.icns', ICONGROUP, MAINICON, 0"
    },
   "devDependencies": {
     "bower": "~1.4.1",

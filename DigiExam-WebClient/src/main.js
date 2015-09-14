@@ -7,6 +7,10 @@ mainWindow = null;
 app.on('ready', function(){
 	mainWindow = new browserWindow({width: 600, height: 800});
 
+	mainWindow.webContents.on('did-finish-load', function(){
+		mainWindow.webContents.send('setElectron');
+	});
+
 	mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
 	globalShortcut.register('Super+r', function(){
