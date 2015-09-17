@@ -3,6 +3,8 @@ angular.module("digiexamclient.storage.filesystem")
 	"use strict";
 
 	var fs = $window.require("fs");
+	var remote = require("remote");
+	var dialog = remote.require("dialog");
 
 	$window.console.log("ElectronFileSystem got fs:", fs);
 
@@ -71,20 +73,7 @@ angular.module("digiexamclient.storage.filesystem")
 		return mockedPromise();
 	};
 
-	var openFile = function(/*accepts*/) {
-		/*
-		 * Ask the user to choose a file or directory.
-		 *
-		 * `accepts`: The optional list of accept options for this file opener.
-		 *            Each option will be presented as a unique group to the
-		 *            end-user.
-		 */
-		$window.console.log("Open angularJS");
-		//fs.open();
-		return mockedPromise();
-	};
-
-	var readFile = function(/*quota, path, name*/) {
+	var readFile = function(fd) {
 		/*
 		 * Looks up an existing file.
 		 *
@@ -93,9 +82,80 @@ angular.module("digiexamclient.storage.filesystem")
 		 *         DirectoryEntry to the directory to be looked up.
 		 * `name`: Name of file to be appended to path
 		 */
-		fs.readFile();
-		$window.console.log("open angularJS");
-		return mockedPromise();
+		var deferred = $q.defer();
+		var fileContent = "";
+
+		fs.readFile(fd, "utf8", function(err, data) {
+			if(err) {
+				$window.console.log("Error reading file");
+				deferred.reject(err);
+			}
+			else
+			{
+				fileContent = data;
+				deferred.resolve(fileContent);
+			}
+		});
+		return deferred.promise;
+		//return mockedPromise();
+		//Lägga in reject ifall filen failar
+	};
+
+
+	var openFile = function(accepts) {
+		/*
+		 * Ask the user to choose a file or directory.
+		 *
+		 * `accepts`: The optional list of accept options for this file opener.
+		 *            Each option will be presented as a unique group to the
+		 *            end-user.
+		 */
+
+		//var fileType = accepts[0].extensions;
+		//var fileContent = "";
+		var deferred = $q.defer();
+
+		var fileDescriptor = dialog.showOpenDialog(
+			{
+				title: "Open Offline Exam",
+				filters: [
+					{ name: "DX Offline Exam", extensions: ["dxe"] }
+				]
+			});
+
+		$window.console.log(fileDescriptor + "typeOf: " + typeof fileDescriptor);
+
+		if(fileDescriptor === undefined)
+		{ deferred.reject() }
+		/*fs.readFile(fileDescriptor[0], "utf8", function(err, data) {
+			if(err) {
+				$window.console.log("Error reading file");
+				deferred.reject(err);
+			}
+			else
+			{
+				fileContent = data;
+				deferred.resolve(fileContent);
+			}
+		});*/
+		else {
+			var readFilePromise = readFile(fileDescriptor[0]);
+
+			readFilePromise.then(function(fileData){
+				deferred.resolve(fileData);
+			},
+				function(reason) {
+					$window.console.log("Reason" + reason);
+					deferred.reject(reason);
+				}
+			);
+		}
+		//Vid ca
+
+
+
+		return deferred.promise;
+		//return mockedPromise();
 	};
 
 	var requestQuota = function(/*bytes*/) {

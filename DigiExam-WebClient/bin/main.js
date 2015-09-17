@@ -2,6 +2,7 @@ var app = require('app');
 var browserWindow = require('browser-window');
 var globalShortcut = require('global-shortcut');
 var dialog = require("dialog");
+var ipc = require("ipc");
 
 mainWindow = null;
 

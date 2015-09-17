@@ -1,5 +1,5 @@
 angular.module("digiexamclient.storage.localstorage")
-.factory("BrowserLocalStorage", function($q, $window){
+.factory("ElectronLocalStorage", function($q, $window){
 	"use strict";
 
 	var BadLocalStorageArgumentType = function (message) {
