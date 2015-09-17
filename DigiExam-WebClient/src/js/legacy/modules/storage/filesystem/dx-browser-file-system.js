@@ -1,5 +1,5 @@
 angular.module("digiexamclient.storage.filesystem")
-.factory("BrowserFileSystem", function($q, $timeout) {
+.factory("BrowserFileSystem", function($window, $q, $timeout) {
 	"use strict";
 
 	var mockedPromise = function(resolveData) {
@@ -52,6 +52,7 @@ angular.module("digiexamclient.storage.filesystem")
 		 *            Each option will be presented as a unique group to the
 		 *            end-user.
 		 */
+		$window.alert("Browser file system");
 		return mockedPromise();
 	};
 

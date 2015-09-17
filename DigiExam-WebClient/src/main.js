@@ -1,14 +1,15 @@
 var app = require('app');
 var browserWindow = require('browser-window');
 var globalShortcut = require('global-shortcut');
+var dialog = require("dialog");
 
 mainWindow = null;
 
 app.on('ready', function(){
-	mainWindow = new browserWindow({width: 600, height: 800});
+	mainWindow = new browserWindow({width: 1200, height: 1600});
 
 	mainWindow.webContents.on('did-finish-load', function(){
-		mainWindow.webContents.send('setElectron');
+		mainWindow.webContents.executeJavaScript("window.isElectron = true;");
 	});
 
 	mainWindow.loadUrl('file://' + __dirname + '/index.html');

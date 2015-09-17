@@ -2,6 +2,10 @@ angular.module("digiexamclient.storage.filesystem")
 .factory("ElectronFileSystem", function($q, $timeout, $window) {
 	"use strict";
 
+	var fs = $window.require("fs");
+
+	$window.console.log("ElectronFileSystem got fs:", fs);
+
 	var mockedPromise = function(resolveData) {
 		var deferred = $q.defer();
 		$timeout(function(){
@@ -16,6 +20,9 @@ angular.module("digiexamclient.storage.filesystem")
 		 *
 		 * `quota`: The storage space—in bytes
 		 */
+
+		$window.console.log("Electron reqFS");
+
 		return mockedPromise();
 	};
 
@@ -27,10 +34,11 @@ angular.module("digiexamclient.storage.filesystem")
 		 * `path`: Either an absolute path or a relative path from the
 		 *         DirectoryEntry to the directory to be looked up.
 		 */
+		$window.console.log("List Dir angularJS");
 		return mockedPromise();
 	};
 
-	var makeDir = function(/*quota, path, name*/) {
+	var makeDir = function(quota, path, name) {
 		/*
 		 * Creates a directory.
 		 *
@@ -41,6 +49,25 @@ angular.module("digiexamclient.storage.filesystem")
 		 *         not yet exist.
 		 * `name`: Name to be appended to path
 		 */
+		if(path === "")
+		{
+			path = __dirname;
+		}
+		path = path + "/" + name;
+		$window.console.log(path);
+		$window.console.log("Type: " + typeof path);
+		$window.console.log("Attempting to create dir: " + path);
+		fs.mkdir(path, function (err) {
+			if (err) {
+				if(fs.statSync(path).isDirectory())
+				{ $window.console.log("Directory " + path + " already exists"); }
+				else
+				{ $window.console.log("Could not create dir: " + path); }
+			}
+			else {
+				$window.console.log("Created dir: " + path);
+			}
+		});
 		return mockedPromise();
 	};
 
@@ -52,6 +79,8 @@ angular.module("digiexamclient.storage.filesystem")
 		 *            Each option will be presented as a unique group to the
 		 *            end-user.
 		 */
+		$window.console.log("Open angularJS");
+		//fs.open();
 		return mockedPromise();
 	};
 
@@ -64,7 +93,8 @@ angular.module("digiexamclient.storage.filesystem")
 		 *         DirectoryEntry to the directory to be looked up.
 		 * `name`: Name of file to be appended to path
 		 */
-		$window.alert("open angularJS");
+		fs.readFile();
+		$window.console.log("open angularJS");
 		return mockedPromise();
 	};
 
@@ -75,6 +105,7 @@ angular.module("digiexamclient.storage.filesystem")
 		 *
 		 * `bytes`: The amount of bytes you want in your storage quota.
 		 */
+		$window.console.log("Request Quota angularJS");
 		return mockedPromise();
 	};
 
@@ -91,6 +122,7 @@ angular.module("digiexamclient.storage.filesystem")
 		 *            Each option will be presented as a unique group to the
 		 *            end-user.
 		 */
+		$window.console.log("SaveAs angularJS");
 		return mockedPromise();
 	};
 
@@ -105,10 +137,12 @@ angular.module("digiexamclient.storage.filesystem")
 		 * `data`: The blob to write
 		 * `mime`: The mime type as a string.
 		 */
+		$window.console.log("Write file angularJS");
 		return mockedPromise();
 	};
 
 	return {
+		"Electron FS": true,
 		"requestFileSystem": requestFileSystem,
 		"listDirectory": listDirectory,
 		"makeDir": makeDir,
