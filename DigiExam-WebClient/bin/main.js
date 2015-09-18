@@ -2,7 +2,6 @@ var app = require('app');
 var browserWindow = require('browser-window');
 var globalShortcut = require('global-shortcut');
 var dialog = require("dialog");
-var ipc = require("ipc");
 
 mainWindow = null;
 
@@ -18,8 +17,8 @@ app.on('ready', function(){
 	globalShortcut.register('Super+r', function(){
 		//Register in order to disable cmd button on Mac and Ctrl on Windows
 	})
-
 	mainWindow.openDevTools();
+
 
 	mainWindow.on('close', function(){
 		mainWindow = null;
