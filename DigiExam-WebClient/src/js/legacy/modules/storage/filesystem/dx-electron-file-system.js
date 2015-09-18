@@ -2,10 +2,11 @@ angular.module("digiexamclient.storage.filesystem")
 .factory("ElectronFileSystem", function($q, $timeout, $window) {
 	"use strict";
 
-	var fs = $window.require("fs");
-	var remote = require("remote");
-	var dialog = remote.require("dialog");
 	var appDataFolder = null;
+	var fs = $window.require("fs");
+	var remote = $window.require("remote");
+	var dialog = remote.require("dialog");
+	var path = $window.require("path");
 
 	$window.console.log("ElectronFileSystem got fs:", fs);
 
@@ -23,42 +24,43 @@ angular.module("digiexamclient.storage.filesystem")
 		 *
 		 * `quota`: The storage space—in bytes
 		 */
-		return appDataFolder = remote.require("app").getPath("userData");
+		appDataFolder = remote.require("app").getPath("userData");
+		return appDataFolder;
 	};
 
-	var makeDir = function(quota, path, name) {
+	var makeDir = function(quota, filepath, name) {
 		/*
 		 * Creates a directory.
 		 *     Create exam dir in rel path to Application Support for OSX, %AppData% for Win
 		 * `quota`: The storage space—in bytes
-		 * `path`: Either an absolute path or a relative path from the
+		 * `filepath`: Either an absolute path or a relative path from the
 		 *         DirectoryEntry to the directory to be looked created. It is an
 		 *         error to attempt to create a file whose immediate parent does
 		 *         not yet exist.
 		 * `name`: Name to be appended to path
 		 */
 		var deferred = $q.defer();
-		if(path === "")
+		if(filepath === "")
 		{
-			path = requestFileSystem();
+			filepath = requestFileSystem();
 		}
-		path = path + "/" + name;
-		fs.mkdir(path, function (err) {
+		filepath = path.join(filepath, name);
+		fs.mkdir(filepath, function (err) {
 			if (err) {
-				if(fs.statSync(path).isDirectory())
-				{ deferred.resolve("Path " + path + "/" + name + " already exists"); }
+				if(fs.statSync(filepath).isDirectory())
+				{ deferred.resolve("Path " + filepath + "/" + name + " already exists"); }
 				else
-				{ deferred.reject("Could not create dir: " + path + "/" + name);	}
+				{ deferred.reject("Could not create dir: " + filepath + "/" + name);	}
 			}
 			else {
-				$window.console.log("Created dir: " + path);
-				deferred.resolve("Path " + path + "/" + name + " created");
+				$window.console.log("Created dir: " + filepath);
+				deferred.resolve("filepath " + filepath + "/" + name + " created");
 			}
 		});
 		return deferred.promise;
 	};
 
-	var listDirectory = function(quota, path) {
+	var listDirectory = function(quota, filepath) {
 		/*
 		 * Looks up a directory.
 		 *
@@ -68,27 +70,26 @@ angular.module("digiexamclient.storage.filesystem")
 		 *         Return array with all files in selected folder.
 		 */
 		$window.console.log("List Dir angularJS");
-
-		fs.readdir(path, function(err, files) {
+		fs.readdir(filepath, function(err, files) {
 			if(!err) { return files; }
-			else { return; }
+			else { return []; }
 		});
 
 	};
 
-	var readFile = function(quota, path, name) {
+	var readFile = function(quota, filepath, name) {
 		/*
 		 * Looks up an existing file.
 		 *
 		 * `quota`: The storage space—in bytes
-		 * `path`: Either an absolute path or a relative path from the
+		 * `filepath`: Either an absolute path or a relative path from the
 		 *         DirectoryEntry to the directory to be looked up.
 		 * `name`: Name of file to be appended to path
 		 */
 		var deferred = $q.defer();
 		var fileContent = "";
 
-		fs.readFile(path + name, "utf8", function(err, data) {
+		fs.readFile(filepath + name, "utf8", function(err, data) {
 			if(err) {
 				$window.console.log("Error reading file");
 				deferred.reject(err);
@@ -120,7 +121,7 @@ angular.module("digiexamclient.storage.filesystem")
 			{
 				title: "Open offline exam",
 				filters: [
-					{name: "DX offline exam",
+					{name: fileType.toUpperCase(),
 						extensions: [fileType],
 						properties: openFile }
 				]
@@ -129,9 +130,9 @@ angular.module("digiexamclient.storage.filesystem")
 
 		else {
 			fileDescriptor = fileDescriptor[0];		//Turn array into string
-			var path = fileDescriptor.substring(0, fileDescriptor.lastIndexOf("/") + 1);
+			var filepath = fileDescriptor.substring(0, fileDescriptor.lastIndexOf("/") + 1);
 			var filename =	fileDescriptor.substring(fileDescriptor.lastIndexOf("/") + 1, fileDescriptor.length);
-			var readFilePromise = readFile(null, path, filename);
+			var readFilePromise = readFile(null, filepath, filename);
 
 			readFilePromise.then(function(fileData){
 				deferred.resolve(fileData);
@@ -157,12 +158,12 @@ angular.module("digiexamclient.storage.filesystem")
 		return mockedPromise();
 	};
 
-	var writeFile = function(quota, path, filename, data, mime) {
+	var writeFile = function(quota, filepath, filename, data, mime) {
 		/*
 		 * Creates up a file without prompting the user.
 		 *
 		 * `quota`: The storage space—in bytes
-		 * `path`: Either an absolute path or a relative path from the
+		 * `filepath`: Either an absolute path or a relative filepath from the
 		 *         DirectoryEntry to the directory to be looked up.
 		 * `filename`: Name of file to be appended to path
 		 * `data`: The blob to write
@@ -171,18 +172,29 @@ angular.module("digiexamclient.storage.filesystem")
 
 		var deferred = $q.defer();
 		$window.console.log("Write file angularJS");
-		$window.console.log("path: " + path);
+		$window.console.log("filepath: " + filepath);
 		$window.console.log("filename: " + filename);
 		$window.console.log("data: " + data);
 		$window.console.log("mime: " + mime);
 
-		if(path === "exams/")
+		/* relative
+		"exams/"
+		"../exams/"
+		"./exams/"
+
+		// absolute
+		"C:/exams/"
+		"/exams/"
+		"~/exams/"
+		*/
+
+		if(!path.isAbsolute(filepath))
 		{
-			path = appDataFolder + "/" + path;
-			$window.console.log("Path changed to: " + path);
+			filepath = path.join(appDataFolder, filepath);
+			$window.console.log("filepath changed to: " + filepath);
 		}
 
-		fs.writeFile(path + filename, data, function(err, written, buffer)
+		fs.writeFile(filepath + filename, data, function(err, written, buffer)
 		{
 			$window.console.log("Written " + written + " bytes");
 			$window.console.log("Buffer data: " + buffer);
@@ -218,22 +230,22 @@ angular.module("digiexamclient.storage.filesystem")
 
 		var fileDescriptor = dialog.showSaveDialog(
 			{
-				title: "Save offline exam",
+				title: "test",
 				filters: [
-					{ name: "DX offline exam", extensions: [fileType] }
+					{ name: fileType.toUpperCase(), extensions: [fileType] }
 				]
 			});
 
 		if(fileDescriptor === undefined) {deferred.reject(); }
 		else
 		{
-			var path = fileDescriptor.substring(0, fileDescriptor.lastIndexOf("/") + 1);
+			var filepath = fileDescriptor.substring(0, fileDescriptor.lastIndexOf("/") + 1);
 			var filename =	fileDescriptor.substring(fileDescriptor.lastIndexOf("/") + 1, fileDescriptor.length);
 
-			$window.console.log("FilePath: " + path);
+			$window.console.log("FilePath: " + filepath);
 			$window.console.log("FileName: " + filename);
 
-			var writeFilePromise = writeFile(null, path, filename, data, mime);
+			var writeFilePromise = writeFile(null, filepath, filename, data, mime);
 
 			writeFilePromise.then(function(){
 				deferred.resolve("success");
