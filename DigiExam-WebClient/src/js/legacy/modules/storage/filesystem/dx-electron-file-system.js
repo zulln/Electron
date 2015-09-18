@@ -8,6 +8,8 @@ angular.module("digiexamclient.storage.filesystem")
 	var dialog = remote.require("dialog");
 	var path = $window.require("path");
 
+	$window.console.log("ElectronFileSystem got fs:", fs);
+
 	var mockedPromise = function(resolveData) {
 		var deferred = $q.defer();
 		$timeout(function(){
@@ -29,6 +31,7 @@ angular.module("digiexamclient.storage.filesystem")
 	var makeDir = function(quota, filepath, name) {
 		/*
 		 * Creates a directory.
+		 *     Create exam dir in rel path to Application Support for OSX, %AppData% for Win
 		 * `quota`: The storage space—in bytes
 		 * `filepath`: Either an absolute path or a relative path from the
 		 *         DirectoryEntry to the directory to be looked created. It is an
@@ -50,6 +53,7 @@ angular.module("digiexamclient.storage.filesystem")
 				{ deferred.reject("Could not create dir: " + filepath + "/" + name);	}
 			}
 			else {
+				$window.console.log("Created dir: " + filepath);
 				deferred.resolve("filepath " + filepath + "/" + name + " created");
 			}
 		});
@@ -65,6 +69,7 @@ angular.module("digiexamclient.storage.filesystem")
 		 *         DirectoryE	ntry to the directory to be looked up.
 		 *         Return array with all files in selected folder.
 		 */
+		$window.console.log("List Dir angularJS");
 		fs.readdir(filepath, function(err, files) {
 			if(!err) { return files; }
 			else { return []; }
@@ -86,6 +91,7 @@ angular.module("digiexamclient.storage.filesystem")
 
 		fs.readFile(filepath + name, "utf8", function(err, data) {
 			if(err) {
+				$window.console.log("Error reading file");
 				deferred.reject(err);
 			}
 			else
@@ -108,7 +114,7 @@ angular.module("digiexamclient.storage.filesystem")
 		 *            end-user.
 		 */
 
-		var fileType = accepts[0].extensions[0];
+		var fileType = accepts[0].extensions[0];		//Extracting file type from accepts array
 		var deferred = $q.defer();
 
 		var fileDescriptor = dialog.showOpenDialog(
@@ -123,7 +129,7 @@ angular.module("digiexamclient.storage.filesystem")
 		if(fileDescriptor === undefined) {deferred.reject(); }
 
 		else {
-			fileDescriptor = fileDescriptor[0];
+			fileDescriptor = fileDescriptor[0];		//Turn array into string
 			var filepath = fileDescriptor.substring(0, fileDescriptor.lastIndexOf("/") + 1);
 			var filename =	fileDescriptor.substring(fileDescriptor.lastIndexOf("/") + 1, fileDescriptor.length);
 			var readFilePromise = readFile(null, filepath, filename);
@@ -132,6 +138,7 @@ angular.module("digiexamclient.storage.filesystem")
 				deferred.resolve(fileData);
 			},
 				function(reason) {
+					$window.console.log("Reason" + reason);
 					deferred.reject(reason);
 				}
 			);
@@ -147,10 +154,11 @@ angular.module("digiexamclient.storage.filesystem")
 		 *
 		 * `bytes`: The amount of bytes you want in your storage quota.
 		 */
+		$window.console.log("Request Quota angularJS");
 		return mockedPromise();
 	};
 
-	var writeFile = function(quota, filepath, filename, data) {
+	var writeFile = function(quota, filepath, filename, data, mime) {
 		/*
 		 * Creates up a file without prompting the user.
 		 *
@@ -163,14 +171,33 @@ angular.module("digiexamclient.storage.filesystem")
 		 */
 
 		var deferred = $q.defer();
+		$window.console.log("Write file angularJS");
+		$window.console.log("filepath: " + filepath);
+		$window.console.log("filename: " + filename);
+		$window.console.log("data: " + data);
+		$window.console.log("mime: " + mime);
+
+		/* relative
+		"exams/"
+		"../exams/"
+		"./exams/"
+
+		// absolute
+		"C:/exams/"
+		"/exams/"
+		"~/exams/"
+		*/
 
 		if(!path.isAbsolute(filepath))
 		{
 			filepath = path.join(appDataFolder, filepath);
+			$window.console.log("filepath changed to: " + filepath);
 		}
 
-		fs.writeFile(filepath + filename, data, function(err)
+		fs.writeFile(filepath + filename, data, function(err, written, buffer)
 		{
+			$window.console.log("Written " + written + " bytes");
+			$window.console.log("Buffer data: " + buffer);
 			if(!err) {deferred.resolve(); }
 			else {deferred.reject(err); }
 		});
@@ -195,9 +222,15 @@ angular.module("digiexamclient.storage.filesystem")
 		var fileType = accepts[0].extensions[0];
 		var deferred = $q.defer();
 
+		$window.console.log("SaveAs angularJS");
+		$window.console.log("Data: " + data);
+		$window.console.log("name: " + name);
+		$window.console.log("mime: " + mime);
+		$window.console.log("accepts: " + fileType);
+
 		var fileDescriptor = dialog.showSaveDialog(
 			{
-				title: "Save offline exam",
+				title: "test",
 				filters: [
 					{ name: fileType.toUpperCase(), extensions: [fileType] }
 				]
@@ -208,12 +241,17 @@ angular.module("digiexamclient.storage.filesystem")
 		{
 			var filepath = fileDescriptor.substring(0, fileDescriptor.lastIndexOf("/") + 1);
 			var filename =	fileDescriptor.substring(fileDescriptor.lastIndexOf("/") + 1, fileDescriptor.length);
+
+			$window.console.log("FilePath: " + filepath);
+			$window.console.log("FileName: " + filename);
+
 			var writeFilePromise = writeFile(null, filepath, filename, data, mime);
 
 			writeFilePromise.then(function(){
 				deferred.resolve("success");
 			},
 				function(reason){
+					$window.console.log("Reason" + reason);
 					deferred.reject(reason);
 				}
 			);
@@ -221,6 +259,8 @@ angular.module("digiexamclient.storage.filesystem")
 
 		return deferred.promise;
 	};
+
+
 
 	return {
 		"requestFileSystem": requestFileSystem,
