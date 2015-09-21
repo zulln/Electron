@@ -4,9 +4,11 @@ angular.module("digiexamclient.storage.filesystem")
 
 	var appDataFolder = null;
 	var fs = $window.require("fs");
+	var ipc = $window.require("ipc");
+	var path = $window.require("path");
 	var remote = $window.require("remote");
 	var dialog = remote.require("dialog");
-	var path = $window.require("path");
+
 
 	$window.console.log("ElectronFileSystem got fs:", fs);
 
@@ -116,18 +118,9 @@ angular.module("digiexamclient.storage.filesystem")
 
 		var fileType = accepts[0].extensions[0];		//Extracting file type from accepts array
 		var deferred = $q.defer();
+		var fileDescriptor = ipc.sendSync("openFile", fileType);
 
-		var fileDescriptor = dialog.showOpenDialog(
-			{
-				title: "Open offline exam",
-				filters: [
-					{name: fileType.toUpperCase(),
-						extensions: [fileType],
-						properties: openFile }
-				]
-			});
-		if(fileDescriptor === undefined) {deferred.reject(); }
-
+		if(fileDescriptor === null) {deferred.reject(); }
 		else {
 			fileDescriptor = fileDescriptor[0];		//Turn array into string
 			var filepath = fileDescriptor.substring(0, fileDescriptor.lastIndexOf("/") + 1);
@@ -228,15 +221,16 @@ angular.module("digiexamclient.storage.filesystem")
 		$window.console.log("mime: " + mime);
 		$window.console.log("accepts: " + fileType);
 
-		var fileDescriptor = dialog.showSaveDialog(
+		var fileDescriptor = ipc.sendSync("saveFile", fileType);
+		/*var fileDescriptor = dialog.showSaveDialog(
 			{
 				title: "test",
 				filters: [
 					{ name: fileType.toUpperCase(), extensions: [fileType] }
 				]
-			});
+			});*/
 
-		if(fileDescriptor === undefined) {deferred.reject(); }
+		if(fileDescriptor === null) {deferred.reject(); }
 		else
 		{
 			var filepath = fileDescriptor.substring(0, fileDescriptor.lastIndexOf("/") + 1);

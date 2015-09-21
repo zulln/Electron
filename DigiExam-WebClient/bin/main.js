@@ -1,7 +1,8 @@
 var app = require('app');
 var browserWindow = require('browser-window');
-var globalShortcut = require('global-shortcut');
 var dialog = require("dialog");
+var globalShortcut = require('global-shortcut');
+var ipc = require("ipc");
 
 mainWindow = null;
 
@@ -19,6 +20,35 @@ app.on('ready', function(){
 	})
 	mainWindow.openDevTools();
 
+	ipc.on("openFile", function(event, fileType) {
+		var dialogResult = dialog.showOpenDialog(mainWindow, {
+			title: "Open offline exam",
+			filters: [
+				{name: fileType.toUpperCase(),
+					extensions: [fileType],
+					properties: "openFile" }
+			]
+		});
+
+		if(dialogResult === undefined) { dialogResult = null; }
+
+		event.returnValue = dialogResult;
+	});
+
+	ipc.on("saveFile", function(event, fileType) {
+		var dialogResult = dialog.showSaveDialog(mainWindow, {
+			title: "Save offline exam",
+			filters: [
+				{name: fileType.toUpperCase(),
+					extensions: [fileType]
+				}
+			]
+		});
+
+		if(dialogResult === undefined) { dialogResult = null; }
+
+		event.returnValue = dialogResult;
+	});
 
 	mainWindow.on('close', function(){
 		mainWindow = null;
