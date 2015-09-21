@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/bin/main.js" line="32" mnemonic="8" />
+    <bookmark url="file://$PROJECT_DIR$/bin/main.js" line="31" mnemonic="8" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0db4bf8-f963-402d-8fce-e5820f842f42" name="Default" comment="" />
@@ -24,21 +24,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6180168">
-              <caret line="59" column="2" selection-start-line="59" selection-start-column="2" selection-end-line="59" selection-end-column="2" />
+            <state vertical-scroll-proportion="-38.333332">
+              <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dx-electron-file-system.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dx-electron-file-system.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/js/legacy/modules/storage/filesystem/dx-electron-file-system.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.592592">
-              <caret line="203" column="41" selection-start-line="203" selection-start-column="41" selection-end-line="203" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.4911032">
+              <caret line="46" column="9" selection-start-line="45" selection-start-column="27" selection-end-line="46" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -109,8 +109,8 @@
         <option value="$PROJECT_DIR$/src/js/legacy/modules/exam/answer-factory.coffee" />
         <option value="$PROJECT_DIR$/src/js/legacy/modules/storage/localstorage/dx-electron-local-storage.js" />
         <option value="$PROJECT_DIR$/src/js/legacy/controllers/overview/overview-controller.coffee" />
-        <option value="$PROJECT_DIR$/src/js/legacy/modules/storage/filesystem/dx-electron-file-system.js" />
         <option value="$PROJECT_DIR$/bin/main.js" />
+        <option value="$PROJECT_DIR$/src/js/legacy/modules/storage/filesystem/dx-electron-file-system.js" />
       </list>
     </option>
   </component>
@@ -1059,18 +1059,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/legacy/modules/storage/filesystem/dx-electron-file-system.js">
+    <entry file="file://$PROJECT_DIR$/bin/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.592592">
-          <caret line="203" column="41" selection-start-line="203" selection-start-column="41" selection-end-line="203" selection-end-column="41" />
+        <state vertical-scroll-proportion="-38.333332">
+          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/main.js">
+    <entry file="file://$PROJECT_DIR$/src/js/legacy/modules/storage/filesystem/dx-electron-file-system.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6180168">
-          <caret line="59" column="2" selection-start-line="59" selection-start-column="2" selection-end-line="59" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.4911032">
+          <caret line="46" column="9" selection-start-line="45" selection-start-column="27" selection-end-line="46" selection-end-column="9" />
           <folding />
         </state>
       </provider>

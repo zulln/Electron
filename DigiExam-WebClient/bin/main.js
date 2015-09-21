@@ -15,9 +15,8 @@ app.on('ready', function(){
 
 	mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
-	globalShortcut.register('Super+r', function(){
-		//Register in order to disable cmd button on Mac and Ctrl on Windows
-	})
+	globalShortcut.register('Super+r', function(){});				//1
+
 	mainWindow.openDevTools();
 
 	ipc.on("openFile", function(event, fileType) {
@@ -30,8 +29,7 @@ app.on('ready', function(){
 			]
 		});
 
-		if(dialogResult === undefined) { dialogResult = null; }
-
+		if(dialogResult === undefined) { dialogResult = null; }		//2
 		event.returnValue = dialogResult;
 	});
 
@@ -45,9 +43,13 @@ app.on('ready', function(){
 			]
 		});
 
-		if(dialogResult === undefined) { dialogResult = null; }
-
+		if(dialogResult === undefined) { dialogResult = null; }		//2
 		event.returnValue = dialogResult;
+	});
+
+	ipc.on("setKiosk", function(event, arg){
+		mainWindow.setKiosk(arg);									//3
+		event.returnValue = mainWindow.isKiosk();
 	});
 
 	mainWindow.on('close', function(){
@@ -58,3 +60,12 @@ app.on('ready', function(){
 app.on('window-all-closed', function(){
 	app.quit();
 })
+
+
+/*		Comment explanations:
+
+1. Register in order to disable cmd button on Mac and Ctrl on Windows
+2. Due to electron not beeing able to return undefined as returnValue
+3. Arg should set kiosk-mode
+
+*/
