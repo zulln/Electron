@@ -1,0 +1,1 @@
+void SetKiosk(bool kiosk);

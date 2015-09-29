@@ -1,8 +1,7 @@
 var app = require('app');
 var browserWindow = require('browser-window');
-var dialog = require("dialog");
 var globalShortcut = require('global-shortcut');
-var ipc = require("ipc");
+var dialog = require("dialog");
 
 mainWindow = null;
 
@@ -61,11 +60,8 @@ app.on('window-all-closed', function(){
 	app.quit();
 })
 
-
 /*		Comment explanations:
 
-1. Register in order to disable cmd button on Mac and Ctrl on Windows
-2. Due to electron not beeing able to return undefined as returnValue
-3. Arg should set kiosk-mode
-
-*/
+ 1. Register in order to disable cmd button on Mac and Ctrl on Windows
+ 2. Due to electron not beeing able to return undefined as returnValue
+ 3. Arg should set kiosk-mode
