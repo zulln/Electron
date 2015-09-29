@@ -12,10 +12,11 @@
 			'targets': [
 				{
 					'target_name': 'dxlockdown',
-					'sources': [ 
-						'lockdown_mac.mm',
-						'kioskwindow/kioskwindow_mac.mm',
-						'sound/sound_mac.mm'
+					'sources': [
+						'lockdown_mac.mm'
+					#	'lockdown_mac.mm',
+					#	'kioskwindow/kioskwindow_mac.mm',
+					#	'sound/sound_mac.mm'
 					]
 				}
 			]

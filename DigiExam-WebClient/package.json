@@ -4,9 +4,11 @@
   "repository": "https://github.com/DigiExam/DigiExam-Webclient/",
   "scripts": {
     "postinstall": "./node_modules/.bin/bower install",
-    "build:osx": "electron-packager ./bin/ 'DigiExam Client' --platform=darwin --arch=all --version=0.30.4 --overwrite --icon ./src/appIcon.icns",
-    "build:win32": "electron-packager ./bin/ 'DigiExam Client' --platform=win32 --arch=ia32 --version=0.30.4 --overwrite --icon ./src/appIcon.icns",
-    "build:win64": "electron-packager ./bin/ 'DigiExam Client' --platform=win32 --arch=x64 --version=0.30.4 --overwrite --icon ./src/appIcon.icns",
+    "build-modules-x64": "./platforms/electron/node/build.sh x64",
+    "build-modules-x86": "./platforms/electron/node/build.sh ia32",
+    "package:osx": "electron-packager ./bin/ 'DigiExam Client' --platform=darwin --arch=all --version=0.30.4 --overwrite --icon ./src/appIcon.icns",
+    "package:win32": "electron-packager ./bin/ 'DigiExam Client' --platform=win32 --arch=ia32 --version=0.30.4 --overwrite --icon ./src/appIcon.icns",
+    "package:win64": "electron-packager ./bin/ 'DigiExam Client' --platform=win32 --arch=x64 --version=0.30.4 --overwrite --icon ./src/appIcon.icns",
     "pack:osx": "npm run build:osx && electron-builder \"DigiExam Client darwin-x64/DigiExam Client.app\" --platform=osx --out=\"dist/osx\" --config=./packager.json",
     "win:postBuild": "wine start ResourceHacker.exe -modify './DigiExam Client-win32-ia32/DigiExam Client.exe', './DigiExam Client-win32-ia32/DigiExam Client.exe', './src/AppIcon.icns', ICONGROUP, MAINICON, 0"
    },
