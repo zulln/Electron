@@ -1,4 +1,4 @@
-angular.module("digiexamclient").controller "OverviewController", ($rootScope, $scope, $window, $modal, $location, $interval, $log, Urls, SessionService, Answer, ExamInfo, ExamInfoRepository, DXFileSystem, DXLocalStorage, DX_PLATFORM)->
+angular.module("digiexamclient").controller "OverviewController", ($rootScope, $scope, $window, $modal, $location, $interval, $log, Urls, SessionService, Answer, ExamInfo, ExamInfoRepository, DXFileSystem, DXLocalStorage, DXLockdown, DX_PLATFORM)->
 
 	$scope.loadingExams = true
 
@@ -9,6 +9,7 @@ angular.module("digiexamclient").controller "OverviewController", ($rootScope, $
 	$scope.openOfflineFileError = ""
 	$scope.demoExamError = ""
 	$scope.DX_PLATFORM = DX_PLATFORM
+	$scope.lockdown = DXLockdown
 
 	$scope.selectedExam = null
 
@@ -152,6 +153,7 @@ angular.module("digiexamclient").controller "OverviewController", ($rootScope, $
 		return instance
 
 	$scope.startExam = (exam)->
+		DXLockdown.executeLockdown();
 		$location.path Urls.get("exam", { id: exam.id, startOffline: exam._startOffline })
 
 	$scope.refreshExams()

@@ -1,9 +1,9 @@
 angular.module("digiexamclient.storage.localstorage")
-.service("DXLocalStorage", function(BrowserLocalStorage, ChromeAppLocalStorage, IOSLocalStorage, DX_PLATFORM) {
+.service("DXLocalStorage", function($window, BrowserLocalStorage, ChromeAppLocalStorage, ElectronLocalStorage, IOSLocalStorage, DX_PLATFORM) {
 	"use strict";
 
 	var PLATFORM_LOCAL_STORAGES = {
-		"ELECTRON_APP": BrowserLocalStorage,
+		"ELECTRON_APP": ElectronLocalStorage,
 		"BROWSER": BrowserLocalStorage,
 		"CHROME_APP": ChromeAppLocalStorage,
 		"IOS_WEBVIEW": IOSLocalStorage
