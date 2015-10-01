@@ -9,7 +9,6 @@ angular.module("digiexamclient").controller "OverviewController", ($rootScope, $
 	$scope.openOfflineFileError = ""
 	$scope.demoExamError = ""
 	$scope.DX_PLATFORM = DX_PLATFORM
-	$scope.lockdown = DXLockdown
 
 	$scope.selectedExam = null
 
@@ -153,7 +152,7 @@ angular.module("digiexamclient").controller "OverviewController", ($rootScope, $
 		return instance
 
 	$scope.startExam = (exam)->
-		DXLockdown.executeLockdown();
+		DXLockdown.executeLockdown()
 		$location.path Urls.get("exam", { id: exam.id, startOffline: exam._startOffline })
 
 	$scope.refreshExams()

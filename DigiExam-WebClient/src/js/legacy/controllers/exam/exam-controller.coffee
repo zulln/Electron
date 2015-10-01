@@ -20,6 +20,7 @@ angular.module("digiexamclient").controller "ExamController", (
 	JsObjcBridge
 	QuestionType
 	DX_PLATFORM
+	DXLockdown
 	GradingTypeEnum
 ) ->
 
@@ -185,11 +186,13 @@ angular.module("digiexamclient").controller "ExamController", (
 			if DX_PLATFORM isnt "IOS_WEBVIEW"
 				$scope.showOfflineFileTurnInDialog()
 			else
+				DXLockdown.tearDown()
 				$scope.showUploadLaterDialog()
 
 	$scope.handleSuccessfulTurnIn = ->
 		promise = $scope.reassignStoredData()
 		promise.then ->
+			DXLockdown.tearDown()
 			$scope.showSuccessfulTurnInModal()
 
 	$scope.showOfflineFileTurnInDialog = ->

@@ -4,7 +4,6 @@
 void SetKiosk(bool kiosk) {
 	NSString *text = [NSString stringWithFormat:@"Main window: %@", [[NSApplication sharedApplication] mainWindow]];
 
-
 	NSAlert *alert = [[NSAlert alloc] init];
 	[alert addButtonWithTitle:@"OK"];
 	[alert addButtonWithTitle:@"Cancel"];
