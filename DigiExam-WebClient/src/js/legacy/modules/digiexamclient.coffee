@@ -4,6 +4,7 @@ client = angular.module "digiexamclient", [
 	"digiexamclient.platform",
 	"digiexamclient.user",
 	"digiexamclient.storage",
+	"digiexamclient.preconditiontest",
 	"digiexamclient.lockdown",
 	"digiexamclient.session",
 	"digiexamclient.exam",

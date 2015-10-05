@@ -89,9 +89,9 @@ INCS_Release := \
 	-I/Users/amc0/.node-gyp/0.33.3/deps/v8/include
 
 OBJS := \
-	$(obj).target/$(TARGET)/lockdown_mac.o \
-	$(obj).target/$(TARGET)/kioskwindow/kioskwindow_mac.o \
-	$(obj).target/$(TARGET)/sound/sound_mac.o
+	$(obj).target/$(TARGET)/Lockdown/lockdown_mac.o \
+	$(obj).target/$(TARGET)/Lockdown/kioskwindow/kioskwindow_mac.o \
+	$(obj).target/$(TARGET)/Lockdown/sound/sound_mac.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)

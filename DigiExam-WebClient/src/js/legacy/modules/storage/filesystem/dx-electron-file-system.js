@@ -2,16 +2,22 @@ angular.module("digiexamclient.storage.filesystem")
 .factory("ElectronFileSystem", function($q, $timeout, $window) {
 	"use strict";
 
+	$window.console.log("DXFileSystem");
+
+	var printModuleName = function (){
+		$window.console.log("Electron FS");
+	};
+
 	var appDataFolder = null;
 	var delimiter = (function() {
 		if($window.navigator.platform === "Win32") { return "\\"; }
 		else {return "/"; }
 	})();
+	var examDir = null;
 	var fs = $window.require("fs");
 	var ipc = $window.require("ipc");
 	var path = $window.require("path");
 	var remote = $window.require("remote");
-	var dialog = remote.require("dialog");
 
 	var mockedPromise = function(resolveData) {
 		var deferred = $q.defer();
@@ -29,6 +35,10 @@ angular.module("digiexamclient.storage.filesystem")
 		 */
 		appDataFolder = remote.require("app").getPath("userData");
 		return appDataFolder;
+	};
+
+	var getExamDir = function() {
+		return examDir;
 	};
 
 	var makeDir = function(quota, filepath, name) {
@@ -53,12 +63,15 @@ angular.module("digiexamclient.storage.filesystem")
 				if(fs.statSync(filepath).isDirectory())
 				{ deferred.resolve("Path " + filepath + delimiter + name + " already exists"); }
 				else
-				{ deferred.reject("Could not create dir: " + filepath + delimiter + name);	}
+				{ deferred.reject("Could not create dir: " + filepath);	}
 			}
 			else {
-				deferred.resolve("filepath " + filepath + delimiter + name + " created");
+				deferred.resolve("filepath " + filepath + " created");
 			}
 		});
+
+		examDir = filepath;
+
 		return deferred.promise;
 	};
 
@@ -147,7 +160,8 @@ angular.module("digiexamclient.storage.filesystem")
 		return mockedPromise();
 	};
 
-	var writeFile = function(quota, filepath, filename, data, mime) {
+	//var writeFile = function(quota, filepath, filename, data, mime) {
+	var writeFile = function(quota, filepath, filename, data) {
 		/*
 		 * Creates up a file without prompting the user.
 		 *
@@ -166,7 +180,8 @@ angular.module("digiexamclient.storage.filesystem")
 			filepath = path.join(appDataFolder, filepath);
 		}
 
-		fs.writeFile(filepath + filename, data, function(err, written, buffer)
+		//fs.writeFile(filepath + filename, data, function(err, written, buffer)
+		fs.writeFile(filepath + filename, data, function(err)
 		{
 			if(!err) {deferred.resolve(); }
 			else {deferred.reject(err); }
@@ -219,11 +234,13 @@ angular.module("digiexamclient.storage.filesystem")
 	return {
 		"requestFileSystem": requestFileSystem,
 		"listDirectory": listDirectory,
+		"getExamDir": getExamDir,
 		"makeDir": makeDir,
 		"openFile": openFile,
 		"readFile": readFile,
 		"requestQuota": requestQuota,
 		"saveAs": saveAs,
-		"writeFile": writeFile
+		"writeFile": writeFile,
+		"printModuleName": printModuleName
 	};
 });
