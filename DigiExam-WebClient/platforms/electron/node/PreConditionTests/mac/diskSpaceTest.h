@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DXPreConditionTest.h"
-#import "DXBasePreConditionTest.h"
+#import "preConditionTest.h"
+#import "basePreConditionTest.h"
 
 /*!
  * @brief Checks that the enough disk space is free in order to run.

@@ -4,56 +4,70 @@ var dialog = require("dialog");
 var globalShortcut = require('global-shortcut');
 var ipc = require('ipc');
 
+preconditionWindow = null;
 mainWindow = null;
 
 app.on('ready', function(){
-	mainWindow = new browserWindow({width: 1200, height: 1600});
+	//mainWindow = new browserWindow({width: 1200, height: 1600});
+	preconditionWindow = new browserWindow({width: 400, height: 320, resizable: true, center: true});
+	preconditionWindow.loadUrl('file://' + __dirname + '/preconditiontest.html');
 
-	mainWindow.webContents.on('did-finish-load', function(){
-		mainWindow.webContents.executeJavaScript("window.isElectron = true;");
-	});
+	preconditionWindow.openDevTools();
 
-	mainWindow.loadUrl('file://' + __dirname + '/index.html');
+	//samtliga tester
+	//if(!(fatalFails > 0 || )
 
-	globalShortcut.register('Super+r', function(){});				//1
+	ipc.on("testsPassed", function(event) {
+		preconditionWindow.close();
+		mainWindow = new browserWindow({width: 1200, height: 1600});
 
-	mainWindow.openDevTools();
 
-	ipc.on("openFile", function(event, fileType) {
-		var dialogResult = dialog.showOpenDialog(mainWindow, {
-			title: "Open offline exam",
-			filters: [
-				{name: fileType.toUpperCase(),
-					extensions: [fileType],
-					properties: "openFile" }
-			]
+		mainWindow.webContents.on('did-finish-load', function(){
+			mainWindow.webContents.executeJavaScript("window.isElectron = true;");
 		});
 
-		if(dialogResult === undefined) { dialogResult = null; }		//2
-		event.returnValue = dialogResult;
-	});
+		mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
-	ipc.on("saveFile", function(event, fileType) {
-		var dialogResult = dialog.showSaveDialog(mainWindow, {
-			title: "Save offline exam",
-			filters: [
-				{name: fileType.toUpperCase(),
-					extensions: [fileType]
-				}
-			]
+		globalShortcut.register('Super+r', function(){});				//1
+
+		mainWindow.openDevTools();
+
+		ipc.on("openFile", function(event, fileType) {
+			var dialogResult = dialog.showOpenDialog(mainWindow, {
+				title: "Open offline exam",
+				filters: [
+					{name: fileType.toUpperCase(),
+						extensions: [fileType],
+						properties: "openFile" }
+				]
+			});
+
+			if(dialogResult === undefined) { dialogResult = null; }		//2
+			event.returnValue = dialogResult;
 		});
 
-		if(dialogResult === undefined) { dialogResult = null; }		//2
-		event.returnValue = dialogResult;
-	});
+		ipc.on("saveFile", function(event, fileType) {
+			var dialogResult = dialog.showSaveDialog(mainWindow, {
+				title: "Save offline exam",
+				filters: [
+					{name: fileType.toUpperCase(),
+						extensions: [fileType]
+					}
+				]
+			});
 
-	ipc.on("setKiosk", function(event, arg){
-		mainWindow.setKiosk(arg);									//3
-		event.returnValue = mainWindow.isKiosk();
-	});
+			if(dialogResult === undefined) { dialogResult = null; }		//2
+			event.returnValue = dialogResult;
+		});
 
-	mainWindow.on('close', function(){
-		mainWindow = null;
+		ipc.on("setKiosk", function(event, arg){
+			mainWindow.setKiosk(arg);									//3
+			event.returnValue = mainWindow.isKiosk();
+		});
+
+		mainWindow.on('close', function(){
+			mainWindow = null;
+		});
 	});
 });
 

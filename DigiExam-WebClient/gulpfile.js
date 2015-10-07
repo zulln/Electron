@@ -145,7 +145,7 @@ var src = {
 	},
 	binDist: "bin/**",
 	html: {
-		entrypoints: "src/index.html",
+		entrypoints: ["src/index.html","src/preconditiontest.html"],
 		partials: "src/partials/**/*.html",
 		templates: "src/js/**/*.html"
 	},

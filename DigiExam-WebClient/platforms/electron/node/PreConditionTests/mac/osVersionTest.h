@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 DigiExam AB. All rights reserved.
 //
 
-#import "DXBasePreConditionTest.h"
+#import "basePreConditionTest.h"
 
 /*!
  * @brief Checks that the version of Mac OS X is supported

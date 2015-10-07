@@ -1,8 +1,13 @@
 angular.module("digiexamclient.preconditiontest", [])
-.factory("ElectronPreconditionTest", function($q, $window, DXFileSystem){
+.factory("ElectronPreconditionTest", function($q, $window, DXFileSystem, DXClient){
 	"use strict";
 
-	var os = $window.require("os");
+	var remote = $window.require("remote");
+	var dialog = remote.require("dialog");
+	var fatalFails;
+	var finishedTests;
+	var warningFails;
+	var tests;
 	//var modulePath = "./platforms/electron/node/build/Release/dxpreconditiontests";
 	//var remote = $window.require("remote");
 
@@ -27,6 +32,7 @@ angular.module("digiexamclient.preconditiontest", [])
 
 	var autoUpdateTest = function() {
 		$window.console.log("autoUpdateTest Check - TODO");
+
 	};
 
 	var installedTest = function() {
@@ -35,65 +41,65 @@ angular.module("digiexamclient.preconditiontest", [])
 	};
 
 	var osVersionTest = function() {
-		$window.console.log("OSVersion: " + os.release());
+		$window.console.log("osVersioNTest Check - TODO ");
 	};
 
-	var runAll = function() {
-		$window.console.log("Running all pre-condition tests");
-		virtualMachineDetect();
-		internetAccessTest();
-		diskSpaceTest();
-		autoUpdateTest();
-		installedTest();
-		osVersionTest();
+	var presentFatalsAndExit = function() {
+		dialog.showErrorBox("Fatal error", "DigiExam will exit");
+		DXClient.close();
+	};
+
+	var presentWarningsAndProceed = function() {
+		dialog.showMessageBox({
+			type: "warning",
+			buttons: ["OK"],
+			title: "Precondition Warning",
+			message: "Warning dialog",
+			detail: "Precondition Warning"
+		});
+	};
+
+	var startPreconditionTests = function() {
+		fatalFails = 0;
+		warningFails = 0;
+		finishedTests = 0;
+		$window.console.log("Running all precondition tests");
+		tests.forEach(function(currTest){
+			currTest();
+			finishedTests++;
+		});
+		//tests.forEach(test in tests)
+		//presentFatalsAndExit();
 		//$window.console.log("Done running all tests");
 	};
 
+	var init = function() {
+		$window.console.log("Initializing function array");
+		tests = [
+			virtualMachineDetect,
+			internetAccessTest,
+			diskSpaceTest,
+			autoUpdateTest,
+			installedTest,
+			osVersionTest
+		];
+	};
+
 	(function() {
-		runAll();
+		init();
+		startPreconditionTests();
+		//fatalFails = 1;
+		//warningFails = 1;
+		if (fatalFails > 0) {
+			presentFatalsAndExit();
+		}
+		if (warningFails > 0) {
+			presentWarningsAndProceed();
+		}
 	})();
 
 	return {
-		"runAll": runAll
+		"startPreconditionTests": startPreconditionTests
 	};
 
-	//var path = $window.require("path");
-	/*var modulePath = "./platforms/electron/node/build/Release/dxlockdown";
-	var remote = $window.require("remote");
-	var BrowserWindow = remote.require("browser-window");
-
-	if($window.navigator.platform === "Win32") {
-		modulePath = modulePath.replace("/", "\\");
-	}
-
-	var nativeModules = $window.require(modulePath);
-
-	$window.console.log("Imported DX Lockdowdn");
-
-	var prepareLockdown = function() {
-		$window.console.log("prepareLockdown");
-	};
-
-	var executeLockdown = function() {
-		$window.console.log("Lockdown message: " + nativeModules.getName());
-		nativeModules.executeLockdown();
-	};
-
-	var onLockdown = function () {
-		$window.console.log("Lockdown onLockdown");
-		nativeModules.onLockdown();
-	};
-
-	var tearDown = function() {
-		//TO DO
-		$window.console.log("Lockdown teardown");
-		nativeModules.teardownLockdown();
-	};
-
-	return {
-		prepareLockdown: prepareLockdown,
-		executeLockdown: executeLockdown,
-		onLockdown: onLockdown,
-		tearDown: tearDown
-	};*/
 });

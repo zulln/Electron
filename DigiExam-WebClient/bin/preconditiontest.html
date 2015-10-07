@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html ng-app="digiexam-preconditiontest" ng-csp="">
+<head>
+	<title>DigiExam Precondition Test</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<script type="text/javascript">
+        window.$ = window.jQuery = require('./jquery.js');
+    </script>
+	<link rel="stylesheet" type="text/css" href="css/libs.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/main.min.css" />
+	<script src="js/libs.min.js" type="text/javascript"></script>
+</head>
+<body>
+	<div flex="30">
+			<div class="sheet m" ng-controller="preconditiontest-controller">
+				<div class="text-center">
+					<p>Running precondition tests</p>
+					<div class="m">
+						<img src="images/loading.gif">
+					</div>
+					<div ng-show="hasWarnings() && hasFatalFails()">
+						<p>Warnings: {{warnings}}</p>
+						<p>Fatal fails: {{fatalFails}}</p>
+						<button class="btn btn-raised" ng-click="close()">Close</button>
+					</div>
+					<div ng-show="hasWarnings()">
+						<p>Warnings: {{warnings}}</p>
+						<button class="btn btn-raised" ng-click="continue()">Continue</button>
+					</div>
+					<div ng-show="hasFatalFails()">
+						<p>Fatal fails: {{fatalFails}}</p>
+						<button class="btn btn-raised" ng-click="close()">Close</button>
+					</div>
+				</div>
+		</div>
+	</div>
+	<script src="js/main.min.js" type="text/javascript"></script>
+</body>
+</html>

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DXPreConditionTest.h"
+#import "preConditionTest.h"
 
 @interface DXBasePreConditionTest : NSObject <DXPreConditionTest> {
 @protected

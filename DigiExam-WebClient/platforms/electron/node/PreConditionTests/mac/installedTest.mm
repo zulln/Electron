@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 DigiExam AB. All rights reserved.
 //
 
-#import "DXInstalledTest.h"
+#import "installedTest.h"
 
 @implementation DXInstalledTest
 

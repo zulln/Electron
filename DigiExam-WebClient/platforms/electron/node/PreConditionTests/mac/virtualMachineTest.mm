@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 DigiExam AB. All rights reserved.
 //
 
-#import "DXVirtualMachineTest.h"
+#import "virtualMachineTest.h"
 
 @implementation DXVirtualMachineTest
 

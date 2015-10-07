@@ -21,19 +21,19 @@
 				{
 					'target_name': 'dxpreconditiontests',
 					'sources': [
-						'PreConditionTests/mac/DXPreConditionTest.h',
-						'PreConditionTests/mac/DXBasePreConditionTest.h',
-						'PreConditionTests/mac/DXBasePreConditionTest.mm',
-						'PreConditionTests/mac/DXVirtualMachineDetector.h',
-						'PreConditionTests/mac/DXVirtualMachineDetector.mm',
-						'PreConditionTests/mac/DXVirtualMachineTest.h',
-						'PreConditionTests/mac/DXVirtualMachineTest.mm',
-						'PreConditionTests/mac/DXDiskSpaceTest.h',
-						'PreConditionTests/mac/DXDiskSpaceTest.mm',
-						'PreConditionTests/mac/DXInstalledTest.h',
-						'PreConditionTests/mac/DXInstalledTest.mm',
-						'PreConditionTests/mac/DXOSVersionTest.h',
-						'PreConditionTests/mac/DXOSVersionTest.mm'
+						'PreConditionTests/mac/preConditionTest.h',
+						'PreConditionTests/mac/basePreConditionTest.h',
+						'PreConditionTests/mac/basePreConditionTest.mm',
+						'PreConditionTests/mac/virtualMachineDetector.h',
+						'PreConditionTests/mac/virtualMachineDetector.mm',
+						'PreConditionTests/mac/virtualMachineTest.h',
+						'PreConditionTests/mac/virtualMachineTest.mm',
+						'PreConditionTests/mac/diskSpaceTest.h',
+						'PreConditionTests/mac/diskSpaceTest.mm',
+						'PreConditionTests/mac/installedTest.h',
+						'PreConditionTests/mac/installedTest.mm',
+						'PreConditionTests/mac/osVersionTest.h',
+						'PreConditionTests/mac/osVersionTest.mm'
 					]
 				}
 			]

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 HagvallData. All rights reserved.
 //
 
-#import "DXVirtualMachineDetector.h"
+#import "virtualMachineDetector.h"
 //#import "Logger.h"
 
 @implementation VirtualMachineDetector

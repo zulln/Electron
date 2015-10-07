@@ -89,12 +89,12 @@ INCS_Release := \
 	-I/Users/amc0/.node-gyp/0.33.3/deps/v8/include
 
 OBJS := \
-	$(obj).target/$(TARGET)/PreConditionTests/mac/DXBasePreConditionTest.o \
-	$(obj).target/$(TARGET)/PreConditionTests/mac/DXVirtualMachineDetector.o \
-	$(obj).target/$(TARGET)/PreConditionTests/mac/DXVirtualMachineTest.o \
-	$(obj).target/$(TARGET)/PreConditionTests/mac/DXDiskSpaceTest.o \
-	$(obj).target/$(TARGET)/PreConditionTests/mac/DXInstalledTest.o \
-	$(obj).target/$(TARGET)/PreConditionTests/mac/DXOSVersionTest.o
+	$(obj).target/$(TARGET)/PreConditionTests/mac/basePreConditionTest.o \
+	$(obj).target/$(TARGET)/PreConditionTests/mac/virtualMachineDetector.o \
+	$(obj).target/$(TARGET)/PreConditionTests/mac/virtualMachineTest.o \
+	$(obj).target/$(TARGET)/PreConditionTests/mac/diskSpaceTest.o \
+	$(obj).target/$(TARGET)/PreConditionTests/mac/installedTest.o \
+	$(obj).target/$(TARGET)/PreConditionTests/mac/osVersionTest.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)

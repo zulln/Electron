@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 DigiExam AB. All rights reserved.
 //
 
-#import "DXDiskSpaceTest.h"
+#import "diskSpaceTest.h"
 
 @implementation DXDiskSpaceTest
 

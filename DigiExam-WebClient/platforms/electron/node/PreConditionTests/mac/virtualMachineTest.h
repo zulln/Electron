@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DXPreConditionTest.h"
-#import "DXBasePreConditionTest.h"
-#import "DXVirtualMachineDetector.h"
+#import "preConditionTest.h"
+#import "basePreConditionTest.h"
+#import "virtualMachineDetector.h"
 
 /*!
  * @brief Checks that DigiExam is not running in a virtual machine.
