@@ -7,69 +7,79 @@ var ipc = require('ipc');
 preconditionWindow = null;
 mainWindow = null;
 
-app.on('ready', function(){
-	//mainWindow = new browserWindow({width: 1200, height: 1600});
+var disableShortKeys = function() {
+	//Define all global shortkeys that should be prohibited in the application here
+	globalShortcut.register('Super+r', function(){});				//1
+};
+
+var showPreconditionWindow = function() {
 	preconditionWindow = new browserWindow({width: 400, height: 320, resizable: true, center: true});
+	preconditionWindow.webContents.on('did-finish-load', function(){
+		preconditionWindow.webContents.executeJavaScript("window.isElectron = true;");
+	});
 	preconditionWindow.loadUrl('file://' + __dirname + '/preconditiontest.html');
 
 	preconditionWindow.openDevTools();
 
-	//samtliga tester
-	//if(!(fatalFails > 0 || )
+	preconditionWindow.on('close', function(){
+		preconditionWindow = null;
+	});
+};
 
+var showMainWindow = function() {
+	mainWindow = new browserWindow({width: 1200, height: 1600});
+	mainWindow.webContents.on('did-finish-load', function(){
+		mainWindow.webContents.executeJavaScript("window.isElectron = true;");
+	});
+
+	mainWindow.loadUrl('file://' + __dirname + '/index.html');
+	disableShortKeys();
+	mainWindow.openDevTools();
+
+	ipc.on("openFile", function(event, fileType) {
+		var dialogResult = dialog.showOpenDialog(mainWindow, {
+			title: "Open offline exam",
+			filters: [
+				{name: fileType.toUpperCase(),
+					extensions: [fileType],
+					properties: "openFile" }
+			]
+		});
+
+		if(dialogResult === undefined) { dialogResult = null; }		//2
+		event.returnValue = dialogResult;
+	});
+
+	ipc.on("saveFile", function(event, fileType) {
+		var dialogResult = dialog.showSaveDialog(mainWindow, {
+			title: "Save offline exam",
+			filters: [
+				{name: fileType.toUpperCase(),
+					extensions: [fileType]
+				}
+			]
+		});
+
+		if(dialogResult === undefined) { dialogResult = null; }		//2
+		event.returnValue = dialogResult;
+	});
+
+	mainWindow.on('close', function(){
+		mainWindow = null;
+	});
+};
+
+/*		Entry point of application 		*/
+
+app.on('ready', function(){
+	showPreconditionWindow();
 	ipc.on("testsPassed", function(event) {
 		preconditionWindow.close();
-		mainWindow = new browserWindow({width: 1200, height: 1600});
-
-
-		mainWindow.webContents.on('did-finish-load', function(){
-			mainWindow.webContents.executeJavaScript("window.isElectron = true;");
-		});
-
-		mainWindow.loadUrl('file://' + __dirname + '/index.html');
-
-		globalShortcut.register('Super+r', function(){});				//1
-
-		mainWindow.openDevTools();
-
-		ipc.on("openFile", function(event, fileType) {
-			var dialogResult = dialog.showOpenDialog(mainWindow, {
-				title: "Open offline exam",
-				filters: [
-					{name: fileType.toUpperCase(),
-						extensions: [fileType],
-						properties: "openFile" }
-				]
-			});
-
-			if(dialogResult === undefined) { dialogResult = null; }		//2
-			event.returnValue = dialogResult;
-		});
-
-		ipc.on("saveFile", function(event, fileType) {
-			var dialogResult = dialog.showSaveDialog(mainWindow, {
-				title: "Save offline exam",
-				filters: [
-					{name: fileType.toUpperCase(),
-						extensions: [fileType]
-					}
-				]
-			});
-
-			if(dialogResult === undefined) { dialogResult = null; }		//2
-			event.returnValue = dialogResult;
-		});
-
-		ipc.on("setKiosk", function(event, arg){
-			mainWindow.setKiosk(arg);									//3
-			event.returnValue = mainWindow.isKiosk();
-		});
-
-		mainWindow.on('close', function(){
-			mainWindow = null;
-		});
+		showMainWindow();
 	});
 });
+
+/*		Exit point of applciation		*/
 
 app.on('window-all-closed', function(){
 	app.quit();

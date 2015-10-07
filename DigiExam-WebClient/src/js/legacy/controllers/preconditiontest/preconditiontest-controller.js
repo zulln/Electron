@@ -1,11 +1,23 @@
-angular.module("digiexam-preconditiontest").controller("preconditiontest-controller", function ($scope, $window) {
+angular.module("digiexam-preconditiontest").controller("preconditiontest-controller", function ($scope, $window, DX_PLATFORM, ElectronFileSystem, DXPreConditionTest) {
 	"use strict";
 
 	var ipc = $window.require("ipc");
-
+	$window.console.log(DX_PLATFORM);
+	$window.console.log(DXPreConditionTest);
 	$scope.currentTest = "Preconditiontest";
-	$scope.warnings = 10;
-	$scope.fatalFails = 10;
+	$scope.warnings = 1;
+	$scope.fatalFails = 1;
+
+	$scope.results = [
+		{
+			outcome: "warning",
+			description: "I always fail, dont mind me"
+		},
+		{
+			outcome: "fatal",
+			description: "I always fatal fail, dont mind me"
+		}
+	];
 
 	/*$scope.runPreconditionTests = function(){
 		$scope.fatalFails = 1;
@@ -21,12 +33,12 @@ angular.module("digiexam-preconditiontest").controller("preconditiontest-control
 
 	$scope.getWarnings = function(){
 	//	get array of warnings from preconditon module
-	//	present in precondition view, add continue button
+	//	and present in precondition view
 	};
 
 	$scope.getFatalFails = function(){
 	//	get array of fatalFails from preconditon module
-	//	present in precondition view, add close button
+	//	and present in precondition view
 	};
 
 	$scope.testsPassed = function(){
@@ -34,7 +46,7 @@ angular.module("digiexam-preconditiontest").controller("preconditiontest-control
 	};
 
 	$scope.continue = function(){
-
+		$scope.testsPassed();
 	};
 
 	$scope.close = function(){

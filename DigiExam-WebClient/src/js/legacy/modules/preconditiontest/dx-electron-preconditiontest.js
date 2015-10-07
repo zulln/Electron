@@ -1,5 +1,5 @@
 angular.module("digiexamclient.preconditiontest", [])
-.factory("ElectronPreconditionTest", function($q, $window, DXFileSystem, DXClient){
+.factory("ElectronPreconditionTest", function($q, $window, DXFileSystem){
 	"use strict";
 
 	var remote = $window.require("remote");

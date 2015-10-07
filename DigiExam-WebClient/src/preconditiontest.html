@@ -11,27 +11,39 @@
 	<script src="js/libs.min.js" type="text/javascript"></script>
 </head>
 <body>
-	<div flex="30">
-			<div class="sheet m" ng-controller="preconditiontest-controller">
-				<div class="text-center">
-					<p>Running precondition tests</p>
-					<div class="m">
-						<img src="images/loading.gif">
-					</div>
-					<div ng-show="hasWarnings() && hasFatalFails()">
-						<p>Warnings: {{warnings}}</p>
-						<p>Fatal fails: {{fatalFails}}</p>
-						<button class="btn btn-raised" ng-click="close()">Close</button>
-					</div>
-					<div ng-show="hasWarnings()">
-						<p>Warnings: {{warnings}}</p>
-						<button class="btn btn-raised" ng-click="continue()">Continue</button>
-					</div>
-					<div ng-show="hasFatalFails()">
-						<p>Fatal fails: {{fatalFails}}</p>
-						<button class="btn btn-raised" ng-click="close()">Close</button>
-					</div>
+	<div flex="30" class="sheet text-center" ng-controller="preconditiontest-controller">
+		<p>Running precondition tests</p>
+		<div class="m">
+			<img src="images/loading.gif">
+		</div>
+		<div class="m">
+			<div ng-show="hasWarnings() || hasFatalFails()">
+				<div ng-show="hasWarnings()">
+					<p>Warnings: {{warnings}}</p>
 				</div>
+				<div ng-repeat="warning in results | filter:{outcome:'warning'}">
+					<h2>WARNING</h2>
+					Outcome: {{warning.outcome}} <br />
+					Description: {{warning.description}}
+				</div>
+				<div ng-repeat="fatal in results | filter:{outcome:'fatal'}">
+					<h2>fatal</h2>
+					Outcome: {{fatal.outcome}} <br />
+					Description: {{fatal.description}}
+				</div>
+				<div ng-show="hasFatalFails()">
+					<p>Fatal fails: {{fatalFails}}</p>
+				</div>
+				<div ng-repeat="warning in warnings">
+					{{warning}}
+				</div>
+				<div ng-show="(hasFatalFails() || (hasFatalFails() && hasWarnings()))">
+					<button class="btn btn-raised" ng-click="close()">Close</button>
+				</div>
+				<div ng-show="hasWarnings() && (!hasFatalFails())">
+					<button class="btn btn-raised" ng-click="continue()">Continue</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script src="js/main.min.js" type="text/javascript"></script>
