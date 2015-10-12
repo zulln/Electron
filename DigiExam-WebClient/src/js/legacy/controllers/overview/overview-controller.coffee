@@ -1,6 +1,5 @@
-angular.module("digiexamclient").controller "OverviewController", ($rootScope, $scope, $window, $modal, $location, $interval, $log, Urls, SessionService, Answer, ExamInfo, ExamInfoRepository, DXFileSystem, DXLocalStorage, DXPreConditionTest, DXLockdown, DX_PLATFORM)->
+angular.module("digiexamclient").controller "OverviewController", ($rootScope, $scope, $window, $modal, $location, $interval, $log, Urls, SessionService, Answer, ExamInfo, ExamInfoRepository, DXFileSystem, DXLocalStorage, DXLockdown, DX_PLATFORM)->
 
-	DXPreConditionTest.startPreconditionTests()
 	$scope.loadingExams = true
 
 	$scope.exams = []

@@ -5,6 +5,12 @@
 				{
 					'target_name': 'dxlockdown',
 					'sources': [ 'lockdown/lockdown_win.cc' ]
+				},
+				{
+					'target_name': 'dxpreconditiontests',
+					'sources': [
+						'PreConditionTests/win/preconditiontest_win.cc'
+					]
 				}
 			]
 		}],
@@ -21,6 +27,7 @@
 				{
 					'target_name': 'dxpreconditiontests',
 					'sources': [
+						'PreConditionTests/mac/preconditiontest_mac.mm',
 						'PreConditionTests/mac/preConditionTest.h',
 						'PreConditionTests/mac/basePreConditionTest.h',
 						'PreConditionTests/mac/basePreConditionTest.mm',

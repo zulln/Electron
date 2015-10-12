@@ -6,11 +6,12 @@
 //  Copyright (c) 2015 DigiExam AB. All rights reserved.
 //
 
-#import "basePreConditionTest.h"
+//#import "basePreConditionTest.h"
+#import <Foundation/Foundation.h>
 
 /*!
  * @brief Checks that DigiExam is installed and not run from a mounted .dmg.
  */
-@interface DXInstalledTest : DXBasePreConditionTest
-
+@interface DXInstalledTest : NSObject //: DXBasePreConditionTest
+	bool IsInstalled();
 @end

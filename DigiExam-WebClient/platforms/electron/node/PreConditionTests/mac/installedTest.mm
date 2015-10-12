@@ -23,15 +23,21 @@
 }
 
 - (void)startTest:(id <DXPreConditionTestDelegate>)adelegate {
+//bool IsInstalled() {
     _delegate = adelegate;
 
     // Mounted .dmg files end up in /Volumes/
+
+	bool _isFinished, _isSuccess, _isFailFatal;
+	NSString *_failTitle, *_failMessage;
+
     if (![[[NSBundle mainBundle] bundlePath] hasPrefix:@"/Volumes/"]) {
         _isSuccess = YES;
+	//	return YES;
     }
 
     _isFinished = YES;
-
+	return NO;
     [_delegate testFinished:self];
 }
 

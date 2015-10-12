@@ -89,6 +89,7 @@ INCS_Release := \
 	-I/Users/amc0/.node-gyp/0.33.3/deps/v8/include
 
 OBJS := \
+	$(obj).target/$(TARGET)/PreConditionTests/mac/preconditiontest_mac.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/basePreConditionTest.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/virtualMachineDetector.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/virtualMachineTest.o \
