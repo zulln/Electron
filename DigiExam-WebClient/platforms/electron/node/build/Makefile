@@ -321,18 +321,13 @@ $(obj).$(TOOLSET)/%.o: $(obj)/%.s FORCE_DO_CMD
 
 ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
     $(findstring $(join ^,$(prefix)),\
-                 $(join ^,dxlockdown.target.mk)))),)
-  include dxlockdown.target.mk
-endif
-ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
-    $(findstring $(join ^,$(prefix)),\
                  $(join ^,dxpreconditiontests.target.mk)))),)
   include dxpreconditiontests.target.mk
 endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
-cmd_regen_makefile = cd $(srcdir); /usr/local/lib/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/Users/amc0/Documents/DigiExam/GitHub/Electron/DigiExam-WebClient/platforms/electron/node/build/config.gypi -I/usr/local/lib/node_modules/node-gyp/addon.gypi -I/Users/amc0/.node-gyp/0.33.3/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/amc0/.node-gyp/0.33.3" "-Dnode_gyp_dir=/usr/local/lib/node_modules/node-gyp" "-Dnode_lib_file=node.lib" "-Dmodule_root_dir=/Users/amc0/Documents/DigiExam/GitHub/Electron/DigiExam-WebClient/platforms/electron/node" binding.gyp
-Makefile: $(srcdir)/../../../../../../../../.node-gyp/0.33.3/common.gypi $(srcdir)/../../../../../../../../../../usr/local/lib/node_modules/node-gyp/addon.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp
+cmd_regen_makefile = cd $(srcdir); /usr/local/lib/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/Users/amc0/Documents/DigiExam/GitHub/Electron/DigiExam-WebClient/platforms/electron/node/build/config.gypi -I/usr/local/lib/node_modules/node-gyp/addon.gypi -I/Users/amc0/.node-gyp/0.12.7/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/amc0/.node-gyp/0.12.7" "-Dnode_gyp_dir=/usr/local/lib/node_modules/node-gyp" "-Dnode_lib_file=node.lib" "-Dmodule_root_dir=/Users/amc0/Documents/DigiExam/GitHub/Electron/DigiExam-WebClient/platforms/electron/node" binding.gyp
+Makefile: $(srcdir)/../../../../../../../../.node-gyp/0.12.7/common.gypi $(srcdir)/../../../../../../../../../../usr/local/lib/node_modules/node-gyp/addon.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included

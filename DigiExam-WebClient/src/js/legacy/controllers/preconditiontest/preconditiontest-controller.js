@@ -64,15 +64,15 @@ angular.module("digiexam-preconditiontest").controller("preconditiontest-control
 		$window.close();
 	};
 
-	//function runPreconditionTests(callback) {
-		/*DXPreConditionTest.startPreconditionTests();
+	function runPreconditionTests(callback) {
+		//DXPreConditionTest.startPreconditionTests();
 
-		self.setWarnings("testWarning", "testWarningDescription");
+		/*self.setWarnings("testWarning", "testWarningDescription");
 		self.setWarnings("testWarning2", "testWarningDescription2");
 		self.setFatalFails("testFail", "testFailDescription");
-		self.setFatalFails("testFail2", "testFailDescription2");
-*/
-		/*if (!(self.hasFatalFails() || self.hasWarnings())) {
+		self.setFatalFails("testFail2", "testFailDescription2");*/
+
+		if (!(self.hasFatalFails() || self.hasWarnings())) {
 			self.state = "passed";
 			self.testsPassed();
 		}
@@ -81,8 +81,8 @@ angular.module("digiexam-preconditiontest").controller("preconditiontest-control
 		}
 		else {
 			self.state = "fatal";
-		}*/
-		/*callback();
+		}
+		callback();
 	}
 
 	function resultCallback(results) {
@@ -101,7 +101,7 @@ angular.module("digiexam-preconditiontest").controller("preconditiontest-control
 		}
 	}
 
-	runPreconditionTests(resultCallback);*/
+	runPreconditionTests(resultCallback);
 
 	function onAllTestsFinished(results) {
 
@@ -111,5 +111,5 @@ angular.module("digiexam-preconditiontest").controller("preconditiontest-control
 		DXPreConditionTest.startTests(onAllTestsFinished);
 	}
 
-	runTests();
+	//runTests();
 });

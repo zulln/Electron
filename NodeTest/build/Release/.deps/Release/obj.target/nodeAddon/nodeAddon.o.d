@@ -4,14 +4,13 @@ Release/obj.target/nodeAddon/nodeAddon.o: ../nodeAddon.cc \
   /Users/amc0/.node-gyp/0.12.7/deps/v8/include/v8.h \
   /Users/amc0/.node-gyp/0.12.7/deps/v8/include/v8stdint.h \
   /Users/amc0/.node-gyp/0.12.7/deps/v8/include/v8config.h \
-  /Users/amc0/.node-gyp/0.12.7/src/node_version.h ../nativeCheck1.cc \
-  ../nativeCheck2.cc ../nativeCheck3.cc
+  /Users/amc0/.node-gyp/0.12.7/src/node_version.h ../myobject.h \
+  /Users/amc0/.node-gyp/0.12.7/src/node_object_wrap.h
 ../nodeAddon.cc:
 /Users/amc0/.node-gyp/0.12.7/src/node.h:
 /Users/amc0/.node-gyp/0.12.7/deps/v8/include/v8.h:
 /Users/amc0/.node-gyp/0.12.7/deps/v8/include/v8stdint.h:
 /Users/amc0/.node-gyp/0.12.7/deps/v8/include/v8config.h:
 /Users/amc0/.node-gyp/0.12.7/src/node_version.h:
-../nativeCheck1.cc:
-../nativeCheck2.cc:
-../nativeCheck3.cc:
+../myobject.h:
+/Users/amc0/.node-gyp/0.12.7/src/node_object_wrap.h:

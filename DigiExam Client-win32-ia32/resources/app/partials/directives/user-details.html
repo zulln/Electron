@@ -1,0 +1,98 @@
+<form name="details">
+	<ul class="unstyledList mb">
+		<li class="mb-300">
+			<label for="studentCode">Student code</label>
+			<div class="input-error-wrapper">
+				<input
+						type="text"
+						id="studentCode"
+						ng-model="user.code"
+						name="code"
+						required
+						autocorrect="off"
+						autocapitalize="off"
+						no-whitespace
+						to-lowercase />
+
+				<span class="input-error" ng-show="details.code.$error.noWhitespace && !details.code.$pristine">
+					Student code can't contain spaces
+				</span>
+				<span class="input-error" ng-show="details.code.$error.required && !details.code.$pristine">
+					Student code is required
+				</span>
+			</div>
+		</li>
+
+		<li class="mb-300">
+			<label for="firstname">First name</label>
+			<div class="input-error-wrapper">
+				<input
+						type="text"
+						id="firstname"
+						ng-model="user.firstname"
+						name="firstname"
+						required
+						autocorrect="off" />
+
+				<span class="input-error" ng-show="details.firstname.$invalid && !details.firstname.$pristine">
+					First name is required
+				</span>
+			</div>
+		</li>
+
+		<li class="mb-300">
+			<label for="lastname">Last name</label>
+			<div class="input-error-wrapper">
+				<input
+						type="text"
+						id="lastname"
+						ng-model="user.lastname"
+						name="lastname"
+						required
+						autocorrect="off" />
+
+				<span class="input-error" ng-show="details.lastname.$invalid && !details.lastname.$pristine">
+					Last name is required
+				</span>
+			</div>
+		</li>
+
+		<li class="mb-300">
+			<label for="email">E-mail address</label>
+			<div class="input-error-wrapper">
+				<input
+						type="email"
+						id="email"
+						ng-model="user.email"
+						name="email"
+						required
+						email />
+
+				<span class="input-error" ng-show="details.email.$invalid && !details.email.$pristine">
+					A valid e-mail address is required
+				</span>
+			</div>
+		</li>
+
+		<li>
+			<label for="confirm-email">Confirm e-mail address</label>
+			<div class="input-error-wrapper">
+				<input
+						type="email"
+						id="confirm-email"
+						ng-model="confirmEmail"
+						name="confirmEmail"
+						required
+						email
+						same-as="user.email"
+						no-paste />
+
+				<span class="input-error" ng-show="details.confirmEmail.$error.sameAs && !details.confirmEmail.$pristine">
+					The e-mail addresses does not match
+				</span>
+			</div>
+		</li>
+	</ul>
+
+	<button class="btn btn-green" ng-click="save()" ng-disabled="details.$invalid">OK</button>
+</form>

@@ -17,30 +17,18 @@
 		['OS=="mac"',{
 			'targets': [
 				{
-					'target_name': 'dxlockdown',
-					'sources': [
-						'Lockdown/lockdown_mac.mm',
-						'Lockdown/kioskwindow/kioskwindow_mac.mm',
-						'Lockdown/sound/sound_mac.mm'
-					]
-				},
-				{
 					'target_name': 'dxpreconditiontests',
 					'sources': [
-						'PreConditionTests/mac/preconditiontest_mac.mm',
-						'PreConditionTests/mac/preConditionTest.h',
-						'PreConditionTests/mac/basePreConditionTest.h',
-						'PreConditionTests/mac/basePreConditionTest.mm',
-						'PreConditionTests/mac/virtualMachineDetector.h',
-						'PreConditionTests/mac/virtualMachineDetector.mm',
-						'PreConditionTests/mac/virtualMachineTest.h',
-						'PreConditionTests/mac/virtualMachineTest.mm',
+						'PreConditionTests/mac/basePreconditiontest.h',
 						'PreConditionTests/mac/diskSpaceTest.h',
 						'PreConditionTests/mac/diskSpaceTest.mm',
 						'PreConditionTests/mac/installedTest.h',
 						'PreConditionTests/mac/installedTest.mm',
 						'PreConditionTests/mac/osVersionTest.h',
-						'PreConditionTests/mac/osVersionTest.mm'
+						'PreConditionTests/mac/osVersionTest.mm',
+						'PreConditionTests/mac/virtualMachineTest.h',
+						'PreConditionTests/mac/virtualMachineTest.mm',
+						'PreConditionTests/mac/preconditiontest_mac.mm'
 					]
 				}
 			]

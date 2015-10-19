@@ -1,4 +1,97 @@
 angular.module("digiexamclient.preconditiontest", [])
+.factory("ElectronPreconditionTest", function($q, $window, DXFileSystem){
+	"use strict";
+
+	var remote = $window.require("remote");
+	var dialog = remote.require("dialog");
+	var nativeModule = $window.require("./platforms/electron/node/build/Release/dxpreconditiontests");
+	var fatalFails;
+	var finishedTests;
+	var warningFails;
+	var tests;
+	//var remote = $window.require("remote");
+
+	var presentFatalsAndExit = function() {
+		dialog.showErrorBox("Fatal error", "DigiExam will exit");
+		$window.close();
+	};
+
+	var presentWarningsAndProceed = function() {
+		dialog.showMessageBox({
+			type: "warning",
+			buttons: ["OK"],
+			title: "Precondition Warning",
+			message: "Warning dialog",
+			detail: "Precondition Warning"
+		});
+	};
+
+	var internetAccessTest = function(callback) {
+		$http.get(_apiBaseUrl).then(function(response) {
+			var result = {
+				title: "Internet access test",
+				description: "No internet connection.",
+				outcome: "warning"
+			};
+
+			if (response.status === 200) {
+				result.outcome = "success";
+			}
+
+			callback(result);
+		});
+	};
+
+	var startPreconditionTests = function() {
+		fatalFails = 0;
+		warningFails = 0;
+		finishedTests = 0;
+		$window.console.log("Running all precondition tests");
+		tests.forEach(function(currTest){
+			currTest();
+			finishedTests++;
+		});
+		//tests.forEach(test in tests)
+		//presentFatalsAndExit();
+		//$window.console.log("Done running all tests");
+	};
+
+	var init = function() {
+		$window.console.log("Initializing function array");
+		tests = nativeModule.getAllTests();
+	};
+	var startTests = function() {
+		init();
+		startPreconditionTests();
+		fatalFails = 1;
+		//warningFails = 1;
+		if (fatalFails > 0) {
+			presentFatalsAndExit();
+		}
+		if (warningFails > 0) {
+			presentWarningsAndProceed();
+		}
+	};
+	/*(function() {
+		init();
+		startPreconditionTests();
+		//fatalFails = 1;
+		//warningFails = 1;
+		if (fatalFails > 0) {
+			presentFatalsAndExit();
+		}
+		if (warningFails > 0) {
+			presentWarningsAndProceed();
+		}
+	})();*/
+
+	return {
+		"startPreconditionTests": startPreconditionTests
+	};
+
+});
+
+/*angular.module("digiexamclient.preconditiontest", [])
 .factory("ElectronPreconditionTest", function($q, $window, $http, DXFileSystem){
 	"use strict";
 
@@ -6,7 +99,7 @@ angular.module("digiexamclient.preconditiontest", [])
 
 	var modulePath = "./platforms/electron/node/build/Release/dxpreconditiontests";
 	var nativeModule = $window.require(modulePath);
-	/*var remote = $window.require("remote");
+	var remote = $window.require("remote");
 	var dialog = remote.require("dialog");
 
 	var fatalFails;
@@ -55,7 +148,7 @@ angular.module("digiexamclient.preconditiontest", [])
 		finishedTests = 0;
 		$window.console.log("Running all precondition tests");
 		tests.forEach(function(currTest){
-			$window.console.log("Test result: " +  currTest());
+			$window.console.log("Test result: " + currTest());
 			finishedTests++;
 		});
 	};
@@ -73,20 +166,20 @@ angular.module("digiexamclient.preconditiontest", [])
 
 	(function() {
 		init();
-	})();*/
-	/*
-		startPreconditionTests();
-		//fatalFails = 1;
-		//warningFails = 1;
-		if (fatalFails > 0) {
-			presentFatalsAndExit();
-		}
-		if (warningFails > 0) {
-			presentWarningsAndProceed();
-		}
-	})();*/
+	})();
 
+	startPreconditionTests();
+	//fatalFails = 1;
+	//warningFails = 1;
+	if (fatalFails > 0) {
+		presentFatalsAndExit();
+	}
+	if (warningFails > 0) {
+		presentWarningsAndProceed();
+	}
+	})();
 
+/*
 	var testsStarted = 0;
 	var testsFinished = 0;
 
@@ -127,11 +220,11 @@ angular.module("digiexamclient.preconditiontest", [])
 		internetAccessTest2(onTestFinished);
 		internetAccessTest2(onTestFinished);
 		internetAccessTest2(onTestFinished);
-	}
+	}*/
 
-	return {
-		//"startPreconditionTests": startPreconditionTests,
+	/*return {
+		"startPreconditionTests": startPreconditionTests,
 		"startTests": startTests
-	};
+	};*/
 
-});
+//});

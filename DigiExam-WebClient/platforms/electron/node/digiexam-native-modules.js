@@ -1,14 +1,6 @@
-var lockdown = require("./build/release/dxlockdown");
+//var lockdown = require("./build/release/dxlockdown");
+var addon = require("./build/Release/dxpreconditiontests");
 
 console.log("Native module init");
-function print() {
-	console.log(lockdown.getName());
-};
-
-function macLockdown() {
-	console.log("LockDown");
-	//lockdown.onLockdown();
-}
-
-exports.print = print;
-exports.onLockdown = macLockdown;
+console.log(addon.getAllTests());
+//console.log(addon.getObject());
