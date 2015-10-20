@@ -1,15 +1,17 @@
 #ifndef INSTALLEDTEST_H
 #define INSTALLEDTEST_H
 //
-//  DXInstalledTest.h
-//  DigiExam
+//  installedTest.h
+//  DigiExam Solutions AB
 //
-//  Created by Robin Andersson on 2015-02-09.
-//  Copyright (c) 2015 DigiExam AB. All rights reserved.
+//  Created by Amar Krupalija on 2015-10-19.
+//  Copyright (c) 2015 DigiExam Solutions AB. All rights reserved.
 //
 
-//#import "basePreConditionTest.h"
-//#import <Foundation/Foundation.h>
+/*!
+ * @brief Checks that the dmg is installed in the Applications folder and isn't
+ 		  mounted.
+ */
 #import "basePreConditionTest.h"
 
 using namespace v8;

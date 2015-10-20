@@ -1,4 +1,3 @@
-//#import <Foundation/Foundation.h>
 #import "osVersionTest.h"
 
 bool OSVersionTest::isFailFatal(){ return OSVersionTest::_isFailFatal;}

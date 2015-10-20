@@ -3,27 +3,27 @@
 bool DiskSpaceTest::isFailFatal(){ return DiskSpaceTest::_isFailFatal;}
 bool DiskSpaceTest::isSuccess(){ return DiskSpaceTest::_isSuccess;}
 void DiskSpaceTest::startTest(v8::Local<v8::Function> callback){
-	if(DiskSpaceTest::hasEnoughDiskSpace()) {
-		_isSuccess = true;
-	}
+	Isolate* isolate = Isolate::GetCurrent();
+	const unsigned argc = 1;
 
-}
-
-bool DiskSpaceTest::hasEnoughDiskSpace(){
-/*	NSError *error;
+	NSError *error;
 
 	NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:&error];
 	if (error) {
-		return false;
+		_isSuccess = false;
 	}
 
 	NSNumber *freeSize = [attributes objectForKey:NSFileSystemFreeSize];
 	if ([freeSize longLongValue] >= 1000000000) {
-		return true;
+		_isSuccess = true;
 	}
-	else {*/
-		return false;
-	//}
+	else {
+		_isSuccess = false;
+	}
+
+	Local<Value> argv[argc] = { v8::Boolean::New(isolate, _isSuccess) };
+	callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
+
 }
 
 std::string DiskSpaceTest::failTitle(){ return DiskSpaceTest::_failTitle;}

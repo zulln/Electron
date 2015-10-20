@@ -9,7 +9,7 @@
 //  Copyright (c) 2013 HagvallData. All rights reserved.
 //
 
-//#import <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
 
 @interface VirtualMachineDetector : NSObject
 

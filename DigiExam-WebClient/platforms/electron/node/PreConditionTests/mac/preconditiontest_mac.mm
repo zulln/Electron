@@ -1,12 +1,10 @@
 // preconditiontest_mac.mm
 #import <node.h>
-//#include <node_object_wrap.h>
 #import "basePreConditionTest.h"
 #import "diskSpaceTest.h"
 #import "installedTest.h"
 #import "osVersionTest.h"
 #import "virtualMachineTest.h"
-//#include "OSTestObj.h"
 
 
 using namespace v8;
@@ -24,8 +22,12 @@ void Run(const FunctionCallbackInfo<Value>& args) {
 	tests[0] = new OSVersionTest();
 	tests[1] = new DiskSpaceTest();
 	tests[2] = new InstalledTest();
+	tests[3] = new VirtualMachineTest();
 
-	tests[0]->startTest(cb);
+	for(int i = 0; i<4; i++){
+		tests[i]->startTest(cb);
+	}
+
 }
 
 void init(Handle<Object> exports) {

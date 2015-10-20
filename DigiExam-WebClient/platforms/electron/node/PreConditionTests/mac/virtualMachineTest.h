@@ -1,6 +1,7 @@
 #ifndef VIRTUALMACHINETEST_H
 #define VIRTUALMACHINETEST_H
 #import "basePreConditionTest.h"
+#import "virtualMachineDetector.h"
 //
 //  VirtualMachineTest.h
 //  DigiExam Solutions AB

@@ -1,4 +1,3 @@
-//#import <Foundation/Foundation.h>
 #ifndef BASE_PREC
 #define BASE_PREC
 

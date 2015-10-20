@@ -94,7 +94,7 @@ OBJS := \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/installedTest.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/osVersionTest.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/virtualMachineTest.o \
-	$(obj).target/$(TARGET)/PreConditionTests/mac/OSTestObj.o
+	$(obj).target/$(TARGET)/PreConditionTests/mac/virtualMachineDetector.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)
