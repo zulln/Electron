@@ -3,14 +3,7 @@ angular.module("digiexam-preconditiontest").controller("preconditiontest-control
 
 	var self = $scope;
 
-	var ipc = $window.require("ipc");
 	$window.console.log(DXPreConditionTest);
-	self.currentTest = "Preconditiontest";
-	self.warnings = 0;
-	self.fatalFails = 0;
-
-	self.warningArray = [];
-	self.fatalFailArray = [];
 
 	self.state = "running";
 
@@ -52,10 +45,6 @@ angular.module("digiexam-preconditiontest").controller("preconditiontest-control
 		self.fatalFails++;
 	};
 
-	self.testsPassed = function(){
-		ipc.sendSync("testsPassed");
-	};
-
 	self.continue = function(){
 		self.testsPassed();
 	};
@@ -67,10 +56,10 @@ angular.module("digiexam-preconditiontest").controller("preconditiontest-control
 	function runPreconditionTests(callback) {
 		//DXPreConditionTest.startPreconditionTests();
 
-		/*self.setWarnings("testWarning", "testWarningDescription");
+		self.setWarnings("testWarning", "testWarningDescription");
 		self.setWarnings("testWarning2", "testWarningDescription2");
 		self.setFatalFails("testFail", "testFailDescription");
-		self.setFatalFails("testFail2", "testFailDescription2");*/
+		self.setFatalFails("testFail2", "testFailDescription2");
 
 		if (!(self.hasFatalFails() || self.hasWarnings())) {
 			self.state = "passed";
@@ -85,31 +74,18 @@ angular.module("digiexam-preconditiontest").controller("preconditiontest-control
 		callback();
 	}
 
-	function resultCallback(results) {
-		if (self.hasFatalFails()) {
-			self.state = "fatal";
-		}
+	//runPreconditionTests(resultCallback);
 
-		else if (self.hasWarnings()) {
-			self.state = "warning";
-			// check warning
-			// check success
-		}
-		else {
-			//IsSuccess
-			self.testsPassed();
-		}
-	}
-
-	runPreconditionTests(resultCallback);
-
-	function onAllTestsFinished(results) {
-
-	}
-
-	function runTests() {
+	/*function runTests() {
 		DXPreConditionTest.startTests(onAllTestsFinished);
+	}*/
+
+	function initTests() {
+		$window.console.log("Init tests");
+		//DXPreConditionTest.init();
+		DXPreConditionTest.init2();
 	}
 
 	//runTests();
+	initTests();		//Get platform specific tests
 });

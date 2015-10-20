@@ -2,29 +2,15 @@ angular.module("digiexamclient.preconditiontest", [])
 .factory("ElectronPreconditionTest", function($q, $window, DXFileSystem){
 	"use strict";
 
-	var remote = $window.require("remote");
-	var dialog = remote.require("dialog");
+
+	var ipc = $window.require("ipc");
 	var nativeModule = $window.require("./platforms/electron/node/build/Release/dxpreconditiontests");
+
 	var fatalFails;
 	var finishedTests;
 	var warningFails;
 	var tests;
 	//var remote = $window.require("remote");
-
-	var presentFatalsAndExit = function() {
-		dialog.showErrorBox("Fatal error", "DigiExam will exit");
-		$window.close();
-	};
-
-	var presentWarningsAndProceed = function() {
-		dialog.showMessageBox({
-			type: "warning",
-			buttons: ["OK"],
-			title: "Precondition Warning",
-			message: "Warning dialog",
-			detail: "Precondition Warning"
-		});
-	};
 
 	var internetAccessTest = function(callback) {
 		$http.get(_apiBaseUrl).then(function(response) {
@@ -42,36 +28,74 @@ angular.module("digiexamclient.preconditiontest", [])
 		});
 	};
 
+	var testsFinished = function() {
+		if (finishedTests === tests.length) {
+			$window.console.log("All tests finished");
+		}
+		else {
+			$window.console.log("Still running");
+		}
+	};
+
+	var finished = function() {
+		finishedTests++;
+	};
+
 	var startPreconditionTests = function() {
 		fatalFails = 0;
 		warningFails = 0;
 		finishedTests = 0;
 		$window.console.log("Running all precondition tests");
+		/*console.log(tests[0].run());
+		console.log(tests[1].run());
+		console.log(tests[2].run());
+		console.log(tests[3].run());
 		tests.forEach(function(currTest){
-			currTest();
+			currTest().run();
 			finishedTests++;
-		});
+		});*/
+		for (var i = 0; i < tests.length; i++){
+			$window.console.log("Running test for " + tests[i].failTitle);
+			$window.console.log(tests[i].run());
+			//nativeModule.run(test[i]);
+		}
+
+		var nativeTestsStartedCount = nativeModule.run(onNativeTestDone);
+
 		//tests.forEach(test in tests)
 		//presentFatalsAndExit();
 		//$window.console.log("Done running all tests");
 	};
 
+	var onNativeTestDone = function(result) {
+		console.log(result);
+	}
+
 	var init = function() {
 		$window.console.log("Initializing function array");
 		tests = nativeModule.getAllTests();
-	};
-	var startTests = function() {
-		init();
+		$window.console.log(tests);
+		$window.console.log("Length: " + tests.length);
+
+
+
+
 		startPreconditionTests();
-		fatalFails = 1;
-		//warningFails = 1;
-		if (fatalFails > 0) {
-			presentFatalsAndExit();
-		}
-		if (warningFails > 0) {
-			presentWarningsAndProceed();
-		}
+		testsFinished();
 	};
+
+	var init2 = function() {
+		$window.console.log("Obj wrap test");
+		$window.console.log(nativeModule);
+		//var osTest = nativeModule.getOsTest(10);
+		nativeModule.run(onNativeTestDone);
+		//tests = nativeModule.getOsTest();
+	};
+
+	var testsPassed = function(){
+		ipc.sendSync("testsPassed");
+	};
+
 	/*(function() {
 		init();
 		startPreconditionTests();
@@ -86,145 +110,9 @@ angular.module("digiexamclient.preconditiontest", [])
 	})();*/
 
 	return {
-		"startPreconditionTests": startPreconditionTests
+		"startPreconditionTests": startPreconditionTests,
+		"init": init,
+		"init2": init2
 	};
 
 });
-
-/*angular.module("digiexamclient.preconditiontest", [])
-.factory("ElectronPreconditionTest", function($q, $window, $http, DXFileSystem){
-	"use strict";
-
-
-
-	var modulePath = "./platforms/electron/node/build/Release/dxpreconditiontests";
-	var nativeModule = $window.require(modulePath);
-	var remote = $window.require("remote");
-	var dialog = remote.require("dialog");
-
-	var fatalFails;
-	var finishedTests;
-	var tests;
-	var warningFails;
-	//var remote = $window.require("remote");
-
-	var virtualMachineDetect = function() {
-		$window.console.log("VM Check - TODO");
-	};
-
-	var internetAccessTest = function() {
-		$window.console.log("internetAccessTest Check");
-		$http.get(_apiBaseUrl).then(function(response) {
-			if(response.status !== 200 || (response.data !== null) || !!response.data.error || !!response.data.code) {
-				return false;
-			}
-			return true;
-		});
-	};
-
-	var diskSpaceTest = function() {
-		$window.console.log("diskSpaceTest");
-		DXFileSystem.printModuleName();				//Add error checking if file path is not set to /Users/Username/Library/Application Suppurt/DigiExam Client/exams0
-		$window.console.log("Should not be null: " + DXFileSystem.getExamDir());
-		//$window.console.log(DXFileSystem.getExamDir());
-	};
-
-	var autoUpdateTest = function() {
-		$window.console.log("autoUpdateTest Check - TODO");
-
-	};
-
-	var installedTest = function() {
-		$window.console.log("installedTest Check");
-		$window.console.log("IsInstalled: " + nativeModule.isInstalled());
-	};
-
-	var osVersionTest = function() {
-		$window.console.log("osVersioNTest Check");
-		$window.console.log("OSVersion module boolean: " + nativeModule.isCorrectOSVersion());
-	};
-
-	var startPreconditionTests = function() {
-		finishedTests = 0;
-		$window.console.log("Running all precondition tests");
-		tests.forEach(function(currTest){
-			$window.console.log("Test result: " + currTest());
-			finishedTests++;
-		});
-	};
-
-	var init = function() {
-		tests = [
-			virtualMachineDetect,
-			internetAccessTest,
-			diskSpaceTest,
-			autoUpdateTest,
-			installedTest,
-			osVersionTest
-		];
-	};
-
-	(function() {
-		init();
-	})();
-
-	startPreconditionTests();
-	//fatalFails = 1;
-	//warningFails = 1;
-	if (fatalFails > 0) {
-		presentFatalsAndExit();
-	}
-	if (warningFails > 0) {
-		presentWarningsAndProceed();
-	}
-	})();
-
-/*
-	var testsStarted = 0;
-	var testsFinished = 0;
-
-	var internetAccessTest2 = function(callback) {
-		$http.get(_apiBaseUrl).then(function(response) {
-			var result = {
-				title: "Internet access",
-				description: "You have no internetz",
-				outcome: "warning"
-			};
-
-			if (response.status === 200) {
-				result.outcome = "success";
-			}
-
-			callback(result);
-		});
-	}
-
-	var onTestFinished = function(result) {
-		// Är alla test klara?
-
-
-		testsFinished++;
-
-		console.log("Got result", result, "tests finished", testsFinished);
-
-		if (testsStarted == testsFinished) {
-			console.log("All tests are finished!");
-		}
-	}
-
-	var startTests = function() {
-		testsStarted = 6;
-		internetAccessTest2(onTestFinished);
-		internetAccessTest2(onTestFinished);
-		internetAccessTest2(onTestFinished);
-		internetAccessTest2(onTestFinished);
-		internetAccessTest2(onTestFinished);
-		internetAccessTest2(onTestFinished);
-	}*/
-
-	/*return {
-		"startPreconditionTests": startPreconditionTests,
-		"startTests": startTests
-	};*/
-
-//});

@@ -1,5 +1,7 @@
+#ifndef DISKSPACETEST_H
+#define DISKSPACETEST_H
 //
-//  DXDiskSpaceTest.h
+//  diskSpaceTest.h
 //  DigiExam Solutions AB
 //
 //  Created by Amar Krupalija on 2015-10-19.
@@ -10,10 +12,11 @@
  * @brief Checks that the enough disk space is free in order to run.
  */
 
-//#import <Foundation/Foundation.h>
-#include "basePreConditionTest.h"
+#import "basePreConditionTest.h"
 
-class DiskSpaceTest : public basePreConditionTest
+using namespace v8;
+
+class DiskSpaceTest : public BasePreConditionTest
 {
 public:
 	std::string _failTitle = "Not enough free disk space.";
@@ -24,7 +27,8 @@ public:
 
 	bool isFailFatal();
 	bool isSuccess();
-	void startTest();
+	//void startTest();
+	void startTest(v8::Local<v8::Function> callback);
 	std::string failTitle();
 	std::string failMessage();
 
@@ -32,3 +36,4 @@ private:
 	bool hasEnoughDiskSpace();
 
 };
+#endif

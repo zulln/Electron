@@ -1,3 +1,5 @@
+#ifndef INSTALLEDTEST_H
+#define INSTALLEDTEST_H
 //
 //  DXInstalledTest.h
 //  DigiExam
@@ -7,22 +9,18 @@
 //
 
 //#import "basePreConditionTest.h"
-#import <Foundation/Foundation.h>
-#include "basePreConditionTest.h"
-/*!
- * @brief Checks that DigiExam is installed and not run from a mounted .dmg.
- *//*
-@interface DXInstalledTest : DXBasePreConditionTest
-@end
-*/
+//#import <Foundation/Foundation.h>
+#import "basePreConditionTest.h"
 
+using namespace v8;
 
-class InstalledTest : public basePreConditionTest
+class InstalledTest : public BasePreConditionTest
 {
 public:
 	bool isFailFatal();
 	bool isSuccess();
-	void startTest();
+	//void startTest();
+	void startTest(Local<Function> callback);
 	std::string failTitle();
 	std::string failMessage();
 	std::string _failTitle = "DigiExam is not installed.";
@@ -31,3 +29,4 @@ public:
 	bool _isFailFatal = true;
 
 };
+#endif

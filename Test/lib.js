@@ -14,9 +14,10 @@ angularApp.controller('angularAppCtrl', function($scope, $window){
 	//var objArray = addon();			//Should return array with all objects that we want to run objectName.run();
 
 	$scope.go = function() {
-		var objArray = new addon.MyObject(10);
+		/*var objArray = new addon.MyObject(10);
 		console.log(objArray.plusOne());
-		console.log(objArray.plusOne());
+		console.log(objArray.plusOne());*/
+		$window.alert(addon.onLockdown());
 	};
 
 	$scope.go2 = function() {

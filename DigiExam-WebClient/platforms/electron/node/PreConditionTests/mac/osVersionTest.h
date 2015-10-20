@@ -1,38 +1,29 @@
+#ifndef OSVERSIONTEST_H
+#define OSVERSIONTEST_H
+#import "basePreConditionTest.h"
 //
-//  DXOsVersionTest.h
-//  DigiExam
+//  osVersionTest.h
+//  DigiExam Solutions AB
 //
-//  Created by Robin Andersson on 2015-02-09.
-//  Copyright (c) 2015 DigiExam AB. All rights reserved.
+//  Created by Amar Krupalija on 2015-10-19.
+//  Copyright (c) 2015 DigiExam Solutions AB. All rights reserved.
 //
-
-//#import "basePreConditionTest.h
-#import <Foundation/Foundation.h>
-#include "basePreConditionTest.h"
 
 /*!
- * @brief Checks that the version of Mac OS X is supported
+ * @brief Checks that the OS version is correct.
  */
-/*@interface DXOSVersionTest : DXBasePreConditionTest
-
-@end
-*/
-
-//#include "basePreConditionTest.h"
-
-class OSVersionTest : public basePreConditionTest
+class OSVersionTest : public BasePreConditionTest
 {
 public:
-//	OSVersionTest();
-//	~OSVersionTest();
 	bool isFailFatal();
 	bool isSuccess();
-	void startTest();
+	void startTest(Local<Function> callback);
 	std::string failTitle();
 	std::string failMessage();
 	std::string _failTitle = "Mac OS X version not supported.";
-    std::string _failMessage =  "Mac OS X 10.7 and earlier is not supported, upgrade in order to run DigiExam.";
+	std::string _failMessage =  "Mac OS X 10.7 and earlier is not supported, upgrade in order to run DigiExam.";
 	bool _isSuccess = false;
 	bool _isFailFatal = true;
 
 };
+#endif

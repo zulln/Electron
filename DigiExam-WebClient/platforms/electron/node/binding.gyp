@@ -17,8 +17,16 @@
 		['OS=="mac"',{
 			'targets': [
 				{
+					'target_name': 'dxlockdown',
+					'sources': [
+						'Lockdown/lockdown_mac.mm',
+						'Lockdown/sound/sound_mac.mm'
+					]
+				},
+				{
 					'target_name': 'dxpreconditiontests',
 					'sources': [
+						'PreConditionTests/mac/preconditiontest_mac.mm',
 						'PreConditionTests/mac/basePreconditiontest.h',
 						'PreConditionTests/mac/diskSpaceTest.h',
 						'PreConditionTests/mac/diskSpaceTest.mm',
@@ -28,7 +36,8 @@
 						'PreConditionTests/mac/osVersionTest.mm',
 						'PreConditionTests/mac/virtualMachineTest.h',
 						'PreConditionTests/mac/virtualMachineTest.mm',
-						'PreConditionTests/mac/preconditiontest_mac.mm'
+						'PreConditionTests/mac/OSTestObj.h',
+						'PreConditionTests/mac/OSTestObj.mm'
 					]
 				}
 			]

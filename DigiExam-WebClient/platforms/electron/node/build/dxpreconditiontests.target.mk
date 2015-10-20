@@ -28,6 +28,7 @@ CFLAGS_C_Debug := \
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Debug := \
+	-std=gnu++0x \
 	-fno-rtti \
 	-fno-exceptions \
 	-fno-threadsafe-statics \
@@ -40,10 +41,10 @@ CFLAGS_OBJC_Debug :=
 CFLAGS_OBJCC_Debug :=
 
 INCS_Debug := \
-	-I/Users/amc0/.node-gyp/0.12.7/include/node \
-	-I/Users/amc0/.node-gyp/0.12.7/src \
-	-I/Users/amc0/.node-gyp/0.12.7/deps/uv/include \
-	-I/Users/amc0/.node-gyp/0.12.7/deps/v8/include
+	-I/Users/amc0/.node-gyp/0.34.0/include/node \
+	-I/Users/amc0/.node-gyp/0.34.0/src \
+	-I/Users/amc0/.node-gyp/0.34.0/deps/uv/include \
+	-I/Users/amc0/.node-gyp/0.34.0/deps/v8/include
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=dxpreconditiontests' \
@@ -69,6 +70,7 @@ CFLAGS_C_Release := \
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Release := \
+	-std=gnu++0x \
 	-fno-rtti \
 	-fno-exceptions \
 	-fno-threadsafe-statics \
@@ -81,17 +83,18 @@ CFLAGS_OBJC_Release :=
 CFLAGS_OBJCC_Release :=
 
 INCS_Release := \
-	-I/Users/amc0/.node-gyp/0.12.7/include/node \
-	-I/Users/amc0/.node-gyp/0.12.7/src \
-	-I/Users/amc0/.node-gyp/0.12.7/deps/uv/include \
-	-I/Users/amc0/.node-gyp/0.12.7/deps/v8/include
+	-I/Users/amc0/.node-gyp/0.34.0/include/node \
+	-I/Users/amc0/.node-gyp/0.34.0/src \
+	-I/Users/amc0/.node-gyp/0.34.0/deps/uv/include \
+	-I/Users/amc0/.node-gyp/0.34.0/deps/v8/include
 
 OBJS := \
+	$(obj).target/$(TARGET)/PreConditionTests/mac/preconditiontest_mac.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/diskSpaceTest.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/installedTest.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/osVersionTest.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/virtualMachineTest.o \
-	$(obj).target/$(TARGET)/PreConditionTests/mac/preconditiontest_mac.o
+	$(obj).target/$(TARGET)/PreConditionTests/mac/OSTestObj.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)

@@ -1,34 +1,23 @@
-//
-//  DXVirtualMachineTest.h
-//  DigiExam
-//
-//  Created by Robin Andersson on 2015-02-09.
-//  Copyright (c) 2015 DigiExam AB. All rights reserved.
-//
-
-/*#import "preConditionTest.h"
+#ifndef VIRTUALMACHINETEST_H
+#define VIRTUALMACHINETEST_H
 #import "basePreConditionTest.h"
-#import "virtualMachineDetector.h"
+//
+//  VirtualMachineTest.h
+//  DigiExam Solutions AB
+//
+//  Created by Amar Krupalija on 2015-10-19.
+//  Copyright (c) 2015 DigiExam Solutions AB. All rights reserved.
+//
 
 /*!
- * @brief Checks that DigiExam is not running in a virtual machine.
+ * @brief Checks that no VM instance is running
  */
-//@interface DXVirtualMachineTest : DXBasePreConditionTest
-
-//@end
-
-
-#import <Foundation/Foundation.h>
-#include "basePreConditionTest.h"
-
-class VirtualMachineTest : public basePreConditionTest
+class VirtualMachineTest : public BasePreConditionTest
 {
 public:
-//	VirtualMachineTest();
-//	~VirtualMachineTest();
 	bool isFailFatal();
 	bool isSuccess();
-	void startTest();
+	void startTest(Local<Function> callback);
 	std::string failTitle();
 	std::string failMessage();
 	std::string _failTitle = "Virtual machine not allowed.";
@@ -37,3 +26,4 @@ public:
 	bool _isFailFatal = true;
 
 };
+#endif

@@ -45,8 +45,9 @@
     "v8_random_seed": 0,
     "v8_use_snapshot": "false",
     "want_separate_host_toolset": 0,
-    "nodedir": "/Users/amc0/.node-gyp/0.12.7",
+    "nodedir": "/Users/amc0/.node-gyp/0.34.0",
     "copy_dev_lib": "true",
-    "standalone_static_library": 1
+    "standalone_static_library": 1,
+    "target": "0.34.0"
   }
 }
