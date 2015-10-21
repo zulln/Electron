@@ -11,29 +11,23 @@
 /*!
  * @brief Checks that the enough disk space is free in order to run.
  */
-
 #import "basePreConditionTest.h"
+#import "objectFactory.h"
 
 using namespace v8;
 
 class DiskSpaceTest : public BasePreConditionTest
 {
 public:
-	std::string _failTitle = "Not enough free disk space.";
-    std::string _failMessage =  "You need to have at least 1GB free disk space to start DigiExam.";
-	bool _isSuccess = false;
-	bool _isFailFatal = true;
-
-
+	void startTest(Local<Function> callback);
 	bool isFailFatal();
 	bool isSuccess();
-	//void startTest();
-	void startTest(v8::Local<v8::Function> callback);
 	std::string failTitle();
 	std::string failMessage();
-
 private:
-	bool hasEnoughDiskSpace();
-
+	bool _isSuccess = false;
+	bool _isFailFatal = true;
+	std::string _failTitle = "Not enough free disk space.";
+    std::string _failMessage =  "You need to have at least 1GB free disk space to start DigiExam.";
 };
 #endif

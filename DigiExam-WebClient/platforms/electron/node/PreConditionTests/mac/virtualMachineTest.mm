@@ -13,9 +13,10 @@ void VirtualMachineTest::startTest(Local<Function> callback){
         _isSuccess = YES;
     }
 
-	Local<Value> argv[argc] = { v8::Boolean::New(isolate, _isSuccess) };
+	ObjectFactory* objFactory = new ObjectFactory();
+	Local<Object> jsObject = objFactory->createObject(this);
+	Local<Value> argv[argc] = { jsObject };
 	callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
-
 }
 std::string VirtualMachineTest::failTitle(){ return VirtualMachineTest::_failTitle;}
 std::string VirtualMachineTest::failMessage(){ return VirtualMachineTest::_failMessage;}

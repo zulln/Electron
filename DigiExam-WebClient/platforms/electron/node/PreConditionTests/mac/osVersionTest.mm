@@ -16,9 +16,15 @@ void OSVersionTest::startTest(Local<Function> callback){
 	else
 		_isSuccess = false;
 
+
+
 	const unsigned argc = 1;
 
-	Local<Value> argv[argc] = { v8::Boolean::New(isolate, _isSuccess) };
+/*	Local<Value> argv[argc] = { v8::Boolean::New(isolate, _isSuccess) };
+	callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);*/
+	ObjectFactory* objFactory = new ObjectFactory();
+	Local<Object> jsObject = objFactory->createObject(this);
+	Local<Value> argv[argc] = { jsObject };
 	callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
 }
 std::string OSVersionTest::failTitle(){ return OSVersionTest::_failTitle;}

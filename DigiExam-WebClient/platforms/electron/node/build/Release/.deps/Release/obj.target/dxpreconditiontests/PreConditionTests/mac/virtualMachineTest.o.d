@@ -8,7 +8,8 @@ Release/obj.target/dxpreconditiontests/PreConditionTests/mac/virtualMachineTest.
   /Users/amc0/.node-gyp/0.34.0/deps/v8/include/v8.h \
   /Users/amc0/.node-gyp/0.34.0/deps/v8/include/v8-version.h \
   /Users/amc0/.node-gyp/0.34.0/deps/v8/include/v8config.h \
-  /Users/amc0/.node-gyp/0.34.0/src/node_version.h
+  /Users/amc0/.node-gyp/0.34.0/src/node_version.h \
+  ../PreConditionTests/mac/objectFactory.h
 ../PreConditionTests/mac/virtualMachineTest.mm:
 ../PreConditionTests/mac/virtualMachineDetector.h:
 ../PreConditionTests/mac/virtualMachineTest.h:
@@ -18,3 +19,4 @@ Release/obj.target/dxpreconditiontests/PreConditionTests/mac/virtualMachineTest.
 /Users/amc0/.node-gyp/0.34.0/deps/v8/include/v8-version.h:
 /Users/amc0/.node-gyp/0.34.0/deps/v8/include/v8config.h:
 /Users/amc0/.node-gyp/0.34.0/src/node_version.h:
+../PreConditionTests/mac/objectFactory.h:

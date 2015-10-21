@@ -13,22 +13,20 @@
  		  mounted.
  */
 #import "basePreConditionTest.h"
-
-using namespace v8;
+#import "objectFactory.h"
 
 class InstalledTest : public BasePreConditionTest
 {
 public:
+	void startTest(Local<Function> callback);
 	bool isFailFatal();
 	bool isSuccess();
-	//void startTest();
-	void startTest(Local<Function> callback);
 	std::string failTitle();
 	std::string failMessage();
-	std::string _failTitle = "DigiExam is not installed.";
-    std::string _failMessage =  "You need to copy DigiExam to Applications in order to run it.";
+private:
 	bool _isSuccess = false;
 	bool _isFailFatal = true;
-
+	std::string _failTitle = "DigiExam is not installed.";
+    std::string _failMessage =  "You need to copy DigiExam to Applications in order to run it.";
 };
 #endif

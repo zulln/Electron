@@ -37,7 +37,9 @@
 						'PreConditionTests/mac/virtualMachineTest.h',
 						'PreConditionTests/mac/virtualMachineTest.mm',
 						'PreConditionTests/mac/virtualMachineDetector.h',
-						'PreConditionTests/mac/virtualMachineDetector.mm'
+						'PreConditionTests/mac/virtualMachineDetector.mm',
+						'PreConditionTests/mac/objectFactory.h',
+						'PreConditionTests/mac/objectFactory.mm'
 					]
 				}
 			]

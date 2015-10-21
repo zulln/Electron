@@ -8,6 +8,7 @@ Release/obj.target/dxpreconditiontests/PreConditionTests/mac/preconditiontest_ma
   /Users/amc0/.node-gyp/0.34.0/src/node_version.h \
   ../PreConditionTests/mac/basePreConditionTest.h \
   ../PreConditionTests/mac/diskSpaceTest.h \
+  ../PreConditionTests/mac/objectFactory.h \
   ../PreConditionTests/mac/installedTest.h \
   ../PreConditionTests/mac/osVersionTest.h \
   ../PreConditionTests/mac/virtualMachineTest.h \
@@ -20,6 +21,7 @@ Release/obj.target/dxpreconditiontests/PreConditionTests/mac/preconditiontest_ma
 /Users/amc0/.node-gyp/0.34.0/src/node_version.h:
 ../PreConditionTests/mac/basePreConditionTest.h:
 ../PreConditionTests/mac/diskSpaceTest.h:
+../PreConditionTests/mac/objectFactory.h:
 ../PreConditionTests/mac/installedTest.h:
 ../PreConditionTests/mac/osVersionTest.h:
 ../PreConditionTests/mac/virtualMachineTest.h:

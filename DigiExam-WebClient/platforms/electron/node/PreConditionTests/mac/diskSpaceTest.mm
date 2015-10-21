@@ -21,9 +21,10 @@ void DiskSpaceTest::startTest(v8::Local<v8::Function> callback){
 		_isSuccess = false;
 	}
 
-	Local<Value> argv[argc] = { v8::Boolean::New(isolate, _isSuccess) };
+	ObjectFactory* objFactory = new ObjectFactory();
+	Local<Object> jsObject = objFactory->createObject(this);
+	Local<Value> argv[argc] = { jsObject };
 	callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
-
 }
 
 std::string DiskSpaceTest::failTitle(){ return DiskSpaceTest::_failTitle;}

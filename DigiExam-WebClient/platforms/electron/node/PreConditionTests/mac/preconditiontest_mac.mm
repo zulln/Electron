@@ -6,8 +6,9 @@
 #import "osVersionTest.h"
 #import "virtualMachineTest.h"
 
-
 using namespace v8;
+
+const int testCount = 3;
 
 void Run(const FunctionCallbackInfo<Value>& args) {
 	// callback = args[0] = on finished test callback
@@ -18,7 +19,7 @@ void Run(const FunctionCallbackInfo<Value>& args) {
 
 	Local<Function> cb = Local<Function>::Cast(args[0]);
 
-	BasePreConditionTest** tests = new BasePreConditionTest*[3];
+	BasePreConditionTest** tests = new BasePreConditionTest*[testCount];
 	tests[0] = new OSVersionTest();
 	tests[1] = new DiskSpaceTest();
 	tests[2] = new InstalledTest();
@@ -28,6 +29,7 @@ void Run(const FunctionCallbackInfo<Value>& args) {
 		tests[i]->startTest(cb);
 	}
 
+	args.GetReturnValue().Set(Number::New(isolate, testCount));
 }
 
 void init(Handle<Object> exports) {

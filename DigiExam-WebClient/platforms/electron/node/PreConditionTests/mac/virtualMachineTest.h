@@ -1,7 +1,5 @@
 #ifndef VIRTUALMACHINETEST_H
 #define VIRTUALMACHINETEST_H
-#import "basePreConditionTest.h"
-#import "virtualMachineDetector.h"
 //
 //  VirtualMachineTest.h
 //  DigiExam Solutions AB
@@ -13,18 +11,22 @@
 /*!
  * @brief Checks that no VM instance is running
  */
+ #import "basePreConditionTest.h"
+ #import "virtualMachineDetector.h"
+ #import "objectFactory.h"
+
 class VirtualMachineTest : public BasePreConditionTest
 {
 public:
+	void startTest(Local<Function> callback);
 	bool isFailFatal();
 	bool isSuccess();
-	void startTest(Local<Function> callback);
 	std::string failTitle();
 	std::string failMessage();
-	std::string _failTitle = "Virtual machine not allowed.";
-    std::string _failMessage =  "You are running DigiExam in a virtual machine which is not allowed.";
+private:
 	bool _isSuccess = false;
 	bool _isFailFatal = true;
-
+	std::string _failTitle = "Virtual machine not allowed.";
+	std::string _failMessage =  "You are running DigiExam in a virtual machine which is not allowed.";
 };
 #endif
