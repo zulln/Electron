@@ -9,7 +9,21 @@
 				{
 					'target_name': 'dxpreconditiontests',
 					'sources': [
-						'PreConditionTests/win/preconditiontest_win.cc'
+						'PreConditionTests/base_precondition_test.h',
+						'PreConditionTests/win/preconditiontest_win.h',
+						'PreConditionTests/win/preconditiontest_win.cc',
+						'PreConditionTests/win/admin_permission_test.h',
+						'PreConditionTests/win/admin_permission_test.cc',
+						'PreConditionTests/win/illegal_processes_test.h',
+						'PreConditionTests/win/illegal_processes_test.cc',
+						'PreConditionTests/win/remote_desktop_test.h',
+						'PreConditionTests/win/remote_desktop_test.cc',
+						'PreConditionTests/win/virtual_machine_test.h',
+						'PreConditionTests/win/virtual_machine_test.cc',
+						'PreConditionTests/win/write_permission_test.h',
+						'PreConditionTests/win/write_permission_test.cc',
+						'PreConditionTests/test_object_factory.h',
+						'PreConditionTests/test_object_factory.cc'
 					]
 				}
 			]
@@ -26,20 +40,21 @@
 				{
 					'target_name': 'dxpreconditiontests',
 					'sources': [
+						'PreConditionTests/base_precondition_test.h',
+						'PreConditionTests/mac/preconditiontest_mac.h',
 						'PreConditionTests/mac/preconditiontest_mac.mm',
-						'PreConditionTests/mac/basePreconditiontest.h',
-						'PreConditionTests/mac/diskSpaceTest.h',
-						'PreConditionTests/mac/diskSpaceTest.mm',
-						'PreConditionTests/mac/installedTest.h',
-						'PreConditionTests/mac/installedTest.mm',
-						'PreConditionTests/mac/osVersionTest.h',
-						'PreConditionTests/mac/osVersionTest.mm',
-						'PreConditionTests/mac/virtualMachineTest.h',
-						'PreConditionTests/mac/virtualMachineTest.mm',
-						'PreConditionTests/mac/virtualMachineDetector.h',
-						'PreConditionTests/mac/virtualMachineDetector.mm',
-						'PreConditionTests/mac/objectFactory.h',
-						'PreConditionTests/mac/objectFactory.mm'
+						'PreConditionTests/mac/disk_space_test.h',
+						'PreConditionTests/mac/disk_space_test.mm',
+						'PreConditionTests/mac/installed_test.h',
+						'PreConditionTests/mac/installed_test.mm',
+						'PreConditionTests/mac/os_version_test.h',
+						'PreConditionTests/mac/os_version_test.mm',
+						'PreConditionTests/mac/virtual_machine_test.h',
+						'PreConditionTests/mac/virtual_machine_test.mm',
+						'PreConditionTests/mac/virtual_machine_detector.h',
+						'PreConditionTests/mac/virtual_machine_detector.mm',
+						'PreConditionTests/test_object_factory.h',
+						'PreConditionTests/test_object_factory.cc'
 					]
 				}
 			]

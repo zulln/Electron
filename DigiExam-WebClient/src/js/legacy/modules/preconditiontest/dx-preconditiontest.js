@@ -3,8 +3,6 @@ angular.module("digiexamclient.preconditiontest")
 //.service("DXLockdown", function($window, BrowserLockdown, ChromeAppLockdown, IOSLockdown, ElectronLockdown, DX_PLATFORM) {
 	"use strict";
 
-	$window.console.log("DXPreConditionTest");
-
 	var PLATFORM_PRECONDITIONTEST = {
 		"ELECTRON_APP": ElectronPreconditionTest/*,
 		"BROWSER": BrowserLockdown,

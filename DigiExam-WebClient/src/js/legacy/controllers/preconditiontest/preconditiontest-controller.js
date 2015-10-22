@@ -2,90 +2,42 @@ angular.module("digiexam-preconditiontest").controller("preconditiontest-control
 	"use strict";
 
 	var self = $scope;
-
-	$window.console.log(DXPreConditionTest);
-
+	self.warningArray = 0;
+	self.fatalFailArray = 0;
 	self.state = "running";
+	var ipc = $window.require("ipc");
 
-	//self.watch
-
-	/*self.runPreconditionTests = function(){
-		self.fatalFails = 1;
-	};*/
-
-	self.hasWarnings = function(){
-		return self.warnings > 0;
+	self.continue = function() {
+		ipc.sendSync("testsPassed");
 	};
 
-	self.hasFatalFails = function(){
-		return self.fatalFails > 0;
-	};
-
-	self.getWarnings = function() {
-		//Return array with all warnings
-	};
-
-	self.setWarnings = function(warningTitle, warningDescription) {
-		self.warningArray.push({
-			type: warningTitle,
-			description: warningDescription
-		});
-		self.warnings++;
-	};
-
-	self.getFatalFails = function() {
-		//Return array with all warnings
-	};
-
-	self.setFatalFails = function(failTitle, failDescription){
-		self.fatalFailArray.push({
-			type: failTitle,
-			description: failDescription
-		});
-		self.fatalFails++;
-	};
-
-	self.continue = function(){
-		self.testsPassed();
-	};
-
-	self.close = function(){
+	self.close = function() {
 		$window.close();
 	};
 
-	function runPreconditionTests(callback) {
-		//DXPreConditionTest.startPreconditionTests();
+	self.hasWarnings = function() {
+		return self.warningArray.length > 0;
+	};
 
-		self.setWarnings("testWarning", "testWarningDescription");
-		self.setWarnings("testWarning2", "testWarningDescription2");
-		self.setFatalFails("testFail", "testFailDescription");
-		self.setFatalFails("testFail2", "testFailDescription2");
+	self.hasFatalFails = function() {
+		return self.fatalFailArray.length > 0;
+	};
 
-		if (!(self.hasFatalFails() || self.hasWarnings())) {
+	function onAllTestsFinished(warnings, fatals) {
+		self.warningArray = warnings;
+		self.fatalFailArray = fatals;
+
+		if (!(self.hasWarnings() || self.hasFatalFails())) {
 			self.state = "passed";
-			self.testsPassed();
+			self.continue();
 		}
-		else if (self.hasWarnings()) {
-			self.state = "warning";
-		}
-		else {
+		else if (self.hasFatalFails()) {
 			self.state = "fatal";
 		}
-		callback();
+		else {
+			self.state = "warning";
+		}
 	}
 
-	//runPreconditionTests(resultCallback);
-
-	/*function runTests() {
-		DXPreConditionTest.startTests(onAllTestsFinished);
-	}*/
-
-	function initTests() {
-		$window.console.log("Init tests");
-		//DXPreConditionTest.init();
-		DXPreConditionTest.init2();
-	}
-
-	//runTests();
-	initTests();		//Get platform specific tests
+	DXPreConditionTest.init(onAllTestsFinished);
 });

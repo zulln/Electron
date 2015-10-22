@@ -2,8 +2,6 @@ angular.module("digiexamclient.storage.filesystem")
 .factory("ElectronFileSystem", function($q, $timeout, $window) {
 	"use strict";
 
-	$window.console.log("DXFileSystem");
-
 	var printModuleName = function (){
 		$window.console.log("Electron FS");
 	};

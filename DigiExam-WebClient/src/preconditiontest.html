@@ -12,23 +12,27 @@
 </head>
 <body>
 	<div flex="30" class="sheet text-center" ng-controller="preconditiontest-controller">
-		<p>Running precondition tests</p>
-		<div class="m">
-			<img src="images/loading.gif">
+		<div ng-hide="hasWarnings() || hasFatalFails()" class="m">
+			<p>Running precondition tests</p>
+			<img src="images/loading.gif" />
 		</div>
 		<div class="m">
 			<div ng-show="hasWarnings() || hasFatalFails()">
 				<div ng-show="hasWarnings()">
-					<h3>Warnings: {{warnings}}</h3>
+					<h3>Warnings: {{warningArray.length}}</h3>
 					<div ng-repeat="warning in warningArray">
-						Type: {{warning.type}} : Description: {{warning.description}}
+						<strong>Type:</strong> {{warning.failTitle}}
+						<br />
+						<strong>Description:</strong> {{warning.failMessage}}
 					</div>
 				</div>
 
 				<div ng-show="hasFatalFails()">
-					<h3>Fatal fails: {{fatalFails}}</h3>
+					<h3>Fatal fails: {{fatalFailArray.length}}</h3>
 					<div ng-repeat="fatal in fatalFailArray">
-						Type: {{fatal.type}} : Description: {{fatal.description}}
+						<strong>Type:</strong> {{fatal.failTitle}}
+						<br />
+						<strong>Description:</strong> {{fatal.failMessage}}
 					</div>
 				</div>
 				<div ng-switch="state">
@@ -39,12 +43,6 @@
 						<button class="btn btn-raised" ng-click="close()">Close</button>
 					</div>
 				</div>
-				<!--<div ng-show="(hasFatalFails() || (hasFatalFails() && hasWarnings()))">
-					<button class="btn btn-raised" ng-click="close()">Close</button>
-				</div>
-				<div ng-show="hasWarnings() && (!hasFatalFails())">
-					<button class="btn btn-raised" ng-click="continue()">Continue</button>
-				</div>-->
 			</div>
 		</div>
 	</div>

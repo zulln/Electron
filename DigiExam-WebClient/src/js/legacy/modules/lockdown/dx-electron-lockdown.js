@@ -5,11 +5,11 @@ angular.module("digiexamclient.lockdown", [])
 	//var path = $window.require("path");
 	var modulePath = "./platforms/electron/node/build/Release/dxlockdown";
 
-	if($window.navigator.platform === "Win32") {
+/*	if($window.navigator.platform === "Win32") {
 		modulePath = modulePath.replace("/", "\\");
 	}
-
-	var nativeModules = $window.require(modulePath);
+*/
+	var nativeModule = $window.require(modulePath);
 
 	$window.console.log("Imported DX Lockdowdn");
 
@@ -18,19 +18,19 @@ angular.module("digiexamclient.lockdown", [])
 	};
 
 	var executeLockdown = function() {
-		$window.console.log("Lockdown message: " + nativeModules.getName());
-		nativeModules.executeLockdown();
+		$window.console.log("Lockdown message: " + nativeModule.getName());
+		nativeModule.executeLockdown();
 	};
 
 	var onLockdown = function () {
 		$window.console.log("Lockdown onLockdown");
-		nativeModules.onLockdown();
+		nativeModule.onLockdown();
 	};
 
 	var tearDown = function() {
 		//TO DO
 		$window.console.log("Lockdown teardown");
-		nativeModules.teardownLockdown();
+		nativeModule.teardownLockdown();
 	};
 
 	return {
