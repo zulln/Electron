@@ -3,8 +3,8 @@
 
 namespace precondition {
 
-	//const int testCount = 5;
-	const int testCount = 1;
+	const int testCount = 5;
+	//const int testCount = 1;
 
 	void Run(const FunctionCallbackInfo<Value>& args) {
 
@@ -15,17 +15,15 @@ namespace precondition {
 
 		BasePreConditionTest** tests = new BasePreConditionTest*[testCount];
 		tests[0] = new AdminPermissionTest();
-//		tests[0]->startTest(cb);
-	/*	tests[1] = new IllegalProcessesTest();
+		tests[1] = new IllegalProcessesTest();
 		tests[2] = new RemoteDesktopTest();
 		tests[3] = new VirtualMachineTest();
 		tests[4] = new WritePermissionTest();
-*/
+
 
 		for(int i = 0; i< testCount; i++){
 			tests[i]->startTest(cb);
 		}
-
 
 		delete[] tests;
 		args.GetReturnValue().Set(Number::New(isolate, testCount));

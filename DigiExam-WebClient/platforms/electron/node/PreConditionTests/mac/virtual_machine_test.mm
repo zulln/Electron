@@ -16,6 +16,8 @@ namespace precondition {
 		TestObjectFactory* testObjFactory = new TestObjectFactory();
 		Local<Object> jsTestObject = testObjFactory->createTestObject(this);
 		Local<Value> argv[argc] = { jsTestObject };
+
+		delete testObjFactory;
 		callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
 	}
 	bool VirtualMachineTest::isFailFatal(){ return VirtualMachineTest::_isFailFatal;}
