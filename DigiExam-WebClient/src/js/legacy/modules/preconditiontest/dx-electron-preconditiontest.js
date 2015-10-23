@@ -15,19 +15,23 @@ angular.module("digiexamclient.preconditiontest", [])
 	var onAllTestsDoneCallback = null;
 
 	var onTestDone = function(result) {
+		$window.console.log(result);
+		$window.console.log("OATCB: " + onAllTestsDoneCallback);
 		if (!result.isSuccess) {
 			if (result.isFailFatal) {
+				$window.console.log("Adding to fatal");
 				fatalFailArray.push(result);
 			}
 			else {
+				$window.console.log("Adding to warning");
 				warningArray.push(result);
 			}
 		}
-		if (finishedTests === testCount && onAllTestsDoneCallback != null) {
+		$window.console.log(finishedTests);
+		if (finishedTests++ === testCount) // && onAllTestsDoneCallback != null) {
+		{
+			$window.console.log("All tests done");
 			onAllTestsDoneCallback(warningArray, fatalFailArray);
-		}
-		else {
-			finishedTests++;
 		}
 	};
 
@@ -50,7 +54,8 @@ angular.module("digiexamclient.preconditiontest", [])
 
 	var init = function(callback) {
 		onAllTestsDoneCallback = callback;
-		testCount = nativeModule.run(onTestDone) + 1;
+		testCount = nativeModule.run(onTestDone);
+		$window.console.log("Testcount " + testCount);
 		internetAccessTest(onTestDone);
 	};
 

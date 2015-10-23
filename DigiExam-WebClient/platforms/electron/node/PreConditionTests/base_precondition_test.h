@@ -2,6 +2,7 @@
 #define BASE_PRECONDITION_TEST_H
 
 #if defined(_WIN32)
+	#include <windows.h>
 	#include <node.h>
 	#include <string>
 #endif
@@ -10,14 +11,6 @@
 	#import <node.h>
 	#import <string>
 #endif
-/*
-#ifdef OS_WINDOWS
-#endif
-#ifdef __APPLE__
-//	#import <Foundation/Foundation.h>
-	#import <node.h>
-	#import <string>
-#endif*/
 
 namespace precondition {
 	using namespace v8;

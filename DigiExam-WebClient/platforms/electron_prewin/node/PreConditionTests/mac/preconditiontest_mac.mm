@@ -1,7 +1,7 @@
 #import "preconditiontest_mac.h"
 
 namespace precondition {
-	const int testCount = 3;
+	const int testCount = 4;
 
 	void Run(const FunctionCallbackInfo<Value>& args) {
 
@@ -16,10 +16,11 @@ namespace precondition {
 		tests[2] = new InstalledTest();
 		tests[3] = new VirtualMachineTest();
 
-		for(int i = 0; i<=testCount; i++){
+		for(int i = 0; i<testCount; i++){
 			tests[i]->startTest(cb);
 		}
 
+		delete[] tests;
 		args.GetReturnValue().Set(Number::New(isolate, testCount));
 	}
 

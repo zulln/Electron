@@ -1,8 +1,8 @@
 #ifndef TEST_OBJECT_FACTOR_H
 #define TEST_OBJECT_FACTOR_H
-#import <string>
-#import <node.h>
-#import "base_precondition_test.h"
+#include <string>
+#include <node.h>
+#include "base_precondition_test.h"
 
 using namespace v8;
 
@@ -13,6 +13,6 @@ namespace precondition {
 	public:
 		virtual Local<Object> createTestObject(BasePreConditionTest* t);
 	};
-	
+
 }
 #endif

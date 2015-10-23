@@ -10,11 +10,10 @@
 					'target_name': 'dxpreconditiontests',
 					'sources': [
 						'PreConditionTests/base_precondition_test.h',
+						'PreConditionTests/win/preconditiontest_win.h',
 						'PreConditionTests/win/preconditiontest_win.cc',
 						'PreConditionTests/win/admin_permission_test.h',
 						'PreConditionTests/win/admin_permission_test.cc',
-						'PreConditionTests/win/configuration_test.h',
-						'PreConditionTests/win/configuration_test.cc',
 						'PreConditionTests/win/illegal_processes_test.h',
 						'PreConditionTests/win/illegal_processes_test.cc',
 						'PreConditionTests/win/remote_desktop_test.h',

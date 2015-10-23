@@ -1,4 +1,4 @@
-#import "test_object_factory.h"
+#include "test_object_factory.h"
 
 namespace precondition {
 
@@ -13,5 +13,5 @@ namespace precondition {
 
 		return jsTestObject;
 	}
-	
+
 }

@@ -24,6 +24,7 @@ angular.module("digiexam-preconditiontest").controller("preconditiontest-control
 	};
 
 	function onAllTestsFinished(warnings, fatals) {
+		$window.console.log("All tests finished");
 		self.warningArray = warnings;
 		self.fatalFailArray = fatals;
 
