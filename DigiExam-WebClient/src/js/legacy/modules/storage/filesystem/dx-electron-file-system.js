@@ -12,6 +12,7 @@ angular.module("digiexamclient.storage.filesystem")
 		else {return "/"; }
 	})();
 	var examDir = null;
+	var logDir = null;
 	var fs = $window.require("fs");
 	var ipc = $window.require("ipc");
 	var path = $window.require("path");
@@ -31,15 +32,26 @@ angular.module("digiexamclient.storage.filesystem")
 		 *
 		 * `quota`: The storage space—in bytes
 		 */
+		$window.console.log("Blabla");
 		appDataFolder = remote.require("app").getPath("userData");
+		$window.console.log(appDataFolder);
 		return appDataFolder;
+	};
+
+	var getAppDataDir = function() {
+		return appDataFolder;
+	};
+
+	var getLogDir = function() {
+		return logDir;
 	};
 
 	var getExamDir = function() {
 		return examDir;
 	};
 
-	var makeDir = function(quota, filepath, name) {
+	var makeLogDir = function(quota, filepath, name) {
+		$window.console.log("Logdir");
 		/*
 		 * Creates a directory.
 		 *     Create exam dir in rel path to Application Support for OSX, %AppData% for Win
@@ -50,8 +62,46 @@ angular.module("digiexamclient.storage.filesystem")
 		 *         not yet exist.
 		 * `name`: Name to be appended to path
 		 */
+		name = "logs";
 		var deferred = $q.defer();
-		if(filepath === "")
+		if(filepath === "" || filepath === undefined)
+		{
+			filepath = requestFileSystem();
+		}
+		filepath = path.join(filepath, name);
+		fs.mkdir(filepath, function (err) {
+			if (err) {
+				if(fs.statSync(filepath).isDirectory())
+				{ deferred.resolve("Path " + filepath + delimiter + name + " already exists"); }
+				else
+				{ deferred.reject("Could not create dir: " + filepath);	}
+			}
+			else {
+				deferred.resolve("filepath " + filepath + " created");
+			}
+		});
+
+		logDir = filepath;
+
+		return deferred.promise;
+	};
+
+	var makeDir = function(quota, filepath, name) {
+		$window.console.log("Makedir");
+		/*
+		 * Creates a directory.
+		 *     Create exam dir in rel path to Application Support for OSX, %AppData% for Win
+		 * `quota`: The storage space—in bytes
+		 * `filepath`: Either an absolute path or a relative path from the
+		 *         DirectoryEntry to the directory to be looked created. It is an
+		 *         error to attempt to create a file whose immediate parent does
+		 *         not yet exist.
+		 * `name`: Name to be appended to path
+		 */
+		//$window.console.log(filepath);
+		name = "exams";
+		var deferred = $q.defer();
+		if(filepath === "" || filepath === undefined)
 		{
 			filepath = requestFileSystem();
 		}
@@ -232,7 +282,10 @@ angular.module("digiexamclient.storage.filesystem")
 	return {
 		"requestFileSystem": requestFileSystem,
 		"listDirectory": listDirectory,
+		"getAppDataDir": getAppDataDir,
 		"getExamDir": getExamDir,
+		"getLogDir": getLogDir,
+		"makeLogDir": makeLogDir,
 		"makeDir": makeDir,
 		"openFile": openFile,
 		"readFile": readFile,
