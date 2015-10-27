@@ -32,7 +32,6 @@ angular.module("digiexamclient.storage.filesystem")
 		 *
 		 * `quota`: The storage space—in bytes
 		 */
-		$window.console.log("Blabla");
 		appDataFolder = remote.require("app").getPath("userData");
 		$window.console.log(appDataFolder);
 		return appDataFolder;
@@ -51,7 +50,6 @@ angular.module("digiexamclient.storage.filesystem")
 	};
 
 	var makeLogDir = function(quota, filepath, name) {
-		$window.console.log("Logdir");
 		/*
 		 * Creates a directory.
 		 *     Create exam dir in rel path to Application Support for OSX, %AppData% for Win
@@ -87,7 +85,6 @@ angular.module("digiexamclient.storage.filesystem")
 	};
 
 	var makeDir = function(quota, filepath, name) {
-		$window.console.log("Makedir");
 		/*
 		 * Creates a directory.
 		 *     Create exam dir in rel path to Application Support for OSX, %AppData% for Win
