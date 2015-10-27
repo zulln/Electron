@@ -33,7 +33,6 @@ angular.module("digiexamclient.storage.filesystem")
 		 * `quota`: The storage space—in bytes
 		 */
 		appDataFolder = remote.require("app").getPath("userData");
-		$window.console.log(appDataFolder);
 		return appDataFolder;
 	};
 
@@ -95,7 +94,6 @@ angular.module("digiexamclient.storage.filesystem")
 		 *         not yet exist.
 		 * `name`: Name to be appended to path
 		 */
-		//$window.console.log(filepath);
 		name = "exams";
 		var deferred = $q.defer();
 		if(filepath === "" || filepath === undefined)

@@ -7,12 +7,19 @@ namespace precondition {
 	void AdminPermissionTest::startTest(v8::Local<v8::Function> callback){
 		Isolate* isolate = Isolate::GetCurrent();
 		const unsigned argc = 1;
+    HANDLE hToken = NULL;
 
-		/*
-			Windows implementation here
-		*/
-		_isSuccess = true;
-
+    if( OpenProcessToken( GetCurrentProcess( ),TOKEN_QUERY,&hToken ) ) {
+        TOKEN_ELEVATION Elevation;
+        DWORD cbSize = sizeof( TOKEN_ELEVATION );
+        if( GetTokenInformation( hToken, TokenElevation, &Elevation, sizeof( Elevation ), &cbSize ) ) {
+            _isSuccess = Elevation.TokenIsElevated;
+        }
+    }
+    if( hToken ) {
+        CloseHandle( hToken );
+    }
+		
 		TestObjectFactory* testObjFactory = new TestObjectFactory();
 		Local<Object> jsTestObject = testObjFactory->createTestObject(this);
 		Local<Value> argv[argc] = { jsTestObject };

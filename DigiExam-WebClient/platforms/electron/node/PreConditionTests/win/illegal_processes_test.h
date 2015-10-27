@@ -1,5 +1,5 @@
 #ifndef ILLEGAL_PROCESSES_TEST_H
-#define ILLEGAL_PROCESSES_TEST_H
+#define ILLEGAL_PROCEAASES_TEST_H
 //
 //  adminPermissionTest.h
 //  DigiExam Solutions AB
@@ -18,6 +18,9 @@ namespace precondition {
 
 class IllegalProcessesTest : public BasePreConditionTest
 {
+
+typedef std::string processString;
+
 public:
 	void startTest(Local<Function> callback);
 	bool isFailFatal();
@@ -30,7 +33,12 @@ private:
 	std::string _failTitle = "Check for processes that interfers with DigiExam.";
   std::string _failMessage =  "Processes that interfer with DigiExam was found.";
   //std::string _failMessage2 = "Please close the following processes and restart DigiExam:";
-};
+  processString str1 = "vncserver";
+  processString str2 = "tvnserver";
+
+  std::string strArray[2];
+
+  };
 
 }
 #endif

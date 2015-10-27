@@ -11,6 +11,7 @@
 	},
 	"rules": {
 		"indent": [2, "tab"],
-		"no-use-before-define": [2, "nofunc"]
+		"no-use-before-define": [2, "nofunc"],
+		"no-multi-str": 0
 	}
 }
