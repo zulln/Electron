@@ -12,6 +12,7 @@ Release/obj.target/dxpreconditiontests/PreConditionTests/mac/preconditiontest_ma
   ../PreConditionTests/mac/../test_object_factory.h \
   ../PreConditionTests/mac/installed_test.h \
   ../PreConditionTests/mac/os_version_test.h \
+  ../PreConditionTests/mac/remote_session_test.h \
   ../PreConditionTests/mac/virtual_machine_test.h \
   ../PreConditionTests/mac/virtual_machine_detector.h
 ../PreConditionTests/mac/preconditiontest_mac.mm:
@@ -26,5 +27,6 @@ Release/obj.target/dxpreconditiontests/PreConditionTests/mac/preconditiontest_ma
 ../PreConditionTests/mac/../test_object_factory.h:
 ../PreConditionTests/mac/installed_test.h:
 ../PreConditionTests/mac/os_version_test.h:
+../PreConditionTests/mac/remote_session_test.h:
 ../PreConditionTests/mac/virtual_machine_test.h:
 ../PreConditionTests/mac/virtual_machine_detector.h:

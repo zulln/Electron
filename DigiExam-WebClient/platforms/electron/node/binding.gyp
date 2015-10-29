@@ -48,6 +48,8 @@
 						'PreConditionTests/mac/installed_test.mm',
 						'PreConditionTests/mac/os_version_test.h',
 						'PreConditionTests/mac/os_version_test.mm',
+						'PreConditionTests/mac/remote_session_test.h',
+						'PreConditionTests/mac/remote_session_test.mm',
 						'PreConditionTests/mac/virtual_machine_test.h',
 						'PreConditionTests/mac/virtual_machine_test.mm',
 						'PreConditionTests/mac/virtual_machine_detector.h',

@@ -1,7 +1,7 @@
 #import "preconditiontest_mac.h"
 
 namespace precondition {
-	const int testCount = 4;
+	const int testCount = 5;
 
 	void Run(const FunctionCallbackInfo<Value>& args) {
 
@@ -14,7 +14,8 @@ namespace precondition {
 		tests[0] = new OSVersionTest();
 		tests[1] = new DiskSpaceTest();
 		tests[2] = new InstalledTest();
-		tests[3] = new VirtualMachineTest();
+		tests[3] = new RemoteSessionTest();
+		tests[4] = new VirtualMachineTest();
 
 		for(int i = 0; i<testCount; i++){
 			tests[i]->startTest(cb);

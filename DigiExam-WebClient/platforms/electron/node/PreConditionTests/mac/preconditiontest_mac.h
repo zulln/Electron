@@ -4,6 +4,7 @@
 #import "disk_space_test.h"
 #import "installed_test.h"
 #import "os_version_test.h"
+#import "remote_session_test.h"
 #import "virtual_machine_test.h"
 
 namespace precondition {

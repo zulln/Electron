@@ -93,6 +93,7 @@ OBJS := \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/disk_space_test.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/installed_test.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/os_version_test.o \
+	$(obj).target/$(TARGET)/PreConditionTests/mac/remote_session_test.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/virtual_machine_test.o \
 	$(obj).target/$(TARGET)/PreConditionTests/mac/virtual_machine_detector.o \
 	$(obj).target/$(TARGET)/PreConditionTests/test_object_factory.o
