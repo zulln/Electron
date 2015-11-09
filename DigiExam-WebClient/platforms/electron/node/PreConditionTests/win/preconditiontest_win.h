@@ -6,7 +6,6 @@
 #include "remote_desktop_test.h"
 #include "virtual_machine_test.h"
 #include "write_permission_test.h"
-// preconditiontest_win.mm
 
 namespace precondition {
 

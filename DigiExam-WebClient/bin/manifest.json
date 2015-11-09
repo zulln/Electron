@@ -12,7 +12,7 @@
 		}
 	},
 	"permissions": [
-		"https://digiexam-manual.appspot.com/",
+		"https://digiexam-live.appspot.com/",
 		"storage",
 		"unlimitedStorage",
 		{ "fileSystem": ["write"] },

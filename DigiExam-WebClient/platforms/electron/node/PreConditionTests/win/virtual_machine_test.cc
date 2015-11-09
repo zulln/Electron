@@ -1,104 +1,187 @@
 #include "virtual_machine_test.h"
-#include <intrin.h>
+# pragma comment(lib, "wbemuuid.lib")
 
 namespace precondition {
 
 	bool VirtualMachineTest::isFailFatal(){ return VirtualMachineTest::_isFailFatal;}
 	bool VirtualMachineTest::isSuccess(){ return VirtualMachineTest::_isSuccess;}
 
-    /*bool isGuestOSVM()
-    {
-       unsigned char in_vm[2];
-       _asm sldt in_vm;
-       return( in_vm[0] != 0x00 && in_vm[1] != 0x00 )?1:0;
-   }*/
-		// IsInsideVPC's exception filter
-	DWORD __forceinline IsInsideVPC_exceptionFilter(LPEXCEPTION_POINTERS ep)
-	{
-	  PCONTEXT ctx = ep->ContextRecord;
-
-	  ctx->Ebx = -1; // Not running VPC
-	  ctx->Eip += 4; // skip past the "call VPC" opcodes
-	  return EXCEPTION_CONTINUE_EXECUTION;
-	  // we can safely resume execution since we skipped faulty instruction
+	bool VirtualMachineTest::wstringequals(wstring str1, wstring str2) {
+		return str1.compare(str2) == 0;
 	}
 
-	// High level language friendly version of IsInsideVPC()
-	bool VirtualMachineTest::isInsideVPC()
+	bool VirtualMachineTest::vmDetect()
 	{
-	  bool rc = false;
+		bool retVal = false;
+		HRESULT hres;
 
-	  __try
-	  {
-	    _asm push ebx
-	    _asm mov  ebx, 0 // It will stay ZERO if VPC is running
-	    _asm mov  eax, 1 // VPC function number
+		hres = CoInitializeEx(0, COINIT_MULTITHREADED);
+		if (FAILED(hres))
+		{
+			cout << "Failed to initialize COM library. Error code = 0x"
+				<< hex << hres << endl;
+			return false;                  // Program has failed.
+		}
 
-	    // call VPC
-	    _asm __emit 0Fh
-	    _asm __emit 3Fh
-	    _asm __emit 07h
-	    _asm __emit 0Bh
+		hres = CoInitializeSecurity(
+			NULL,
+			-1,                          // COM authentication
+			NULL,                        // Authentication services
+			NULL,                        // Reserved
+			RPC_C_AUTHN_LEVEL_DEFAULT,   // Default authentication
+			RPC_C_IMP_LEVEL_IMPERSONATE, // Default Impersonation
+			NULL,                        // Authentication info
+			EOAC_NONE,                   // Additional capabilities
+			NULL                         // Reserved
+			);
 
-	    _asm test ebx, ebx
-	    _asm setz [rc]
-	    _asm pop ebx
-	  }
-	  // The except block shouldn't get triggered if VPC is running!!
-	  __except(IsInsideVPC_exceptionFilter(GetExceptionInformation()))
-	  {
-	  }
 
-	  return rc;
-	}
+		if (FAILED(hres))
+		{
+			cout << "Failed to initialize security. Error code = 0x"
+				<< hex << hres << endl;
+			CoUninitialize();
+			return false;                    // Program has failed.
+		}
 
-	bool VirtualMachineTest::isInsideVMWare()
-	{
-	  bool rc = true;
+		IWbemLocator *pLoc = NULL;
 
-	  __try
-	  {
-	    __asm
-	    {
-	      push   edx
-	      push   ecx
-	      push   ebx
+		hres = CoCreateInstance(
+			CLSID_WbemLocator,
+			0,
+			CLSCTX_INPROC_SERVER,
+			IID_IWbemLocator, (LPVOID *)&pLoc);
 
-	      mov    eax, 'VMXh'
-	      mov    ebx, 0 // any value but not the MAGIC VALUE
-	      mov    ecx, 10 // get VMWare version
-	      mov    edx, 'VX' // port number
+		if (FAILED(hres))
+		{
+			cout << "Failed to create IWbemLocator object."
+				<< " Err code = 0x"
+				<< hex << hres << endl;
+			CoUninitialize();
+			return false;                 // Program has failed.
+		}
 
-	      in     eax, dx // read port
-	                     // on return EAX returns the VERSION
-	      cmp    ebx, 'VMXh' // is it a reply from VMWare?
-	      setz   [rc] // set return value
+		IWbemServices *pSvc = NULL;
 
-	      pop    ebx
-	      pop    ecx
-	      pop    edx
-	    }
-	  }
-	  __except(EXCEPTION_EXECUTE_HANDLER)
-	  {
-	    rc = false;
-	  }
+		hres = pLoc->ConnectServer(
+			_bstr_t(L"ROOT\\CIMV2"), // Object path of WMI namespace
+			NULL,                    // User name. NULL = current user
+			NULL,                    // User password. NULL = current
+			0,                       // Locale. NULL indicates current
+			NULL,                    // Security flags.
+			0,                       // Authority (for example, Kerberos)
+			0,                       // Context object
+			&pSvc                    // pointer to IWbemServices proxy
+			);
 
-	  return rc;
+		if (FAILED(hres))
+		{
+			cout << "Could not connect. Error code = 0x"
+				<< hex << hres << endl;
+			pLoc->Release();
+			CoUninitialize();
+			return false;                // Program has failed.
+		}
+
+		cout << "Connected to ROOT\\CIMV2 WMI namespace" << endl;
+
+		hres = CoSetProxyBlanket(
+			pSvc,                        // Indicates the proxy to set
+			RPC_C_AUTHN_WINNT,           // RPC_C_AUTHN_xxx
+			RPC_C_AUTHZ_NONE,            // RPC_C_AUTHZ_xxx
+			NULL,                        // Server principal name
+			RPC_C_AUTHN_LEVEL_CALL,      // RPC_C_AUTHN_LEVEL_xxx
+			RPC_C_IMP_LEVEL_IMPERSONATE, // RPC_C_IMP_LEVEL_xxx
+			NULL,                        // client identity
+			EOAC_NONE                    // proxy capabilities
+			);
+
+		if (FAILED(hres))
+		{
+			cout << "Could not set proxy blanket. Error code = 0x"
+				<< hex << hres << endl;
+			pSvc->Release();
+			pLoc->Release();
+			CoUninitialize();
+			return false;
+		}
+
+		IEnumWbemClassObject* pEnumerator = NULL;
+		hres = pSvc->ExecQuery(
+			bstr_t("WQL"),
+			bstr_t("SELECT * FROM Win32_ComputerSystem"),
+			WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
+			NULL,
+			&pEnumerator);
+
+		if (FAILED(hres))
+		{
+			cout << "Query for operating system name failed."
+				<< " Error code = 0x"
+				<< hex << hres << endl;
+			pSvc->Release();
+			pLoc->Release();
+			CoUninitialize();
+			return false;
+		}
+
+		IWbemClassObject *pclsObj = NULL;
+		ULONG uReturn = 0;
+
+		while (pEnumerator)
+		{
+			HRESULT hr = pEnumerator->Next(WBEM_INFINITE, 1,
+				&pclsObj, &uReturn);
+
+			if (0 == uReturn)
+			{
+				break;
+			}
+
+			VARIANT vtManufacturer, vtModel;
+
+			hr = pclsObj->Get(L"Manufacturer", 0, &vtManufacturer, 0, 0);
+			hr = pclsObj->Get(L"Model", 0, &vtModel, 0, 0);
+
+			wstring manufacturer = vtManufacturer.bstrVal;
+			wstring model = vtModel.bstrVal;
+
+			wstring vmWare = L"VMware Virtual Platform";
+			wstring vBox = L"VirtualBox";
+			wstring hyperV = L"Virtual Machine";
+
+			bool isVMWare = wstringequals(model, vmWare) ? true: false;
+			bool isVirtualBox = wstringequals(model, vBox) ? true : false;
+			bool isHyperV = wstringequals(model, hyperV) ? true : false;
+
+
+			if (isVMWare || isVirtualBox || isHyperV){
+				retVal = true;
+			}
+			else{
+				retVal = false;
+			}
+
+			VariantClear(&vtManufacturer);
+			VariantClear(&vtModel);
+
+			pclsObj->Release();
+
+
+		}
+		pSvc->Release();
+		pLoc->Release();
+		pEnumerator->Release();
+		CoUninitialize();
+
+		return retVal;
 	}
 
 	void VirtualMachineTest::startTest(v8::Local<v8::Function> callback){
 		Isolate* isolate = Isolate::GetCurrent();
 		const unsigned argc = 1;
 
-		/*
-			Windows implementation here
-		*/
-
-		//if (!(VirtualMachineTest::isInsideVPC() && VirtualMachineTest::isInsideVMWare()) && VirtualMachineTest::isGuestOSVM()) {
-		if (!(VirtualMachineTest::isInsideVPC() && VirtualMachineTest::isInsideVMWare())) {
-				_isSuccess = true;
-		}
+		_isSuccess = !vmDetect();
 
 		TestObjectFactory* testObjFactory = new TestObjectFactory();
 		Local<Object> jsTestObject = testObjFactory->createTestObject(this);

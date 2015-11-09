@@ -52,7 +52,8 @@ angular.module("digiexamclient.preconditiontest", [])
 	};
 
 	var internetAccessTest = function(callback) {
-		$http.get(_apiBaseUrl).then(function(response) {
+		var apiBaseUrl = "https://digiexam-release.appspot.com/app#/";
+		$http.get(apiBaseUrl).then(function(response) {
 			var result = {
 				failTitle: "Internet access test",
 				failMessage: "No internet connection.",
@@ -62,6 +63,9 @@ angular.module("digiexamclient.preconditiontest", [])
 
 			if (response.status === 200) {
 				result.isSuccess = true;
+			}
+			else {
+				result.isSuccess = false;
 			}
 			callback(result);
 		});

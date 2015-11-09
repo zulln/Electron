@@ -15,9 +15,9 @@ namespace precondition {
 
 		BasePreConditionTest** tests = new BasePreConditionTest*[testCount];
 		tests[0] = new AdminPermissionTest();
-		tests[1] = new IllegalProcessesTest();
-		tests[2] = new RemoteDesktopTest();
-		tests[3] = new VirtualMachineTest();
+		tests[1] = new RemoteDesktopTest();
+		tests[2] = new VirtualMachineTest();
+		tests[3] = new IllegalProcessesTest();
 		tests[4] = new WritePermissionTest();
 
 

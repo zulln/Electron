@@ -13,6 +13,14 @@
  */
  #include "../base_precondition_test.h"
  #include "../test_object_factory.h"
+ #include <string>
+ #define _WIN32_DCOM
+#include <iostream>
+#include <comdef.h>
+#include <Wbemidl.h>
+#include <algorithm>
+
+using namespace std;
 
 namespace precondition {
 
@@ -27,11 +35,10 @@ namespace precondition {
 	private:
 		bool _isSuccess = false;
 		bool _isFailFatal = true;
+		bool wstringequals(wstring str1, wstring str2);
+		bool vmDetect();
 		std::string _failTitle = "DigiExam is running in a virtual machine.";
 	    std::string _failMessage =  "You are not allowed to run DigiExam in a virtual machine.\nIf you are running Mac OS X please use the Mac version.\nIf you are running Linux, please boot into Windows or Mac.";
-		//bool isGuestOSVM();
-		bool isInsideVPC();
-		bool isInsideVMWare();
 	};
 
 }

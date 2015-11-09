@@ -91,7 +91,7 @@
 		0CA7C5571B57E50E008A7DA4 /* DXFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXFileSystem.h; sourceTree = "<group>"; };
 		0CA7C5581B57E50E008A7DA4 /* DXFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXFileSystem.m; sourceTree = "<group>"; };
 		E12FF5D7AE33D90038F31B9D /* libPods-ipad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ipad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F54616171B90589B007BE3AD /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bin; path = ../../bin; sourceTree = "<group>"; };
+		F54616171B90589B007BE3AD /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bin; path = ../../bin/web; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

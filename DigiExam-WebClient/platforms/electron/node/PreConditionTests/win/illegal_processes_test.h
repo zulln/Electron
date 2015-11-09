@@ -11,15 +11,16 @@
 /*!
  * @brief Checks that the application is started as Administrator.
  */
- #include "../base_precondition_test.h"
- #include "../test_object_factory.h"
+#include "../base_precondition_test.h"
+#include "../test_object_factory.h"
+#include <tlhelp32.h>
+#include <algorithm>
+#include <vector>
 
 namespace precondition {
 
 class IllegalProcessesTest : public BasePreConditionTest
 {
-
-typedef std::string processString;
 
 public:
 	void startTest(Local<Function> callback);
@@ -31,13 +32,12 @@ private:
 	bool _isSuccess = false;
 	bool _isFailFatal = true;
 	std::string _failTitle = "Check for processes that interfers with DigiExam.";
-  std::string _failMessage =  "Processes that interfer with DigiExam was found.";
+	std::string _failMessage =  "Processes that interfer with DigiExam was found.";
   //std::string _failMessage2 = "Please close the following processes and restart DigiExam:";
-  processString str1 = "vncserver";
-  processString str2 = "tvnserver";
 
-  std::string strArray[2];
-
+  void TerminateIllegalProcesses(std::string filename);
+  bool isLegal(std::string process, int pid);
+  void GetProcessList();
   };
 
 }

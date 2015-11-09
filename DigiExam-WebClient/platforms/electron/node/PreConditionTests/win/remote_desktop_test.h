@@ -13,7 +13,8 @@
  */
 #include "../base_precondition_test.h"
 #include "../test_object_factory.h"
-#pragma comment(lib, "user32.lib")
+#include <windows.h>
+//#pragma comment(lib, "user32.lib")
 
 namespace precondition {
 
