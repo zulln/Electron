@@ -11,7 +11,7 @@ namespace precondition {
 	class TestObjectFactory
 	{
 	public:
-		virtual Local<Object> createTestObject(BasePreConditionTest* t);
+		Local<Object> createTestObject(BasePreConditionTest* t);
 	};
 
 }

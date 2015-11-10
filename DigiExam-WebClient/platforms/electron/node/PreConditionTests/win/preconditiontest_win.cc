@@ -1,10 +1,8 @@
 // preconditiontest_win.cc
 #include "preconditiontest_win.h"
+#include <vector>
 
 namespace precondition {
-
-	const int testCount = 5;
-	//const int testCount = 1;
 
 	void Run(const FunctionCallbackInfo<Value>& args) {
 
@@ -13,20 +11,20 @@ namespace precondition {
 
 		Local<Function> cb = Local<Function>::Cast(args[0]);
 
-		BasePreConditionTest** tests = new BasePreConditionTest*[testCount];
-		tests[0] = new AdminPermissionTest();
-		tests[1] = new RemoteDesktopTest();
-		tests[2] = new VirtualMachineTest();
-		tests[3] = new IllegalProcessesTest();
-		tests[4] = new WritePermissionTest();
+		std::vector<BasePreConditionTest*> testArray;
+		testArray.push_back(new AdminPermissionTest());
+		testArray.push_back(new RemoteDesktopTest());
+		testArray.push_back(new VirtualMachineTest());
+		testArray.push_back(new IllegalProcessesTest());
+		testArray.push_back(new WritePermissionTest());
 
 
-		for(int i = 0; i< testCount; i++){
-			tests[i]->startTest(cb);
+		for (std::vector<BasePreConditionTest*>::iterator it = testArray.begin(); it != testArray.end(); ++it){
+			(*it)->startTest(cb);
 		}
 
-		delete[] tests;
-		args.GetReturnValue().Set(Number::New(isolate, testCount));
+		testArray.clear();
+		args.GetReturnValue().Set(Number::New(isolate, testArray.size()));
 	}
 
 	void init(Handle<Object> exports) {

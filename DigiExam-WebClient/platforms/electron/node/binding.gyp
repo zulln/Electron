@@ -4,7 +4,7 @@
 			'targets': [
 				{
 					'target_name': 'dxlockdown',
-					'sources': [ 'lockdown/lockdown_win.cc' ]
+					'sources': [ 'Lockdown/win/lockdown_win.cc' ]
 				},
 				{
 					'target_name': 'dxpreconditiontests',
@@ -32,8 +32,21 @@
 				{
 					'target_name': 'dxlockdown',
 					'sources': [
-						'Lockdown/lockdown_mac.mm',
-						'Lockdown/sound/sound_mac.mm'
+						'Lockdown/base_lockdown_task.h',
+						'Lockdown/mac/lockdown_mac.h',
+						'Lockdown/mac/lockdown_mac.mm',
+						'Lockdown/mac/folder_watcher.h',
+						'Lockdown/mac/folder_watcher.mm',
+						'Lockdown/mac/kiosk_window_mac.h',
+						'Lockdown/mac/kiosk_window_mac.mm',
+						'Lockdown/mac/shell_command_mac.h',
+						'Lockdown/mac/shell_command_mac.mm',
+						'Lockdown/mac/disable_screen_capture_mac.h',
+						'Lockdown/mac/disable_screen_capture_mac.mm',
+						'Lockdown/mac/sound_mac.h',
+						'Lockdown/mac/sound_mac.mm',
+						'Lockdown/mac/clear_clipboard_mac.h',
+						'Lockdown/mac/clear_clipboard_mac.mm'
 					]
 				},
 				{

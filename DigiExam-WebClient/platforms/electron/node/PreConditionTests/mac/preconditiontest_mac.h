@@ -8,7 +8,7 @@
 #import "virtual_machine_test.h"
 
 namespace precondition {
-	class preconditiontest
+	class Preconditiontest
 	{
 	public:
 		void Run(const FunctionCallbackInfo<Value>& args);

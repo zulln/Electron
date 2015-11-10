@@ -1,7 +1,7 @@
 #import "preconditiontest_mac.h"
+#import <vector>
 
 namespace precondition {
-	const int testCount = 5;
 
 	void Run(const FunctionCallbackInfo<Value>& args) {
 
@@ -10,19 +10,20 @@ namespace precondition {
 
 		Local<Function> cb = Local<Function>::Cast(args[0]);
 
-		BasePreConditionTest** tests = new BasePreConditionTest*[testCount];
-		tests[0] = new OSVersionTest();
-		tests[1] = new DiskSpaceTest();
-		tests[2] = new InstalledTest();
-		tests[3] = new RemoteSessionTest();
-		tests[4] = new VirtualMachineTest();
+		std::vector<BasePreConditionTest*> testArray;
+		testArray.push_back(new OSVersionTest());
+		testArray.push_back(new DiskSpaceTest());
+		testArray.push_back(new InstalledTest());
+		testArray.push_back(new RemoteSessionTest());
+		testArray.push_back(new VirtualMachineTest());
 
-		for(int i = 0; i<testCount; i++){
-			tests[i]->startTest(cb);
+
+		for (std::vector<BasePreConditionTest*>::iterator it = testArray.begin(); it != testArray.end(); ++it){
+			(*it)->startTest(cb);
 		}
 
-		delete[] tests;
-		args.GetReturnValue().Set(Number::New(isolate, testCount));
+		testArray.clear();
+		args.GetReturnValue().Set(Number::New(isolate, testArray.size()));
 	}
 
 	void init(Handle<Object> exports) {

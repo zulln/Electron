@@ -10,6 +10,7 @@ mainWindow = null;
 var disableShortKeys = function() {
 	//Define all global shortkeys that should be prohibited in the application here
 	globalShortcut.register('Super+r', function(){});				//1
+	globalShortcut.register('Cmd+Shift', function(){ alert("Cmd + shift pressed"); });
 };
 
 var showPreconditionWindow = function() {

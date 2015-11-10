@@ -16,7 +16,7 @@ angular.module("digiexamclient.lockdown", [])
 
 	var onLockdown = function () {
 		$window.console.log("Lockdown onLockdown");
-		nativeModule.onLockdown();
+		$window.console.log(nativeModule.onLockdown());
 	};
 
 	var tearDown = function() {
