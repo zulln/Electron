@@ -70,6 +70,13 @@
 						'PreConditionTests/test_object_factory.h',
 						'PreConditionTests/test_object_factory.cc'
 					]
+				},
+				{
+					'target_name': 'dxkiosk',
+					'sources': [
+						'Lockdown/mac/kiosk_window_mac_copy.h',
+						'Lockdown/mac/kiosk_window_mac_copy.mm'
+					]
 				}
 			]
 		}]

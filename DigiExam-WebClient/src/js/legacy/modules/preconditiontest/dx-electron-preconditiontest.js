@@ -123,6 +123,7 @@ angular.module("digiexamclient.preconditiontest", [])
 	var init = function(callback) {
 		onAllTestsDoneCallback = callback;
 		testCount = nativeModule.run(onTestDone) + 1;
+		$window.console.log("Testcount: " + testCount);
 		internetAccessTest(onTestDone);
 		writePermissionTest();
 	};

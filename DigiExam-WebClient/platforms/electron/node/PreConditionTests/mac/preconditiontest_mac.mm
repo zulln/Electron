@@ -22,8 +22,9 @@ namespace precondition {
 			(*it)->startTest(cb);
 		}
 
+		int testCount = testArray.size();
 		testArray.clear();
-		args.GetReturnValue().Set(Number::New(isolate, testArray.size()));
+		args.GetReturnValue().Set(Number::New(isolate, testCount));
 	}
 
 	void init(Handle<Object> exports) {

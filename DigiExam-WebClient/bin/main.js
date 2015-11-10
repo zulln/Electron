@@ -3,27 +3,18 @@ var browserWindow = require('browser-window');
 var dialog = require("dialog");
 var globalShortcut = require('global-shortcut');
 var ipc = require('ipc');
+var kioskModule = require('./platforms/electron/node/build/Release/dxkiosk');
 
 preconditionWindow = null;
 mainWindow = null;
-//webFrame.setZoomLevelLimits(1,1);
-
-var disablePinchZoom = function(currWindow) {
-	currWindow.addEventListener('mouseWheel', function(e)
-	{	if(e.ctrlKey){
-			e.preventDefault();
-		}
-	});
-};
 
 var disableShortKeys = function() {
 	//Define all global shortkeys that should be prohibited in the application here
 	globalShortcut.register('Super+r', function(){});				//1
-
 };
 
 var showPreconditionWindow = function() {
-	preconditionWindow = new browserWindow({width: 400, height: 320, resizable: true, center: true, "always-on-top": true, icon: "/images/arrow-right.png"});
+	preconditionWindow = new browserWindow({width: 400, height: 320, resizable: true, center: true});
 	preconditionWindow.webContents.on('did-finish-load', function(){
 		preconditionWindow.webContents.executeJavaScript("window.isElectron = true;");
 	});
@@ -37,10 +28,10 @@ var showPreconditionWindow = function() {
 };
 
 var showMainWindow = function() {
-	mainWindow = new browserWindow({width: 1200, height: 1600, resizable: false, center: true, "always-on-top": true, icon: "/images/arrow-right.png"});
-	//webFrame.setZoomLevelLimits(1,1);
+	mainWindow = new browserWindow({width: 1200, height: 1600});
 	mainWindow.webContents.on('did-finish-load', function(){
 		mainWindow.webContents.executeJavaScript("window.isElectron = true;");
+		kioskModule.runTask();
 	});
 
 	mainWindow.loadUrl('file://' + __dirname + '/index.html');
