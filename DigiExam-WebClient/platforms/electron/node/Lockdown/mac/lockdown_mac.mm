@@ -6,12 +6,14 @@ using namespace v8;
 
 namespace lockdown {
 
-	void PrepareLockdown(const FunctionCallbackInfo<Value>& args) {
+	DXScreenCaptureDisabler *screenCaptureDisabler;
 
+	void PrepareLockdown(const FunctionCallbackInfo<Value>& args) {
+		/*TODO*/
 	}
 
 	void ExecuteLockdown(const FunctionCallbackInfo<Value>& args) {
-
+		/*TODO*/
 	}
 
 	void OnLockdown(const FunctionCallbackInfo<Value>& args) {
@@ -26,11 +28,13 @@ namespace lockdown {
 		taskArray.push_back(new ClearClipboard());
 		taskArray.push_back(new KioskWindow());
 
+		screenCaptureDisabler = [[DXScreenCaptureDisabler alloc] init];
+		[screenCaptureDisabler restoreUserSettings];
+		[screenCaptureDisabler start];
+
 		for (std::vector<BaseLockdownTask*>::iterator it = taskArray.begin(); it != taskArray.end(); ++it){
 			(*it)->runTask(cb);
 		}
-		DXScreenCaptureDisabler *screenCapture = [[DXScreenCaptureDisabler init] alloc];
-		[screenCapture start];
 
 		taskArray.clear();
 		bool hasFinished = true;
@@ -39,6 +43,8 @@ namespace lockdown {
 	}
 
 	void TeardownLockdown(const FunctionCallbackInfo<Value>& args) {
+		[screenCaptureDisabler stop];
+		screenCaptureDisabler = nil;
 	}
 
 

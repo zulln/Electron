@@ -1,5 +1,3 @@
-#import "disable_screen_capture_mac.h"
-
 //
 //  DXScreenCaptureDisabler.m
 //  DigiExam
@@ -118,7 +116,7 @@ NSString *ORIGINAL_SCREEN_CAPTURE_PATH_KEY = @"DEOrignalScreenCapturePath";
  */
 - (NSString*)getScreencaptureType {
     NSString* ret = [DXShellCommand run:@"defaults read com.apple.screencapture type"];
-
+	//http://stackoverflow.com/questions/4516852/detect-when-a-user-takes-a-screenshot
     if ([ret isEqualTo:@""]) {
         return @"png";
     } else {

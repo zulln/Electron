@@ -3,7 +3,7 @@ var browserWindow = require('browser-window');
 var dialog = require("dialog");
 var globalShortcut = require('global-shortcut');
 var ipc = require('ipc');
-var kioskModule = require('./platforms/electron/node/build/Release/dxkiosk');
+var kioskModule = require('./platforms/electron/node/build/Release/dxlockdown');
 
 preconditionWindow = null;
 mainWindow = null;
@@ -11,6 +11,7 @@ mainWindow = null;
 var disableShortKeys = function() {
 	//Define all global shortkeys that should be prohibited in the application here
 	globalShortcut.register('Super+r', function(){});				//1
+	globalShortcut.register('Cmd+q', function(){});
 };
 
 var showPreconditionWindow = function() {
@@ -31,7 +32,6 @@ var showMainWindow = function() {
 	mainWindow = new browserWindow({width: 1200, height: 1600});
 	mainWindow.webContents.on('did-finish-load', function(){
 		mainWindow.webContents.executeJavaScript("window.isElectron = true;");
-		kioskModule.runTask();
 	});
 
 	mainWindow.loadUrl('file://' + __dirname + '/index.html');
@@ -64,6 +64,10 @@ var showMainWindow = function() {
 
 		if(dialogResult === undefined) { dialogResult = null; }		//2
 		event.returnValue = dialogResult;
+	});
+
+	ipc.on("kioskMode", function(event, enable) {
+		kioskModule.onLockdown();
 	});
 
 	mainWindow.on('close', function(){

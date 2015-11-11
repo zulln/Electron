@@ -152,8 +152,8 @@ angular.module("digiexamclient").controller "OverviewController", ($rootScope, $
 			return instance
 
 	$scope.startExam = (exam)->
-		DXLockdown.executeLockdown()
 		DXLockdown.onLockdown()
+		DXLockdown.executeLockdown()
 		$location.path Urls.get("exam", { id: exam.id, startOffline: exam._startOffline })
 
 	$scope.refreshExams()

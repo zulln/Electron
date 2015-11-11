@@ -2,6 +2,8 @@ angular.module("digiexamclient.lockdown", [])
 .factory("ElectronLockdown", function($q, $window){
 	"use strict";
 
+	var ipc = $window.require("ipc");
+
 	var modulePath = "./platforms/electron/node/build/Release/dxlockdown";
 	var nativeModule = $window.require(modulePath);
 
@@ -16,6 +18,7 @@ angular.module("digiexamclient.lockdown", [])
 
 	var onLockdown = function () {
 		$window.console.log("Lockdown onLockdown");
+		ipc.send("kioskMode", true);
 		$window.console.log(nativeModule.onLockdown());
 	};
 

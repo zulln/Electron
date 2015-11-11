@@ -9,7 +9,9 @@
 
 namespace lockdown {
 	class Lockdown{
+
 	public:
+		
 		void PrepareLockdown(const FunctionCallbackInfo<Value>& args);
 		void ExecuteLockdown(const FunctionCallbackInfo<Value>& args);
 		void OnLockdown(const FunctionCallbackInfo<Value>& args);

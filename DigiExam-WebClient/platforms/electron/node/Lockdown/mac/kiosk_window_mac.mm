@@ -1,25 +1,35 @@
 #import "kiosk_window_mac.h"
+#import <vector>
+
+using namespace v8;
 
 namespace lockdown {
 
+	NSApplicationPresentationOptions KioskWindow::presentationOptions() {
+	    return NSApplicationPresentationHideDock
+				+ NSApplicationPresentationHideMenuBar
+				+ NSApplicationPresentationDisableForceQuit
+				+ NSApplicationPresentationDisableProcessSwitching
+				+ NSApplicationPresentationDisableSessionTermination;
+	}
+
 	void KioskWindow::runTask(Local<Function> callback) {
+		Isolate* isolate = Isolate::GetCurrent();
+		HandleScope scope(isolate);
 
-		//NSWindow *mainWindow = [NSApplication mainWindow];
+		[NSApp setPresentationOptions:presentationOptions()];
+		NSWindow *window = [[NSApplication sharedApplication] mainWindow];
 
-	//	NSString *windowsString = [NSString stringWithFormat:@"Open windows %@", windows];
+		NSDictionary *optionsDictionary;
+		NSArray *keys = [NSArray arrayWithObjects:NSFullScreenModeAllScreens, nil];
+		NSArray *objects = [NSArray arrayWithObjects:[NSNumber numberWithBool:YES], nil];
 
-		NSAlert *alert = [[NSAlert alloc] init];
-		[alert addButtonWithTitle:@"OK"];
-		[alert addButtonWithTitle:@"Cancel"];
-		//[alert setMessageText:[self mainWindow]];
-	//	[alert setInformativeText:text];
-		[alert setAlertStyle:NSWarningAlertStyle];
-		if ([alert runModal] == NSAlertFirstButtonReturn) {
+		optionsDictionary = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
 
-		}
+		[window.contentView enterFullScreenMode:[NSScreen mainScreen] withOptions:optionsDictionary];
 
 		_isSuccess = true;
 	}
 
-	bool KioskWindow::isSuccess() { return _isSuccess; }
+	bool KioskWindow::isSuccess() {	return _isSuccess; }
 }
