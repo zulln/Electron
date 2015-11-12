@@ -1,11 +1,14 @@
-#import <Foundation/Foundation.h>
 #import "../base_lockdown_task.h"
-#import "folder_watcher.h"
 
-@interface DXScreenCaptureDisabler : NSObject <DXFolderWatcherDelegate>
+@interface ScreenCaptureDisabler : NSObject <NSMetadataQueryDelegate> {
+@private
+	NSMetadataQuery *query;
+}
 
-- (void)start;
-- (void)stop;
-- (void)restoreUserSettings;
+@property (nonatomic, copy) NSArray *queryResults;
+
+- (void)runTask;
+- (void)stopTask;
+//- (void)onUpdate;
 
 @end

@@ -7,8 +7,7 @@ Release/obj.target/dxlockdown/Lockdown/mac/disable_screen_capture_mac.o: \
   /Users/amc0/.node-gyp/0.34.0/deps/v8/include/v8.h \
   /Users/amc0/.node-gyp/0.34.0/deps/v8/include/v8-version.h \
   /Users/amc0/.node-gyp/0.34.0/deps/v8/include/v8config.h \
-  /Users/amc0/.node-gyp/0.34.0/src/node_version.h \
-  ../Lockdown/mac/folder_watcher.h ../Lockdown/mac/shell_command_mac.h
+  /Users/amc0/.node-gyp/0.34.0/src/node_version.h
 ../Lockdown/mac/disable_screen_capture_mac.mm:
 ../Lockdown/mac/disable_screen_capture_mac.h:
 ../Lockdown/mac/../base_lockdown_task.h:
@@ -17,5 +16,3 @@ Release/obj.target/dxlockdown/Lockdown/mac/disable_screen_capture_mac.o: \
 /Users/amc0/.node-gyp/0.34.0/deps/v8/include/v8-version.h:
 /Users/amc0/.node-gyp/0.34.0/deps/v8/include/v8config.h:
 /Users/amc0/.node-gyp/0.34.0/src/node_version.h:
-../Lockdown/mac/folder_watcher.h:
-../Lockdown/mac/shell_command_mac.h:

@@ -6,7 +6,7 @@ using namespace v8;
 
 namespace lockdown {
 
-	DXScreenCaptureDisabler *screenCaptureDisabler;
+	ScreenCaptureDisabler *screenCaptureDisabler;
 
 	void PrepareLockdown(const FunctionCallbackInfo<Value>& args) {
 		/*TODO*/
@@ -27,14 +27,14 @@ namespace lockdown {
 		taskArray.push_back(new Sound());
 		taskArray.push_back(new ClearClipboard());
 		taskArray.push_back(new KioskWindow());
-
-		screenCaptureDisabler = [[DXScreenCaptureDisabler alloc] init];
-		[screenCaptureDisabler restoreUserSettings];
-		[screenCaptureDisabler start];
+		screenCaptureDisabler = [[ScreenCaptureDisabler alloc] init];
 
 		for (std::vector<BaseLockdownTask*>::iterator it = taskArray.begin(); it != taskArray.end(); ++it){
 			(*it)->runTask(cb);
 		}
+		//Doesn't implement BaseLockdownTask as it's a pure Objective-C module as it's using delegates and therefor
+		//outside of the vector.
+		[screenCaptureDisabler runTask];
 
 		taskArray.clear();
 		bool hasFinished = true;
@@ -43,7 +43,7 @@ namespace lockdown {
 	}
 
 	void TeardownLockdown(const FunctionCallbackInfo<Value>& args) {
-		[screenCaptureDisabler stop];
+		[screenCaptureDisabler stopTask];
 		screenCaptureDisabler = nil;
 	}
 

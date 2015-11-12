@@ -90,9 +90,7 @@ INCS_Release := \
 
 OBJS := \
 	$(obj).target/$(TARGET)/Lockdown/mac/lockdown_mac.o \
-	$(obj).target/$(TARGET)/Lockdown/mac/folder_watcher.o \
 	$(obj).target/$(TARGET)/Lockdown/mac/kiosk_window_mac.o \
-	$(obj).target/$(TARGET)/Lockdown/mac/shell_command_mac.o \
 	$(obj).target/$(TARGET)/Lockdown/mac/disable_screen_capture_mac.o \
 	$(obj).target/$(TARGET)/Lockdown/mac/sound_mac.o \
 	$(obj).target/$(TARGET)/Lockdown/mac/clear_clipboard_mac.o

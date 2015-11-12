@@ -9,8 +9,7 @@ Release/obj.target/dxlockdown/Lockdown/mac/lockdown_mac.o: \
   /Users/amc0/.node-gyp/0.34.0/src/node_version.h \
   ../Lockdown/mac/sound_mac.h ../Lockdown/mac/clear_clipboard_mac.h \
   ../Lockdown/mac/kiosk_window_mac.h \
-  ../Lockdown/mac/disable_screen_capture_mac.h \
-  ../Lockdown/mac/folder_watcher.h
+  ../Lockdown/mac/disable_screen_capture_mac.h
 ../Lockdown/mac/lockdown_mac.mm:
 ../Lockdown/mac/lockdown_mac.h:
 ../Lockdown/mac/../base_lockdown_task.h:
@@ -23,4 +22,3 @@ Release/obj.target/dxlockdown/Lockdown/mac/lockdown_mac.o: \
 ../Lockdown/mac/clear_clipboard_mac.h:
 ../Lockdown/mac/kiosk_window_mac.h:
 ../Lockdown/mac/disable_screen_capture_mac.h:
-../Lockdown/mac/folder_watcher.h:
