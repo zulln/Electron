@@ -66,6 +66,13 @@
 						'PreConditionTests/test_object_factory.h',
 						'PreConditionTests/test_object_factory.cc'
 					]
+				},
+				{
+					'target_name': 'dxsavedialog',
+					'sources': [
+						'Lockdown/mac/save_file_dialog_mac.h',
+						'Lockdown/mac/save_file_dialog_mac.mm'
+					]
 				}
 			]
 		}]

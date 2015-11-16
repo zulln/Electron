@@ -3,7 +3,7 @@ var browserWindow = require('browser-window');
 var dialog = require("dialog");
 var globalShortcut = require('global-shortcut');
 var ipc = require('ipc');
-var kioskModule = require('./platforms/electron/node/build/Release/dxlockdown');
+var lockdown = require('./platforms/electron/node/build/Release/dxlockdown');
 
 preconditionWindow = null;
 mainWindow = null;
@@ -67,7 +67,12 @@ var showMainWindow = function() {
 	});
 
 	ipc.on("kioskMode", function(event, enable) {
-		kioskModule.onLockdown();
+		lockdown.onLockdown();
+	});
+
+	ipc.on("teardownLockdown", function(event, enable) {
+		lockdown.teardownLockdown();
+		event.returnValue = true;
 	});
 
 	mainWindow.on('close', function(){

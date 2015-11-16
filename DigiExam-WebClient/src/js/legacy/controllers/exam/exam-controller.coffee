@@ -23,7 +23,7 @@ angular.module("digiexamclient").controller "ExamController", (
 	DXLockdown
 	GradingTypeEnum
 ) ->
-
+	ipc = require("ipc")
 	$scope.QuestionType = QuestionType
 	$scope.GradingTypeEnum = GradingTypeEnum
 
@@ -186,13 +186,11 @@ angular.module("digiexamclient").controller "ExamController", (
 			if DX_PLATFORM isnt "IOS_WEBVIEW"
 				$scope.showOfflineFileTurnInDialog()
 			else
-				DXLockdown.tearDown()
 				$scope.showUploadLaterDialog()
 
 	$scope.handleSuccessfulTurnIn = ->
 		promise = $scope.reassignStoredData()
 		promise.then ->
-			DXLockdown.tearDown()
 			$scope.showSuccessfulTurnInModal()
 
 	$scope.showOfflineFileTurnInDialog = ->
@@ -203,6 +201,7 @@ angular.module("digiexamclient").controller "ExamController", (
 			$scope: modalScope
 			templateUrl: "partials/modals/exam/offline-turn-in.html"
 			controller: "ModalOfflineTurnInController"
+			ipc.sendSync("teardownLockdown")
 		modalInstance.result.then ->
 			$scope.handleSuccessfulTurnIn()
 		return modalInstance

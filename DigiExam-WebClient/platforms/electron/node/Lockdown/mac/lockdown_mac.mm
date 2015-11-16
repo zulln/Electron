@@ -1,5 +1,6 @@
 // lockdown_mac.mm
 #import "lockdown_mac.h"
+#import <Cocoa/Cocoa.h>
 #import <vector>
 
 using namespace v8;
@@ -43,6 +44,7 @@ namespace lockdown {
 	}
 
 	void TeardownLockdown(const FunctionCallbackInfo<Value>& args) {
+		[[[[NSApplication sharedApplication] mainWindow] contentView] exitFullScreenModeWithOptions:nil];
 		[screenCaptureDisabler stopTask];
 		screenCaptureDisabler = nil;
 	}

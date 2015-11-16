@@ -5,10 +5,10 @@
 	NSMetadataQuery *query;
 }
 
-@property (nonatomic, copy) NSArray *queryResults;
+@property (nonatomic, copy) NSDate *startDate;
+@property (nonatomic, copy) NSDate *endDate;
 
 - (void)runTask;
 - (void)stopTask;
-//- (void)onUpdate;
 
 @end

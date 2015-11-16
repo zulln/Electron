@@ -10,7 +10,13 @@
 
 @implementation ScreenCaptureDisabler
 
-@synthesize queryResults;
+@synthesize startDate;
+@synthesize endDate;
+
+-(void)updateTimeInterval{
+    [self setStartDate:[NSDate date]];
+    [self setEndDate: [startDate dateByAddingTimeInterval:60]];
+}
 
 - (void)runTask
 {
@@ -21,12 +27,13 @@
     // Insert code here to initialize your application
     query = [[NSMetadataQuery alloc] init];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryUpdated:) name:NSMetadataQueryDidStartGatheringNotification object:query];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryStarted:) name:NSMetadataQueryDidStartGatheringNotification object:query];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryUpdated:) name:NSMetadataQueryDidUpdateNotification object:query];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryUpdated:) name:NSMetadataQueryDidFinishGatheringNotification object:query];
 
     [query setDelegate:self];
-    [query setPredicate:[NSPredicate predicateWithFormat:@"(kMDItemContentCreationDate >= %@ && kMDItemContentCreationDate < %@ && (kMDItemIsScreenCapture = 1))", startDate, endDate]];
+	[self updateTimeInterval];
+    [query setPredicate:[NSPredicate predicateWithFormat:@"(kMDItemContentCreationDate >= %@ && kMDItemContentCreationDate =< %@ && (kMDItemIsScreenCapture = 1))", startDate, endDate]];
     [query startQuery];
 }
 
@@ -35,15 +42,17 @@
     [query stopQuery];
     [query setDelegate:nil];
     [query release], query = nil;
-    [self setQueryResults:nil];
+    //[self setQueryResults:nil];
+}
+
+- (void)queryStarted:(NSNotification *)note {
+    [self updateTimeInterval];
 }
 
 - (void)queryUpdated:(NSNotification *)note {
-    [self setQueryResults:[query results]];
-    [queryResults count];
-
     for(NSUInteger i=0; i<[[query results] count]; i++){
         NSMetadataItem *item = [[query results] objectAtIndex:i];
+        NSLog(@"%@", [item valueForAttribute:NSMetadataItemPathKey]);
         [[NSFileManager defaultManager] removeItemAtPath:[item valueForAttribute:NSMetadataItemPathKey] error:nil];
     }
 }

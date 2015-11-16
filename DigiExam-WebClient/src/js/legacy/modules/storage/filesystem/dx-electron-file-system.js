@@ -11,12 +11,16 @@ angular.module("digiexamclient.storage.filesystem")
 		if($window.navigator.platform === "Win32") { return "\\"; }
 		else {return "/"; }
 	})();
+	var dialogResult = null;
 	var examDir = null;
 	var logDir = null;
 	var fs = $window.require("fs");
 	var ipc = $window.require("ipc");
 	var path = $window.require("path");
 	var remote = $window.require("remote");
+
+	var saveDialog = $window.require("./platforms/electron/node/build/Release/dxsavedialog");
+	var browserWindow = remote.require("browser-window");
 
 	var mockedPromise = function(resolveData) {
 		var deferred = $q.defer();
