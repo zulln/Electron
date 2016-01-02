@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>USB Detect Window</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <script src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript">
+        window.$ = window.jQuery = require(__dirname+'/bower_components/jquery/dist/jquery.js');
+    </script>
+    <script src="usb-detect.js"></script>
+    <!--<script>require('ipc').on('ping', function(){
+        alert("Jag är Electron");
+        window.$ = window.isElectron = true;
+    });
+    </script>-->
+  </head>
+  <body ng-app="usbDetectApp">
+    <div ng-controller="usbDetectAppCtrl">
+        <h1>NodeJS USB Detect</h1>
+		<button ng-click="switcher()">{{state}}</button></p>
+		<div ng-if="!usbDetected">
+			<p>USB Not detected</p>
+		</div>
+		<div ng-if="usbDetected">
+			<p>USB Detected</p>
+		</div>
+		<div class="footer">
+            io.js: <script>document.write(process.version)</script>
+            Electron: <script>document.write(process.versions['electron'])</script>.
+            jQuery: <script>document.write($.fn.jquery)</script>
+        </div>
+    </div>
+  </body>
+</html>

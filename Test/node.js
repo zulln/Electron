@@ -1,4 +1,4 @@
-var addon = require('./node_modules/hello-mac/build/Release/dxlockdown');
+//var addon = require('./node_modules/hello-mac/build/Release/dxlockdown');
 
 exports.nodeTest = function() {
 	return "nodeTest";

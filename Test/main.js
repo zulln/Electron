@@ -27,6 +27,14 @@ app.on('ready', function() {
       event.returnValue = mainWindow.isKiosk();
   });
 
+  ipc.on("saveToUSB", function(event, arg) {
+	  mainWindow.loadUrl('file://' + __dirname + '/detect.html');
+	  //usbWindow = new BrowserWindow({width: 800, height: 600, center: true});
+	  //usbWindow.loadUrl('file://' + __dirname + '/detect.html');
+	  //usbWindow.openDevTools();
+      //event.returnValue = mainWindow.isKiosk();
+  });
+
   // Open the devtools.
   mainWindow.openDevTools();
 

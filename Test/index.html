@@ -19,7 +19,8 @@
     <div ng-controller="angularAppCtrl">
         <h1>NodeJS Test Application</h1>
         <p><button ng-click="go()">Activate</button><button ng-click="go2()">Method2</button></p>
-        <p><button ng-click="toggleKiosk()">{{isKiosk}}</button><button ng-click="close()">Close</button></p>
+		<p><button ng-click="usbDetect()">USB Detect</button><button ng-click="close()">Close</button></p>
+		<!--<p><button ng-click="toggleKiosk()">{{isKiosk}}</button><button ng-click="close()">Close</button></p>-->
         <div class="footer">
             io.js: <script>document.write(process.version)</script>
             Electron: <script>document.write(process.versions['electron'])</script>.
